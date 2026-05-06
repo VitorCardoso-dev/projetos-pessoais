@@ -1,0 +1,466 @@
+
+@charset "UTF-8";
+
+/* ===================================================
+   CONFIGURAÇÕES GLOBAIS E RESET
+   =================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Garante que padding/border não aumentem o tamanho do elemento */
+}
+
+body {
+    height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: black;
+}
+
+
+/* ===================================================
+   CABEÇALHO E NAVEGAÇÃO
+   =================================================== */
+header {
+    position: fixed; /* Fixa o elemento no topo da tela durante o scroll */
+    top: 0;          
+    left: 0;         
+    width: 100%;     
+    z-index: 1000;   /* Mantém o menu acima de outros elementos */
+    display: flex;
+    align-items: center;
+    background-color: black;
+    border-bottom: 1px solid gray;
+    height: 60px;
+}
+
+.cabeçalho {
+    display: flex;
+    align-items: center;
+    margin: auto;
+    width: 100vw;
+    gap: 185px;
+}
+
+.titulo {
+    display: flex;
+    align-items: center;
+    color: white;
+    margin-left: 50px;
+}
+
+.titulo>img {
+    height: 48px;
+}
+
+.icones {
+    display: flex;
+    color: white;
+    gap: 10px;
+    margin-right: 50px;
+}
+
+/* Links da navegação */
+nav a {
+    color: white;
+    margin: 10px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.5s; /* Suaviza a mudança de cor no hover */
+}
+
+nav a:hover {
+    color: #deb7abcf;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+/* ===================================================
+   SEÇÃO PRINCIPAL (HERO) - Banner de Entrada
+   =================================================== */
+main {
+    display: flex;
+    align-items: center;
+    /* Imagem de fundo com overlay escuro (gradiente) */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url('imagens/home-img.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+
+.apresentando {
+    width: 600px;
+    margin-left: 25px;
+    margin-bottom: 25px;
+}
+
+.apresentando>h1 {
+    font-size: 4em;
+    font-weight: bold;
+    color: white;
+}
+
+.apresentando>p {
+    line-height: 30px;
+    color: white;
+}
+
+.apresentando>button {
+    margin-top: 10px;
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    font-size: 1em;
+    font-weight: bold;
+    background-color: #6f574fcf;
+    transition: 0.5s;
+}
+
+.apresentando>button:hover {
+    color: white;
+    background-color: #e3cc67cf;
+}
+
+/* ===================================================
+   SEÇÃO SOBRE NÓS
+   =================================================== */
+#sobre-nos {
+    padding: 100px;
+    background-color: black;
+    margin: auto;
+    color: white;
+}
+
+.about {
+    display: flex;
+    width: 80vw;
+    margin: auto;
+    height: 360px;
+    background-color: rgb(6 6 28);
+}
+
+.about>img {
+    height: 358px;
+}
+
+div.cafe-especial {
+    margin: 20px;
+    background-color: rgb(6 6 28);
+}
+
+div.cafe-especial>h2 {
+    font-size: 1.8em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+div.cafe-especial>button {
+    margin-top: 20px;
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    font-size: 1em;
+    font-weight: bold;
+    background-color: #6f574fcf;
+    transition: 0.5s;
+}
+
+div.cafe-especial>button:hover {
+    color: white;
+    background-color: #e3cc67cf;
+}
+
+/* ===================================================
+   SEÇÃO DO MENU (Produtos)
+   =================================================== */
+#menu {
+    padding: 100px;
+    background-color: black;
+    margin: auto;
+    color: white;
+}
+
+.menu-café {
+    display: flex;
+    flex-wrap: wrap; /* Permite que os itens quebrem para a linha de baixo */
+    justify-content: center;
+    gap: 5px;
+    margin: auto;
+    padding: 10px;
+    background-color: #030105;
+}
+
+.café {
+    height: 250px;
+    width: 330px;
+    border: 2px solid #4a4625c9;
+}
+
+.café:hover {
+    background-color: rgba(255, 255, 255, 0.918);
+    color: black;
+    transition: 0.8s;
+}
+
+.opcoes {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.opcoes>h2>s {
+    color: #808080a8;
+    font-size: 13px; /* Estilo para o preço riscado */
+}
+
+.opcoes>button {
+    margin-top: 10px;
+    text-align: center;
+    padding: 10px 20px;
+    border: none;
+    color: white;
+    font-size: 1em;
+    font-weight: bold;
+    background-color: #6f574fcf;
+    transition: 0.5s;
+}
+
+.opcoes>button:hover {
+    color: black;
+    background-color: #e3cc67cf;
+}
+
+/* ===================================================
+   SEÇÃO DE AVALIAÇÕES (Testemunhos)
+   =================================================== */
+.clientes {
+    padding: 100px;
+    background-color: black;
+    margin: auto;
+    color: white;
+}
+
+.avaliações {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+    margin: auto;
+    padding: 10px;
+    background-color: #030105;
+}
+
+.cliente {
+    border: 2px solid #4a4625c9;
+    width: 330px;
+    padding: 20px;
+    transition: transform 0.5s ease, box-shadow 0.3s ease;
+}
+
+.cliente:hover {
+    transform: translateY(-10px); /* Efeito de subir o card ao passar o mouse */
+    color: black;
+    background-color: white;
+}
+
+.pessoas {
+    font-size: 11px;
+    width: 300px;
+    margin: auto;
+}
+
+.pessoas>h1 {
+    color: #795548;
+    text-align: center;
+    margin-top: -50px;
+    font-size: 7em; /* Aspas grandes ou detalhe decorativo */
+}
+
+.pessoas>p {
+    text-align: center;
+    margin: auto;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.pessoas>img {
+    border-radius: 50%; /* Foto circular do cliente */
+    width: 70px;
+    margin: auto;
+    margin-top: 10px;
+    display: block;
+}
+
+/* ===================================================
+   SEÇÃO DE LOCALIZAÇÃO (MAPS) E RODAPÉ
+   =================================================== */
+#endereço {
+    background-color: black;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+footer {
+    margin-top: 10px;
+    color: rgb(187, 187, 187);
+    background-color: black;
+    padding: 10px;
+    text-align: center;
+}
+
+footer>a>img {
+    height: 25px;
+    margin-right: -10px;
+}
+
+.insta {
+    color: rgb(187, 187, 187);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.insta:hover {
+    text-decoration: underline;
+}
+/* --- REGRAS DE RESPONSIVIDADE --- */
+/* --- REGRAS DE RESPONSIVIDADE --- */
+
+/* TABLETS E TELAS MÉDIAS (até 1024px) - Resolve a quebra da NAV */
+@media (max-width: 1024px) {
+    .cabeçalho {
+        gap: 20px; /* Reduz o gap de 180px que empurra o conteúdo para fora */
+        justify-content: space-around;
+        width: 100vw;
+    }
+
+    .titulo {
+        margin-left: 20px;
+    }
+
+    .icones {
+        margin-right: 20px;
+    }
+
+    nav a {
+        margin: 5px;
+        font-size: 0.9em;
+    }
+}
+
+/* CELULARES (até 768px) - Ajustes gerais e Sobre-nós */
+@media (max-width: 768px) {
+   header {
+        height: auto; /* Permite que o header cresça para caber tudo */
+        padding: 15px 0;
+        flex-direction: column;
+        position: relative; /* Opcional: evita que o menu cubra o conteúdo fixo */
+        margin-bottom: -5px;
+    }
+
+    .cabeçalho {
+        flex-direction: column; /* Empilha Logo -> Nav -> Ícones */
+        gap: 15px;
+        width: 100%;
+        margin: 0;
+    }
+
+    .titulo {
+        margin-left: 0;
+    }
+
+    /* NAV REORGANIZADA */
+    nav {
+        justify-content: center;
+    }
+
+    nav a {
+        margin: 5px 10px;
+        font-size: 0.95em;
+    }
+
+    .icones {
+        margin-top: 10px;
+        margin-right: 0; /* Remove a margem lateral do desktop */
+        justify-content: center;
+        width: 100%;
+        gap: 20px; /* Dá um respiro entre os ícones */
+    }
+    /* NAV REORGANIZADA: Em vez de sumir, ela se ajusta */
+    
+
+    main {
+        background-position: center right;
+    }
+
+    .apresentando {
+        width: 90%;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+   
+
+    .apresentando>p {
+        line-height: 25px;
+        background-color: rgba(91, 88, 88, 0.4); /* Leve fundo para leitura */
+    }
+
+    /* SEÇÃO SOBRE-NÓS CORRIGIDA */
+    #sobre-nos {
+        padding: 40px 10px;
+    }
+
+    .about {
+        flex-direction: column;
+        height: auto; /* Mata os 360px fixos */
+        width: 100%;
+    }
+
+    .about > img {
+        width: 100%;
+        height: auto;
+    }
+
+    div.cafe-especial {
+        margin: 20px;
+        text-align: center;
+    }
+
+    /* MENU E CLIENTES */
+    #menu, .clientes {
+        padding: 50px 20px;
+        text-align: center;
+    }
+
+    .avaliações, .menu-café {
+        gap: 20px;
+    }
+
+    .café, .cliente {
+        width: 100%;
+        max-width: 330px; /* Mantém o tamanho mas centraliza */
+        margin: auto;
+    }
+
+    .mapa {
+        width: 100%; /* Mapa responsivo */
+        max-width: 400px;
+    }
+}
+
+/* CELULARES MUITO PEQUENOS (até 480px) */
+@media (max-width: 480px) {
+    .apresentando>h1 {
+        font-size: 3em;
+    }
+
+}
