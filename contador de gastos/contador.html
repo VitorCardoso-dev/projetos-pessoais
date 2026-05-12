@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gestão de Salario</title>
+  <!-- CSS externo com todos os estilos da página -->
+  <link rel="stylesheet" href="contador.css">
+</head>
+<body>
+
+<!-- =====================================================================
+     HEADER — Logo do app + botão de resetar tudo (fica oculto até existir
+     receita cadastrada; é exibido pela função applyIncome()).
+====================================================================== -->
+<header>
+  <div class="logo">
+    <span>💰</span>
+    <div>
+      <h1>Contador de Gastos</h1>
+      <small>metodo de gestão financeira</small>
+    </div>
+  </div>
+  <!-- Botão de reset: chama confirmReset() que abre o modal de confirmação -->
+  <button class="btn btn-ghost btn-sm" id="btn-reset" onclick="confirmReset()">↩ Resetar</button>
+</header>
+
+<!-- =====================================================================
+     MAIN — Conteúdo principal do app
+====================================================================== -->
+<main>
+
+  <!-- ===================================================================
+       SEÇÃO RENDA — Aparece logo de cara. Tem dois "modos":
+       1) income-form    → formulário para digitar a receita mensal
+       2) income-display → mostra a receita já cadastrada + botão Editar
+       Só um dos dois fica visível por vez (controlado via JS).
+  =================================================================== -->
+  <section id="income-section">
+    <div class="income-icon">💵</div>
+
+    <!-- MODO EXIBIÇÃO: visível depois que o usuário cadastra a renda -->
+    <div id="income-display" style="display:none">
+      <div>
+        <div class="label">Receita Mensal</div>
+        <div class="amount" id="income-display-value">R$ 0,00</div>
+      </div>
+      <button class="btn btn-ghost btn-sm" onclick="startEditIncome()">Editar</button>
+    </div>
+
+    <!-- MODO FORMULÁRIO: visível antes de cadastrar (ou ao clicar em Editar) -->
+    <div id="income-form">
+      <div>
+        <label for="income-input">Receita Mensal</label>
+        <input type="text" id="income-input" inputmode="decimal" placeholder="Ex: 5000" />
+      </div>
+      <button class="btn btn-primary" onclick="submitIncome()">✓ Confirmar</button>
+    </div>
+  </section>
+
+  <!-- ===================================================================
+       APP CONTENT — Todo o resto do app (resumo, divisão 50-30-20 e
+       envelopes). Fica oculto até que exista uma receita cadastrada.
+  =================================================================== -->
+  <div id="app-content" style="display:none">
+
+    <!-- ====== RESUMO GERAL ====== 
+         3 cards com totais agregados:
+         - Em Envelopes  → tudo que já foi alocado em envelopes
+         - Total Gasto   → soma de todos os gastos registrados
+         - Livre         → receita - total alocado (dinheiro sem envelope) -->
+    <section>
+      <p class="section-title">Resumo Geral</p>
+      <div class="summary-grid">
+
+        <!-- Card: Em Envelopes -->
+        <div class="summary-card">
+          <div class="s-icon" style="background:rgba(96,165,250,.15)">📋</div>
+          <div>
+            <div class="s-label">Em Envelopes</div>
+            <div class="s-value" id="sum-committed">R$ 0,00</div>
+            <div class="s-sub" id="sum-committed-pct">0% da receita planejado</div>
+          </div>
+        </div>
+
+        <!-- Card: Total Gasto -->
+        <div class="summary-card">
+          <div class="s-icon" style="background:rgba(248,113,113,.12)">📉</div>
+          <div>
+            <div class="s-label">Total Gasto</div>
+            <div class="s-value" style="color:var(--red)" id="sum-spent">R$ 0,00</div>
+            <div class="s-sub" id="sum-spent-pct">0% da receita</div>
+          </div>
+        </div>
+
+        <!-- Card: Livre (sobra) -->
+        <div class="summary-card">
+          <div class="s-icon" style="background:rgba(34,197,94,.12)">🐷</div>
+          <div>
+            <div class="s-label">Livre</div>
+            <div class="s-value" style="color:var(--green)" id="sum-free">R$ 0,00</div>
+            <div class="s-sub">Sem envelope alocado</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== DIVISÃO 50-30-20 ====== 
+         Mostra os 3 limites mensais por categoria:
+         - 50% Obrigatórios | 30% Investimentos | 20% Lazer
+         Cada card mostra: limite, alocado, livre, % usado e gasto. -->
+    <section>
+      <p class="section-title">Divisão 50-30-20</p>
+      <div class="cat-grid">
+
+        <!-- Categoria: Obrigatórios (50%) -->
+        <div class="cat-card cat-essentials">
+          <div class="cat-header">
+            <div>
+              <div class="cat-emoji">🏠</div>
+              <div class="cat-name">Obrigatórios</div>
+              <div class="cat-badge">50% da receita</div>
+            </div>
+            <div style="text-align:right">
+              <div class="cat-amount" id="cat-essentials-limit">R$ 0,00</div>
+              <div class="cat-sub">limite mensal</div>
+            </div>
+          </div>
+          <div class="cat-stats">
+            <span>Alocado: <b id="cat-essentials-alloc">R$ 0,00</b></span>
+            <span>Livre: <b id="cat-essentials-free">R$ 0,00</b></span>
+          </div>
+          <!-- Barra de progresso de alocação (preenchida via JS) -->
+          <div class="bar-track">
+            <div class="bar-fill" id="cat-essentials-bar" style="width:0%"></div>
+          </div>
+          <div class="cat-footer" id="cat-essentials-footer">Gasto: R$ 0,00 · 0% do limite</div>
+        </div>
+
+        <!-- Categoria: Investimentos (30%) -->
+        <div class="cat-card cat-investments">
+          <div class="cat-header">
+            <div>
+              <div class="cat-emoji">📈</div>
+              <div class="cat-name">Investimentos</div>
+              <div class="cat-badge">30% da receita</div>
+            </div>
+            <div style="text-align:right">
+              <div class="cat-amount" id="cat-investments-limit">R$ 0,00</div>
+              <div class="cat-sub">limite mensal</div>
+            </div>
+          </div>
+          <div class="cat-stats">
+            <span>Alocado: <b id="cat-investments-alloc">R$ 0,00</b></span>
+            <span>Livre: <b id="cat-investments-free">R$ 0,00</b></span>
+          </div>
+          <div class="bar-track">
+            <div class="bar-fill" id="cat-investments-bar" style="width:0%"></div>
+          </div>
+          <div class="cat-footer" id="cat-investments-footer">Gasto: R$ 0,00 · 0% do limite</div>
+        </div>
+
+        <!-- Categoria: Lazer (20%) -->
+        <div class="cat-card cat-leisure">
+          <div class="cat-header">
+            <div>
+              <div class="cat-emoji">🎮</div>
+              <div class="cat-name">Lazer</div>
+              <div class="cat-badge">20% da receita</div>
+            </div>
+            <div style="text-align:right">
+              <div class="cat-amount" id="cat-leisure-limit">R$ 0,00</div>
+              <div class="cat-sub">limite mensal</div>
+            </div>
+          </div>
+          <div class="cat-stats">
+            <span>Alocado: <b id="cat-leisure-alloc">R$ 0,00</b></span>
+            <span>Livre: <b id="cat-leisure-free">R$ 0,00</b></span>
+          </div>
+          <div class="bar-track">
+            <div class="bar-fill" id="cat-leisure-bar" style="width:0%"></div>
+          </div>
+          <div class="cat-footer" id="cat-leisure-footer">Gasto: R$ 0,00 · 0% do limite</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== ENVELOPES ======
+         Lista os envelopes agrupados por categoria.
+         O conteúdo de #envelopes-container é gerado dinamicamente
+         pela função renderizacao_envelopes(). -->
+    <section>
+      <div class="env-header">
+        <p class="section-title" style="margin:0">Envelopes</p>
+        <!-- Abre o modal de criação de envelope -->
+        <button class="btn btn-primary btn-sm" onclick="openCreateModal()">+ Novo Envelope</button>
+      </div>
+      <div id="envelopes-container"></div>
+    </section>
+
+  </div><!-- /app-content -->
+</main>
+
+<!-- =====================================================================
+     MODAL: CRIAR ENVELOPE
+     Coleta nome, categoria e valor. Validado por validacoes_envelope().
+====================================================================== -->
+<div class="overlay" id="modal-create">
+  <div class="modal">
+    <h2>Criar Envelope</h2>
+
+    <div class="form-group">
+      <label>Nome do Envelope</label>
+      <input type="text" id="env-name" placeholder="Ex: Aluguel, Netflix, Academia…" />
+    </div>
+
+    <div class="form-group">
+      <label>Categoria</label>
+      <!-- Ao trocar a categoria, mostramos quanto ainda há disponível nela -->
+      <select id="env-category" onchange="onCategoryChange()">
+        <option value="">Selecione…</option>
+        <option value="essentials">🏠 Obrigatórios (50%)</option>
+        <option value="investments">📈 Investimentos (30%)</option>
+        <option value="leisure">🎮 Lazer (20%)</option>
+      </select>
+      <!-- Texto auxiliar com o saldo disponível da categoria selecionada -->
+      <div class="hint" id="env-category-hint"></div>
+    </div>
+
+    <div class="form-group">
+      <label>Valor (R$)</label>
+      <input type="text" id="env-value" inputmode="decimal" placeholder="0,00" />
+    </div>
+
+    <!-- Mensagens de erro exibidas inline no modal -->
+    <div class="modal-error" id="create-error"></div>
+
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeCreateModal()">Cancelar</button>
+      <button class="btn btn-primary" onclick="submitCreateEnvelope()">Criar Envelope</button>
+    </div>
+  </div>
+</div>
+
+<!-- =====================================================================
+     MODAL: REGISTRAR GASTO
+     Aberto pelo botão 🧾 de cada envelope. Validado por validacoes_expense().
+====================================================================== -->
+<div class="overlay" id="modal-expense">
+  <div class="modal">
+    <h2 id="expense-modal-title">Registrar Gasto</h2>
+    <p style="font-size:.82rem;color:var(--text-muted);margin-bottom:16px">
+      <!-- Mostra o saldo disponível do envelope selecionado -->
+      Saldo disponível: <b id="expense-remaining" style="color:var(--text)"></b>
+    </p>
+
+    <div class="form-group">
+      <label>Descrição</label>
+      <input type="text" id="expense-desc" placeholder="Ex: Parcela do aluguel, Mensalidade…" />
+    </div>
+
+    <div class="form-group">
+      <label>Valor (R$)</label>
+      <input type="text" id="expense-value" inputmode="decimal" placeholder="0,00" />
+    </div>
+
+    <div class="modal-error" id="expense-error"></div>
+
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeExpenseModal()">Cancelar</button>
+      <button class="btn btn-primary" onclick="submitExpense()">Registrar Gasto</button>
+    </div>
+  </div>
+</div>
+
+<!-- =====================================================================
+     MODAL: CONFIRMAR RESET
+     Pede confirmação antes de apagar tudo do localStorage.
+====================================================================== -->
+<div class="overlay" id="modal-reset">
+  <div class="modal alert-modal">
+    <h2>Resetar tudo?</h2>
+    <p>Isso apagará toda sua receita, envelopes e gastos registrados. Essa ação não pode ser desfeita.</p>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="document.getElementById('modal-reset').classList.remove('open')">Cancelar</button>
+      <button class="btn btn-danger" onclick="doReset()">Resetar Tudo</button>
+    </div>
+  </div>
+</div>
+<!-- linkando o java script -->
+<script src="contador.js"></script>
+</body>
+</html>
