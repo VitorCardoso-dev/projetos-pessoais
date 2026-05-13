@@ -1,3 +1,4 @@
+
 * {
     margin: 0;
     padding: 0;
@@ -36,7 +37,7 @@ strong { color: var(--white); }
 
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--cyan-dim); border-radius: 99px; }
+::-webkit-scrollbar-thumb { display: none; }
 
 /* ==================== HEADER ==================== */
 header {
@@ -70,8 +71,29 @@ header h1 span {
 
 header img { display: none; }
 
-nav { display: flex; align-items: center; gap: 4px; }
-
+nav { 
+    display: flex; 
+    align-items: center; 
+    gap: 4px; 
+    position: fixed;
+    top: 0;
+    right: -100%; 
+    width: 80%; /* Ou 70% como você preferir */
+    height: 100vh;
+    background: var(--card);
+    z-index: 999;
+    
+    /* ADICIONE ESTAS DUAS LINHAS: */
+    visibility: hidden; 
+    pointer-events: none; /* Impede cliques acidentais no menu invisível */
+    
+    transition: all var(--transition);
+}
+ nav.active {
+    right: 0;
+    visibility: visible;
+    pointer-events: auto;
+}
 nav a {
     font-size: 14px;
     font-weight:bolder;
@@ -486,7 +508,7 @@ text-decoration: underline;
     margin-bottom: 32px;
 }
 
-.infeep-list { list-style: none; padding: 0; margin: 0; }
+.infeep-list { list-style: none; padding: 0; margin: 0; text-align: left; }
 
 .infeep-list li {
     display: flex;
@@ -1000,7 +1022,57 @@ footer p {
 }
 
 /* ==================== RESPONSIVIDADE (MOBILE) ==================== */
+/* ==================== RESPONSIVIDADE TOTAL ==================== */
+
+/* Ajustes Gerais para Telas Grandes (Desktops) */
+@media (max-width: 1200px) {
+    .banner-with-cards, 
+    .infeep-experience, 
+    .secao-oferta-final {
+        padding: 80px 40px;
+        gap: 40px;
+    }
+    
+    .cursos, 
+    .depoimentos {
+        padding: 80px 40px;
+    }
+}
+
+/* Tablets e Celulares Grandes */
+@media (max-width: 992px) {
+    .banner-with-cards, 
+    .infeep-container, 
+    .container-oferta-final {
+        grid-template-columns: 1fr; /* Empilha as colunas */
+        text-align: center;
+    }
+
+    .banner-text-content, 
+    .texto-marketing {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .cards-container {
+        justify-content: center;
+        margin-right: 0;
+    }
+
+    .cursos, 
+    .depoimentos-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 colunas em tablets */
+    }
+    
+    .infeep-image {
+        order: -1; /* Imagem aparece antes do texto no mobile */
+    }
+}
+
+/* Celulares (Mobile) */
 @media (max-width: 768px) {
+    /* Header & Nav */
     .hamburger {
         display: flex;
     }
@@ -1008,55 +1080,93 @@ footer p {
     nav {
         position: fixed;
         top: 0;
-        right: -100%; /* Escondido fora da tela */
-        width: 70%;
+        right: -110%; /* Aumentamos para garantir que suma mesmo */
+        width: 80%;
         height: 100vh;
-        background: var(--card);
-        border-left: 1px solid var(--border);
-        flex-direction: column;
-        justify-content:center;
-        align-items:start;
-        gap: 20px;
-        transition: var(--transition);
+        
+        /* A MÁGICA ESTÁ AQUI: */
+        display: none; /* Ele deixa de existir para o layout quando fechado */
+        
+        transition: right var(--transition);
         z-index: 999;
     }
-
+    nav a , .compre{
+        font-size: 17px;
+    }
+    /* Quando abrir, ele passa a existir e desliza */
     nav.active {
-        right: 0; /* Desliza para dentro */
-        box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+        display: flex; /* Volta a existir */
+        flex-direction: column;
+        justify-content: center;
+        right: 0;
     }
-
-    nav a {
-        font-size: 18px;
-        width: 100%;
-        
-    }
+}
 
     .compre {
-        width:30vw;
-        
+        margin-left: 0;
+        width: 100%;
+        max-width: 200px;
+        text-align: center;
     }
-    .banner-with-cards{
-      display: flex;
-      flex-direction: column;
+
+    /* Ajustes de Seções */
+    .banner-with-cards, 
+    .infeep-experience, 
+    .sobre, 
+    .cursos, 
+    .depoimentos, 
+    .secao-oferta-final {
+        padding: 60px 20px;
     }
-    .infeep-container{
-display: flex;
-        flex-direction: column;
-      }
-      .cursos{
-        display: flex;
-        flex-direction: column;
-      }
-      .depoimentos-grid{
-        display: flex;
-        flex-direction: column;
-      }
-      .container-oferta-final{
-        display: flex;
-        flex-direction: column;
-      }
-      .cards-wrapper{
-        justify-content: center;
-      }
-} 
+
+    .carousel-text h2 {
+        font-size: 2.5rem;
+    }
+
+    /* Forçar 1 coluna em tudo */
+    .cursos, 
+    .depoimentos-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .sobre-inner {
+        padding-left: 15px;
+        margin-left: 5px;
+    }
+
+    /* Ajuste de Preço */
+    .preco {
+        font-size: 3.5rem;
+    }
+
+    .card-compra {
+        padding: 30px 20px;
+    }
+
+    /* Reset de margens negativas ou fixas que você tinha */
+    .cards-wrapper {
+        margin-left: 0 !important; 
+        max-width: 100%;
+    }
+
+
+/* Telas muito pequenas (iPhone SE, etc) */
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 18px;
+    }
+
+    .carousel-text h2 {
+        font-size: 2rem;
+    }
+
+    .texto-marketing h1 {
+        font-size: 1.8rem;
+    }
+    
+    .card h2 {
+        font-size: 1rem;
+    }
+}
+
+   
