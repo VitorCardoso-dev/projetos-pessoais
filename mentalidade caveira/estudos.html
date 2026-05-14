@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudos | Protocolo Faca na Caveira</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:wght@300;400;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style> 
+        :root {
+            --primary-red: #b30000;
+            --steel-gray: #2d2d2d;
+            --light-bg: #ffffff;
+            --dark-overlay: rgba(0, 0, 0, 0.8);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--light-bg);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* HEADER REDUZIDO PARA PÁGINAS INTERNAS */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background: linear-gradient(var(--dark-overlay), var(--dark-overlay)), url('biblioteca-tatica.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            border-bottom: 4px solid var(--primary-red);
+        }
+
+        .logo h1 {
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            font-size: 24px;
+        }
+
+        .logo span { color: var(--primary-red); }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        nav a:hover { color: var(--primary-red); }
+
+        /* SEÇÃO INTRODUTÓRIA */
+        .intro-estudos {
+            padding: 60px 5%;
+            background: #f4f4f4;
+            text-align: center;
+        }
+
+        .intro-estudos h2 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 45px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .intro-estudos p {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        /* GRID DE MATÉRIAS/MÓDULOS */
+        .grid-estudos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 60px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .modulo-card {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 30px;
+            position: relative;
+            transition: 0.3s;
+            overflow: hidden;
+        }
+
+        .modulo-card:hover {
+            border-color: var(--primary-red);
+            transform: scale(1.02);
+        }
+
+        .modulo-card i {
+            font-size: 40px;
+            color: var(--primary-red);
+            margin-bottom: 20px;
+        }
+
+        .modulo-card h3 {
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .status-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 10px;
+            background: var(--steel-gray);
+            color: white;
+            padding: 3px 8px;
+            text-transform: uppercase;
+            font-weight: 900;
+        }
+
+        .btn-acesso {
+            display: inline-block;
+            margin-top: 20px;
+            color: var(--primary-red);
+            text-decoration: none;
+            font-weight: 900;
+            text-transform: uppercase;
+            font-size: 13px;
+        }
+
+        .btn-acesso:hover { text-decoration: underline; }
+
+        footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 40px;
+            text-align: center;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <h1>Faca na <span>Caveira</span></h1>
+        </div>
+        <nav>
+            <a href="index.html">Início</a>
+            <a href="#">Módulos</a>
+            <a href="#">Biblioteca</a>
+            <a href="#">Suporte</a>
+        </nav>
+    </header>
+
+    <section class="intro-estudos">
+        <h2>Forja Intelectual</h2>
+        <p>O conhecimento é a única arma que você carrega sem peso. Abaixo, selecione o módulo de doutrina para iniciar sua progressão hoje.</p>
+    </section>
+
+    <main class="grid-estudos">
+        <div class="modulo-card">
+            <span class="status-badge">Disponível</span>
+            <i class="fa-solid fa-brain"></i>
+            <h3>Neurociência do Foco</h3>
+            <p>Aprenda como blindar seu cérebro contra distrações e entrar em estado de Flow operacional.</p>
+            <a href="#" class="btn-acesso">Acessar Material <i class="fa-solid fa-chevron-right"></i></a>
+        </div>
+
+        <div class="modulo-card">
+            <span class="status-badge">Disponível</span>
+            <i class="fa-solid fa-shield-halved"></i>
+            <h3>Estratégia e Tática</h3>
+            <p>A aplicação dos princípios de Sun Tzu e Clausewitz na tomada de decisão do cotidiano profissional.</p>
+            <a href="#" class="btn-acesso">Acessar Material <i class="fa-solid fa-chevron-right"></i></a>
+        </div>
+
+        <div class="modulo-card">
+            <span class="status-badge" style="background: var(--primary-red);">Em Breve</span>
+            <i class="fa-solid fa-pen-nib"></i>
+            <h3>Escrita e Retórica</h3>
+            <p>Domine a arte de comunicar suas ideias com autoridade e clareza absoluta.</p>
+            <a href="#" class="btn-acesso">Ver Detalhes <i class="fa-solid fa-chevron-right"></i></a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2026 - Protocolo de Estudos Faca na Caveira <br>
+        <span style="font-family: 'Oswald'; margin-top: 10px; display: block;">Conhecimento para dominar.</span>
+    </footer>
+
+</body>
+</html>

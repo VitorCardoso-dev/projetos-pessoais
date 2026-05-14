@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faca na Caveira | Mentalidade Tática</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:wght@300;400;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style> 
+        :root {
+            --primary-red: #b30000;
+            --steel-gray: #2d2d2d;
+            --light-bg: #ffffff;
+            --card-bg: #fdffdf; 
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--light-bg);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 40px 5%;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)), url('exercito-fundo.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            min-height: 600px;
+        }
+
+        .titulo {
+            margin-top: 50px;
+            flex: 1; 
+            width: 80%;
+        }
+
+        .titulo h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 80px;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+            line-height: 1;
+            margin-bottom: 20px;
+            max-width: 900px;
+        }
+
+        .titulo h1>span{
+            color: var(--primary-red);
+        }
+
+        .titulo p {
+            font-size: 1.2rem;
+            max-width: 850px;
+            opacity: 0.9;
+            text-align: justify;
+        }
+
+        .titulo span {
+            font-size: 1.1em;
+            font-style: italic;
+            opacity: 0.8;
+            display: block;
+            margin-top: 10px;
+        }
+
+        nav {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 10px 0;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: 0.3s;
+            letter-spacing: 1px;
+        }
+
+        nav a:hover {
+            color: var(--primary-red);
+        }
+
+        main {
+            padding: 80px 5%;
+            text-align: center;
+        }
+
+        .funcoes-container h2 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 40px;
+            text-transform: uppercase;
+            margin-bottom: 50px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .funcoes-container h2::after {
+            content: '';
+            width: 50%;
+            height: 4px;
+            background: var(--primary-red);
+            position: absolute;
+            bottom: -10px;
+            left: 25%;
+        }
+
+        .cards {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .card-funcao {
+            background-color: white;
+            padding: 40px 25px;
+            border-radius: 4px;
+            width: 320px;
+            border: 1px solid #b1aeae;
+            transition: all 0.4s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .card-funcao:hover {
+            transform: translateY(-15px);
+            border-color: var(--primary-red);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .card-funcao i {
+            font-size: 35px;
+            color: var(--primary-red);
+            margin-bottom: 15px;
+        }
+
+        .card-funcao h3 {
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: var(--steel-gray);
+        }
+
+        .card-funcao p {
+            font-size: 0.95rem;
+            color: #666;
+            flex-grow: 1; /* Faz o parágrafo ocupar o espaço restante, alinhando o botão embaixo */
+            margin-bottom: 20px;
+        }
+
+        .card-funcao button {
+            padding: 12px 30px;
+            background-color: var(--primary-red);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: 0.3s;
+            width: 100%; /* Botão ocupa a largura do card para visual tático */
+        }
+
+        .card-funcao button:hover {
+            background-color: #8a0000;
+            letter-spacing: 1px;
+        }
+        .card-funcao button a {
+            color: white;
+            text-decoration: none;
+            display: block;
+        }
+
+        footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 30px;
+            text-align: center;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .caveira {
+            font-family: 'Oswald', sans-serif;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .titulo { width: 100%; }
+            nav { margin-top: 30px; }
+            nav a { margin: 0 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="titulo">
+            <h1>Mentalidade <span>Caveira</span></h1>
+            <p>Onde a maioria enxerga sacrifício, nós estabelecemos doutrina. O Faca na Caveira não é apenas um portal de motivação, é um ecossistema tático desenhado para quem busca a soberania sobre o próprio tempo, corpo e mente.
+            Não oferecemos atalhos, oferecemos o protocolo. Uma metodologia de alta performance baseada na tríade: Intelecto, Força e Ordem.</p>
+            <span>um bom homem sempre vai a luta</span>
+        </div>
+        <nav>
+            <a href="#">Início</a>
+            <a href="#">Sobre</a>
+            <a href="#">Serviços</a>
+            <a href="#">Contato</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="funcoes-container">
+            <h2>Os Pilares</h2>
+            <div class="cards">
+                <div class="card-funcao">
+                    <i class="fa-solid fa-book-skull"></i>
+                    <h3>Estudos</h3>
+                    <p>Desenvolvimento intelectual focado em estratégia e absorção de conhecimento crítico para tomada de decisão sob pressão.</p>
+                    <button><a href="estudos.html">Saiba Mais</a></button>
+                </div>
+                
+                <div class="card-funcao">
+                    <i class="fa-solid fa-dumbbell"></i>
+                    <h3>Treino</h3>
+                    <p>Construção de um corpo resiliente. Força física como base para a resistência mental inabalável.</p>
+                    <button><a href="treino.html">Saiba Mais</a></button>
+                </div>
+                
+                <div class="card-funcao">
+                    <i class="fa-solid fa-clock-precision"></i>
+                    <i class="fa-solid fa-gears"></i>
+                    <h3>Rotina</h3>
+                    <p>Sistemas de hábitos táticos. A gestão do tempo aplicada à eficiência máxima do seu dia a dia.</p>
+                    <button><a href="rotina.html">Saiba Mais</a></button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2026 - Feito por Vitor da Silva <br> 
+        <p class="caveira">Faca na Caveira | Missão Dada é Missão Cumprida</p>
+    </footer>
+
+</body>
+</html>
