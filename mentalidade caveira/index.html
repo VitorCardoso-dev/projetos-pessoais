@@ -100,6 +100,19 @@
             text-align: center;
         }
 
+        .intro-pilares {
+            max-width: 800px; /* Mantém o texto centralizado e fácil de ler */
+            margin: 0 auto 50px; /* Centraliza e dá espaço para os cards abaixo */
+            font-size: 1.15rem;
+            color: #555;
+            line-height: 1.7;
+            text-align: center;
+        }
+
+        .intro-pilares strong {
+            color: var(--primary-red);
+            font-weight: 700;
+        }
         .funcoes-container h2 {
             font-family: 'Oswald', sans-serif;
             font-size: 40px;
@@ -182,7 +195,6 @@
 
         .card-funcao button:hover {
             background-color: #8a0000;
-            letter-spacing: 1px;
         }
         .card-funcao button a {
             color: white;
@@ -190,6 +202,289 @@
             display: block;
         }
 
+        
+
+
+        
+        .sobre {
+    padding: 100px 5%;
+    background-color: #f9f9f9; /* Fundo levemente cinza para destacar do branco */
+    border-top: 2px solid #eee;
+    text-align: left;
+        }
+
+        .sobre h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 45px;
+            text-transform: uppercase;
+            color: var(--steel-gray);
+            margin-bottom: 40px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        /* Linha vermelha abaixo do título do Sobre */
+        .sobre h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 5px;
+            background-color: var(--primary-red);
+        }
+
+        .sobre-content {
+            max-width: 900px; /* Alinhado com a largura do header */
+        }
+
+        .sobre p {
+            font-size: 1.15rem;
+            color: #444;
+            margin-bottom: 25px;
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+        .sobre p strong {
+            color: var(--primary-red);
+            font-weight: 900;
+        }
+
+        /* Efeito sutil de hover na seção para dar profundidade */
+        .sobre:hover {
+            background-color: #fff;
+            transition: background-color 0.5s ease;
+        }
+        .beneficios {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 100px 5%;
+    
+    /* Usando a mesma lógica do seu header, mas com background-attachment fixo */
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)),
+    url('soldado.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment:cover; /* Isso cria um efeito visual premium ao rolar a página */
+    color: white;
+    min-height: 500px;
+}
+
+.beneficios-content {
+    max-width: 1200px;
+    width: 100%;
+}
+
+.beneficios-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.beneficios-header h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 50px;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+}
+
+.beneficios-header h1 span {
+    color: var(--primary-red);
+}
+
+.beneficios-header p {
+    font-size: 1.2rem;
+    max-width: 700px;
+    margin: 15px auto;
+    opacity: 0.8;
+}
+
+.beneficios-grid {
+    display: flex;
+    gap: 30px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.beneficios-item {
+    flex: 1;
+    min-width: 300px;
+    background: rgba(255, 255, 255, 0.05); /* Efeito de vidro sutil */
+    backdrop-filter: blur(5px);
+    padding: 40px;
+    border-left: 3px solid var(--primary-red);
+    transition: 0.4s;
+}
+
+.beneficios-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-10px);
+}
+
+.icon-box {
+    font-size: 40px;
+    color: var(--primary-red);
+    margin-bottom: 20px;
+}
+
+.beneficios-item h3 {
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    font-size: 22px;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+.beneficios-item p {
+    font-size: 1rem;
+    color: #ccc;
+    line-height: 1.5;
+}
+
+.motivos {
+    padding: 100px 5%;
+    background-color: #ffffff;
+    color: #1a1a1a;
+    text-align: center;
+}
+
+.motivos-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.motivos h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 3rem;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    margin-bottom: 40px;
+}
+
+.motivos h1 span {
+    color: var(--primary-red);
+}
+
+.texto-introducao {
+    margin-bottom: 40px;
+    border-left: 4px solid var(--primary-red);
+    padding-left: 25px;
+    text-align: left;
+}
+
+.legenda-topo {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.destaque-protocolo {
+    font-size: 1.1rem;
+    color: #666;
+    font-weight: 300;
+}
+
+.chamada-video {
+    margin: 50px 0 25px;
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+}
+
+.chamada-video a {
+    color: #4a4a4a;
+    font-style: italic;
+    border-bottom: 1px solid #ccc;
+    text-decoration: none;
+}
+.chamada-video a:hover {
+    color:var(--primary-red);
+    border-bottom: none;
+}
+.chamada-video strong {
+    color: var(--primary-red);
+}
+
+/* CONTAINER DO VÍDEO COM EFEITO DE PROFUNDIDADE */
+.video-container-premium {
+    position: relative;
+    padding: 15px;
+    background: #1a1a1a; /* Moldura escura tática */
+    border-radius: 4px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+    margin-bottom: 60px;
+}
+
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+    overflow: hidden;
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* BOX FINAL E BOTÃO */
+.conclusao-box {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.legenda-baixo {
+    font-size: 1.2rem;
+    font-style: italic;
+    color: #444;
+    margin-bottom: 40px;
+    line-height: 1.8;
+}
+
+.btn-chamada {
+    padding: 22px 50px;
+    background-color: var(--primary-red);
+    color: white;
+    border: none;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 10px 20px rgba(179, 0, 0, 0.3);
+}
+
+.btn-chamada:hover {
+    background-color: #000;
+    transform: scale(1.05);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .motivos h1 { font-size: 2.2rem; }
+    .texto-introducao { padding-left: 15px; }
+    .btn-chamada { width: 100%; padding: 20px; }
+}
+
+/* Ajuste Responsivo */
+@media (max-width: 768px) {
+    .motivos h1 { font-size: 32px; }
+    .motivos p { font-size: 1rem; }
+}
+/* Responsividade para celulares */
+@media (max-width: 768px) {
+    .beneficios-header h1 { font-size: 35px; }
+    .beneficios-grid { flex-direction: column; }
+}
         footer {
             background: #1a1a1a;
             color: white;
@@ -227,42 +522,125 @@
             <span>um bom homem sempre vai a luta</span>
         </div>
         <nav>
-            <a href="#">Início</a>
-            <a href="#">Sobre</a>
-            <a href="#">Serviços</a>
-            <a href="#">Contato</a>
+            <a href="#sobre">Sobre</a>
+            <a href="#beneficios">beneficios</a>
+            <a href="#pilares">ferramentas</a>
+            <a href="#motivos">motivos</a>
         </nav>
     </header>
 
     <main>
-        <div class="funcoes-container">
-            <h2>Os Pilares</h2>
-            <div class="cards">
-                <div class="card-funcao">
-                    <i class="fa-solid fa-book-skull"></i>
-                    <h3>Estudos</h3>
-                    <p>Desenvolvimento intelectual focado em estratégia e absorção de conhecimento crítico para tomada de decisão sob pressão.</p>
-                    <button><a href="estudos.html">Saiba Mais</a></button>
-                </div>
-                
-                <div class="card-funcao">
-                    <i class="fa-solid fa-dumbbell"></i>
-                    <h3>Treino</h3>
-                    <p>Construção de um corpo resiliente. Força física como base para a resistência mental inabalável.</p>
-                    <button><a href="treino.html">Saiba Mais</a></button>
-                </div>
-                
-                <div class="card-funcao">
-                    <i class="fa-solid fa-clock-precision"></i>
-                    <i class="fa-solid fa-gears"></i>
-                    <h3>Rotina</h3>
-                    <p>Sistemas de hábitos táticos. A gestão do tempo aplicada à eficiência máxima do seu dia a dia.</p>
-                    <button><a href="rotina.html">Saiba Mais</a></button>
-                </div>
+        
+        <section class="sobre" id="sobre">
+    <h1>O que é o Mentalidade Caveira?</h1>
+    <div class="sobre-content">
+        <p>O <strong>Mentalidade Caveira</strong> não é um portal de autoajuda convencional. É um centro de treinamento intelectual e estratégico desenvolvido para indivíduos que decidiram abandonar a mediocridade e adotar um padrão de elite em todas as áreas da vida.</p>
+        
+        <p>Nascido da filosofia de que a disciplina é a única forma real de liberdade, nosso ecossistema baseia-se em princípios de clareza tática, resiliência física e ordem absoluta. Entendemos que para dominar o mundo lá fora, primeiro você deve conquistar a guerra interna contra a procrastinação e a falta de propósito.</p>
+        
+        <p>Aqui, fornecemos o <strong>Protocolo Operacional</strong>: métodos validados para otimizar seus estudos, blindar seu corpo através do treino e arquitetar uma rotina que trabalha para você, e não contra você. No Faca na Caveira, missão dada é missão cumprida. <strong>A pergunta é: você está pronto para o próximo nível?</strong></p>
+    </div>
+</section>
+
+    <div class="funcoes-container" id="pilares">
+    <h2>Os Pilares</h2>
+    
+    <p class="intro-pilares">
+        A soberania pessoal não é fruto do acaso, mas da harmonia entre três eixos fundamentais. 
+        O <strong>Protocolo Caveira</strong> integra o desenvolvimento intelectual, a resiliência física e a ordem sistemática, 
+        criando uma base inabalável para quem opera em ambientes de alta performance e decisão.
+    </p>
+
+    <div class="cards">
+        <div class="card-funcao">
+            <i class="fa-solid fa-book-skull"></i>
+            <h3>Estudos</h3>
+            <p>Desenvolvimento intelectual focado em estratégia e absorção de conhecimento crítico para tomada de decisão sob pressão.</p>
+            <button><a href="estudos.html">Saiba Mais</a></button>
+        </div>
+        
+        <div class="card-funcao">
+            <i class="fa-solid fa-dumbbell"></i>
+            <h3>Treino</h3>
+            <p>Construção de um corpo resiliente. Força física como base para a resistência mental inabalável.</p>
+            <button onclick="window.location.href='treino.html'">Saiba Mais</button>
+        </div>
+        
+        <div class="card-funcao">
+            <i class="fa-solid fa-gears"></i>
+            <h3>Rotina</h3>
+            <p>Sistemas de hábitos táticos. A gestão do tempo aplicada à eficiência máxima do seu dia a dia.</p>
+            <button onclick="window.location.href='rotina.html'">Saiba Mais</button>
+        </div>
+    </div>
+</div>
+    </main>
+    <section class="beneficios" id="beneficios">
+    <div class="beneficios-content">
+        <div class="beneficios-header">
+            <h1>Operação Diária: <span>Benefícios</span></h1>
+            <p>A aplicação do Protocolo Faca na Caveira transforma o caos em ordem. Não é sobre fazer mais, é sobre ser mais eficiente em cada movimento.</p>
+        </div>
+
+        <div class="beneficios-grid">
+            <div class="beneficios-item">
+                <div class="icon-box"><i class="fa-solid fa-brain"></i></div>
+                <h3>Clareza Decisória</h3>
+                <p>Redução de ruído mental e aumento da capacidade de análise sob condições de alta pressão.</p>
+            </div>
+
+            <div class="beneficios-item">
+                <div class="icon-box"><i class="fa-solid fa-battery-full"></i></div>
+                <h3>Vigor Inabalável</h3>
+                <p>Otimização da fisiologia para manter o estado de alerta e energia durante todo o turno operacional.</p>
+            </div>
+
+            <div class="beneficios-item">
+                <div class="icon-box"><i class="fa-solid fa-crosshairs"></i></div>
+                <h3>Precisão de Execução</h3>
+                <p>Sincronia perfeita entre planejamento intelectual e ação física. Missão dada, missão cumprida.</p>
             </div>
         </div>
-    </main>
+    </div>
+</section>
 
+
+
+<section class="motivos" id="motivos">
+    <div class="motivos-container">
+        <h1>Por que se tornar um <span>Caveira</span>?</h1>
+        
+        <div class="texto-introducao">
+            <p class="legenda-topo">
+                A maioria das pessoas passa a vida reagindo ao mundo. Ser um <strong>Caveira</strong> é sobre inverter essa lógica: 
+                é construir uma mente tão resiliente e uma rotina tão sólida que o mundo passa a reagir às suas ações. 
+            </p>
+            <p class="destaque-protocolo">
+                O protocolo não visa transformar você em um soldado, mas desbloquear o potencial máximo da sua disciplina em todos os ambientes. 
+                Utilizamos o rigor militar para que você pare de apenas planejar e comece a <strong>executar a mudança</strong> de fato.
+            </p>
+        </div>
+
+        <div class="chamada-video">
+            <p>Assista ao manifesto de <a href="">Caveira Cadar</a> e entenda por que adotar esta mentalidade para sua <strong>VIDA:</strong></p>
+        </div>
+
+        <div class="video-container-premium">
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/TvbXuTi5kYU?si=uBDAIKfz27hLq3KZ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <div class="conclusao-box">
+            <p class="legenda-baixo">
+                "O protocolo não é um fardo, é o seu escudo." A excelência não é um ato isolado, mas um hábito contínuo. 
+                Este é o chamado para quem cansou de desculpas e está pronto para a virada de chave definitiva.
+            </p>
+            <button class="btn-chamada">Quero Iniciar o Protocolo</button>
+        </div>
+    </div>
+</section>
+</section>
     <footer>
         &copy; 2026 - Feito por Vitor da Silva <br> 
         <p class="caveira">Faca na Caveira | Missão Dada é Missão Cumprida</p>
