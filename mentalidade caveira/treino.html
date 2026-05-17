@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Central de Treino | Mentalidade Caveira</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="shortcut icon" href="logo.ico">
+    <style>
+        :root {
+            --bg-dark-1: #0b0c10;   /* Preto BOPE */
+            --bg-dark-2: #12161a;   /* Cinza Blindado */
+            --bg-dark-3: #1b2416;   /* Verde Oliva Noturno */
+            
+            --primary-red: #b30000;
+            --alert-red: #ff3333;
+            --gold-tactical: #cfb997;
+            --text-clear: #e0e0e0;
+            --success-green: #2d3b26;
+            --bright-green: #39ff14;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(180deg, var(--bg-dark-1) 0%, var(--bg-dark-2) 60%, var(--bg-dark-3) 100%);
+            color: var(--text-clear);
+            min-height: 100vh;
+            padding-bottom: 50px;
+        }
+
+        header {
+            text-align: center;
+            padding: 50px 5%;
+            background: rgba(0, 0, 0, 0.4);
+            border-bottom: 2px solid var(--primary-red);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        header h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #fff;
+        }
+
+        header h1 span { color: var(--alert-red); }
+        header p { font-size: 1.1rem; color: var(--gold-tactical); font-style: italic; margin-top: 5px; }
+
+        /* DASHBOARD */
+        .dashboard-status {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 5%;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+        }
+
+        .status-card {
+            background: linear-gradient(135deg, #111418 0%, #171d24 50%, #222b35 100%);
+            border: 1px solid #333;
+            padding: 30px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            position: relative;
+        }
+
+        .status-card::before {
+            content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 4px; background: var(--alert-red);
+        }
+
+        .status-card i { font-size: 3rem; color: var(--alert-red); }
+        .status-info h3 { font-family: 'Oswald', sans-serif; text-transform: uppercase; font-size: 1.2rem; }
+        .status-info p { font-size: 1.8rem; font-weight: 700; color: #fff; }
+
+        .progress-container {
+            width: 100%; background: #090b0d; height: 25px; border: 1px solid #444; margin-top: 15px; position: relative; overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%; width: 0%; background: linear-gradient(90deg, #660000 0%, #b30000 50%, #ff3333 100%); transition: width 0.5s ease-in-out;
+        }
+
+        .progress-text {
+            position: absolute; width: 100%; text-align: center; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 0.85rem; font-weight: 700; color: #fff; text-shadow: 1px 1px 2px #000;
+        }
+
+        /* LAYOUT PRINCIPAL */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 5%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .painel-operacional {
+            background: linear-gradient(135deg, #0e1114 0%, #15191f 50%, #1f2630 100%);
+            border: 1px solid #2a2a2a;
+            padding: 35px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .painel-operacional h2 {
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+            color: #fff;
+        }
+
+        /* FORMULÁRIO */
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-family: 'Oswald', sans-serif; text-transform: uppercase; font-size: 0.95rem; margin-bottom: 8px; color: var(--gold-tactical); }
+        .form-group input, .form-group select { width: 100%; padding: 12px; background: #090b0d; border: 1px solid #444; color: #fff; font-size: 1rem; }
+        .form-group input:focus, .form-group select:focus { outline: none; border-color: var(--alert-red); }
+        
+        .row-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+
+        /* SELETOR DE MODELOS PRONTOS MILITARES */
+        .area-modelos-prontos {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px dashed #555;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .btn-grupo-modelos { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 8px; }
+        .btn-modelo {
+            padding: 8px; font-family: 'Oswald', sans-serif; font-size: 0.9rem; text-transform: uppercase; background: #222; border: 1px solid #444; color: #fff; cursor: pointer; transition: 0.3s;
+        }
+        .btn-modelo:hover { background: var(--primary-red); border-color: var(--alert-red); }
+
+        /* BOTÕES */
+        .btn-add-lista, .btn-gerar-missao, .btn-fechar-banner {
+            width: 100%; padding: 14px; font-family: 'Oswald', sans-serif; font-size: 1.1rem; text-transform: uppercase; border: none; cursor: pointer; transition: all 0.3s; margin-top: 10px;
+        }
+        .btn-add-lista { background: linear-gradient(135deg, #1b2416 0%, #2d3b26 50%, #3f5236 100%); color: #fff; border: 1px solid #3f5236; }
+        .btn-add-lista:hover { background: linear-gradient(135deg, #3f5236 0%, #2d3b26 50%, #1b2416 100%); }
+        .btn-gerar-missao { background: linear-gradient(135deg, #660000 0%, #b30000 50%, #ff3333 100%); color: white; border: 1px solid var(--alert-red); }
+        .btn-gerar-missao:hover { background: linear-gradient(135deg, #ff3333 0%, #b30000 50%, #660000 100%); transform: scale(1.02); }
+
+        .lista-previa-exercicios { margin: 20px 0; background: rgba(0, 0, 0, 0.2); padding: 10px; max-height: 150px; overflow-y: auto; border-left: 2px solid var(--gold-tactical); }
+        .item-previa { font-size: 0.9rem; padding: 5px 0; border-bottom: 1px solid #222; display: flex; justify-content: space-between; color: #bbb; }
+
+        /* HISTÓRICO DE TREINOS SALVOS */
+        .historico-treinos-container { margin-top: 25px; border-top: 1px dashed #444; padding-top: 20px; }
+        .lista-treinos-salvos { display: flex; flex-direction: column; gap: 10px; max-height: 250px; overflow-y: auto; margin-top: 10px; }
+        .treino-salvo-item {
+            background: #090b0d; padding: 12px; border: 1px solid #333; display: flex; font-size: 0.9rem; transition: 0.3s;
+        }
+        .treino-salvo-item:hover { border-color: var(--gold-tactical); }
+        
+        .acoes-historico { display: flex; gap: 8px; }
+        .btn-carregar-salvo { background: none; border: 1px solid var(--gold-tactical); color: var(--gold-tactical); padding: 4px 10px; font-family: 'Oswald', sans-serif; text-transform: uppercase; cursor: pointer; transition: 0.3s; height: fit-content; }
+        .btn-carregar-salvo:hover { background: var(--gold-tactical); color: #000; }
+        .btn-deletar-salvo { background: none; border: 1px solid var(--primary-red); color: var(--alert-red); padding: 4px 10px; cursor: pointer; transition: 0.3s; height: fit-content; }
+        .btn-deletar-salvo:hover { background: var(--primary-red); color: #fff; }
+
+        /* CHECKLIST */
+        .missao-vazia { color: #666; font-style: italic; text-align: center; margin-top: 40px; }
+        .tipo-badge { display: inline-block; padding: 4px 10px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; background: var(--gold-tactical); color: #111; margin-bottom: 6px; }
+        .checklist-container { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; margin-bottom: 20px; }
+        
+        .check-item { display: flex; align-items: center; background: #090b0d; border: 1px solid #333; padding: 12px 18px; cursor: pointer; transition: all 0.3s ease; user-select: none; }
+        .check-item:hover { border-color: #555; background: #111418; }
+        .check-item input[type="checkbox"] { appearance: none; width: 20px; height: 20px; border: 2px solid #505050; margin-right: 15px; position: relative; cursor: pointer; }
+        .check-item input[type="checkbox"]:checked { background: var(--alert-red); border-color: var(--alert-red); }
+        .check-item input[type="checkbox"]:checked::after { content: '\2713'; position: absolute; color: white; font-size: 13px; font-weight: bold; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+        .check-item-info { flex-grow: 1; }
+        .check-item-info h4 { font-size: 1rem; color: #fff; }
+        .check-item-info p { font-size: 0.8rem; color: #888; }
+        .check-item.completo { border-color: var(--bg-dark-3); background: rgba(27, 36, 22, 0.2); opacity: 0.6; }
+        .check-item.completo h4 { text-decoration: line-through; color: #666; }
+
+        /* BANNER DE MISSÃO CUMPRIDA NO SITE */
+        .banner-sucesso {
+            display: none; background: linear-gradient(135deg, #1b2416 0%, #2d3b26 50%, #0b0c10 100%);
+            border: 2px solid var(--bright-green); padding: 25px; text-align: center; margin: 30px auto; max-width: 1100px;
+            box-shadow: 0 0 20px rgba(57, 255, 20, 0.2); position: relative;
+        }
+        .banner-sucesso h2 { font-family: 'Oswald', sans-serif; color: var(--bright-green); text-transform: uppercase; font-size: 2rem; margin-bottom: 10px; }
+        .banner-sucesso p { color: #fff; font-size: 1.1rem; }
+        .btn-fechar-banner { background: #222; border: 1px solid #444; color: #fff; max-width: 180px; margin: 15px auto 0; padding: 8px; font-size: 0.9rem; }
+        .btn-fechar-banner:hover { background: #333; }
+
+        /* CALENDÁRIO DE CONSTÂNCIA */
+        .secao-calendario { max-width: 1100px; margin: 50px auto 0; padding: 0 5%; }
+        .secao-calendario h2 { font-family: 'Oswald', sans-serif; text-transform: uppercase; font-size: 1.5rem; margin-bottom: 15px; color: var(--gold-tactical); }
+        .calendario-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(75px, 1fr)); gap: 12px; background: rgba(0,0,0,0.4); padding: 25px; border: 1px solid #222; }
+        
+        .dia-box { background: #090b0d; border: 1px solid #333; padding: 10px 5px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 5px; }
+        .dia-num { font-size: 0.8rem; font-weight: 700; color: #666; }
+        .dia-status { width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; }
+        .dia-status.check { background: var(--success-green); color: var(--bright-green); border: 1px solid var(--bright-green); }
+        .dia-status.neutro { background: #222; color: #555; }
+
+        /* ANIMAÇÃO */
+        .revelar-ao-scroll { opacity: 0; transform: translateY(40px); }
+
+        @media (max-width: 900px) { .main-container { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Central de <span>Operações de Treino</span></h1>
+        <p>Construa a carcaça. Forje a mente. Sem desculpas.</p>
+    </header>
+
+    <div class="banner-sucesso" id="banner-missao-cumprida">
+        <h2><i class="fa-solid fa-award"></i> Missão Cumprida, Caveira!</h2>
+        <p>A carcaça foi castigada com sucesso. Seu histórico operacional e sua constância foram atualizados.</p>
+        <button class="btn-fechar-banner" id="btn-fechar-sucesso">Fechar Registro</button>
+    </div>
+
+    <section class="dashboard-status revelar-ao-scroll" id="dash">
+        <div class="status-card">
+            <i class="fa-solid fa-fire-flame-curved"></i>
+            <div class="status-info">
+                <h3>Constância</h3>
+                <p id="contador-dias">00 Dias Seguidos</p>
+            </div>
+        </div>
+
+        <div class="status-card">
+            <i class="fa-solid fa-crosshairs"></i>
+            <div class="status-info" style="width: 100%;">
+                <h3>Objetivo da Missão Atual</h3>
+                <div class="progress-container">
+                    <div class="progress-bar" id="barra-progresso"></div>
+                    <div class="progress-text" id="texto-progresso">0% CONCLUÍDO</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main class="main-container">
+        
+        <section class="painel-operacional revelar-ao-scroll">
+            <h2><i class="fa-solid fa-pen-ruler"></i> Projetar Nova Missão</h2>
+            
+            <div class="form-group">
+                <label for="nome-plano">Identificação da Missão (Nome do Treino)</label>
+                <input type="text" id="nome-plano" placeholder="Ex: Operação Peito de Aço, Corrida Matinal">
+            </div>
+
+            <div class="row-inputs">
+                <div class="form-group">
+                    <label for="tipo-treino">Doutrina de Treino</label>
+                    <select id="tipo-treino">
+                        <option value="Militar / Operacional">Militar / Operacional</option>
+                        <option value="Calistenia">Calistenia</option>
+                        <option value="Musculação / Hipertrofia">Musculação / Hipertrofia</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="data-missao">Data da Operação</label>
+                    <input type="date" id="data-missao">
+                </div>
+            </div>
+
+            <div class="area-modelos-prontos" id="bloco-modelos-militares">
+                <label style="font-family:'Oswald'; font-size:0.85rem; color:var(--gold-tactical); text-transform:uppercase;">Modelos de Doutrina Prontos:</label>
+                <div class="btn-grupo-modelos">
+                    <button class="btn-modelo" data-nivel="iniciante">Iniciante</button>
+                    <button class="btn-modelo" data-nivel="intermediario">Intermediário</button>
+                    <button class="btn-modelo" data-nivel="avancado">Avançado</button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="nome-exercicio">Nome do Exercício / Atividade</label>
+                <input type="text" id="nome-exercicio" list="sugestoes-exercicios" placeholder="Clique para ver opções ou digite...">
+                
+                <datalist id="sugestoes-exercicios">
+                    <option value="Corrida de Resistência (TAF)"></option>
+                    <option value="Flexões Padrão Militar"></option>
+                    <option value="Abdominais Remador"></option>
+                    <option value="Barra Fixa Pronada"></option>
+                    <option value="Burpees Táticos"></option>
+                    <option value="Marcha com Mochila Pesada"></option>
+                    <option value="Paralelas (Dips)"></option>
+                    <option value="Flexões Declinadas"></option>
+                    <option value="Flexões Diamante"></option>
+                    <option value="Agachamento Livre (Squat)"></option>
+                    <option value="Pistol Squat (Unilateral)"></option>
+                    <option value="Elevação de Pernas na Barra"></option>
+                    <option value="Supino Reto com Barra"></option>
+                    <option value="Agachamento Livre com Barra"></option>
+                    <option value="Levantamento Terra"></option>
+                    <option value="Desenvolvimento de Ombros (Military Press)"></option>
+                    <option value="Remada Curvada"></option>
+                    <option value="Rosca Direta com Barra"></option>
+                </datalist>
+            </div>
+
+            <div class="row-inputs">
+                <div class="form-group">
+                    <label for="series">Séries / Rounds</label>
+                    <input type="number" id="series" placeholder="Ex: 4" min="1">
+                </div>
+                <div class="form-group">
+                    <label for="reps">Repetições / Tempo</label>
+                    <input type="text" id="reps" placeholder="Ex: 20">
+                </div>
+            </div>
+
+            <button class="btn-add-lista" id="btn-add-exercicio"><i class="fa-solid fa-plus"></i> Inserir na Lista</button>
+
+            <div class="lista-previa-exercicios" id="previa-exercicios">
+                <p class="missao-vazia" style="margin-top: 50px;">Nenhum exercício adicionado ao escopo.</p>
+            </div>
+
+            <button class="btn-gerar-missao" id="btn-publicar-treino"><i class="fa-solid fa-skull"></i> Iniciar Missão do Dia</button>
+
+            <div class="historico-treinos-container">
+                <label style="font-family:'Oswald'; font-size:0.9rem; color:var(--gold-tactical); text-transform:uppercase;"><i class="fa-solid fa-clock-rotate-left"></i> Reativar Missões Anteriores:</label>
+                <div class="lista-treinos-salvos" id="historico-salvos">
+                    </div>
+            </div>
+        </section>
+
+        <section class="painel-operacional revelar-ao-scroll">
+            <h2><i class="fa-solid fa-list-check"></i> Missão do Dia (Execução)</h2>
+            <div id="area-checklist">
+                <p class="missao-vazia">Nenhum plano operacional ativo na tela. Aloque ou crie uma missão ao lado.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <section class="secao-calendario revelar-ao-scroll">
+        <h2><i class="fa-solid fa-calendar-days"></i> Histórico Mensal de Desempenho</h2>
+        <div class="calendario-grid" id="calendario-ops">
+            </div>
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            let exerciciosTemporarios = [];
+            
+            // Estrutura hierárquica para empilhar múltiplos treinos contendo seus exercícios
+            let missaoAtiva = []; 
+            let dataMissaoAtiva = ''; 
+            let diasSeguidos = 0;
+            
+            const modelosMilitares = {
+                iniciante: [
+                    { nome: "Corrida de Resistência (TAF)", series: "1", reps: "15 min" },
+                    { nome: "Flexões Padrão Militar", series: "3", reps: "12" },
+                    { nome: "Abdominais Remador", series: "3", reps: "15" },
+                    { nome: "Agachamento Livre (Squat)", series: "3", reps: "20" }
+                ],
+                intermediario: [
+                    { nome: "Corrida de Resistência (TAF)", series: "1", reps: "25 min" },
+                    { nome: "Flexões Padrão Militar", series: "4", reps: "20" },
+                    { nome: "Abdominais Remador", series: "4", reps: "35" },
+                    { nome: "Barra Fixa Pronada", series: "3", reps: "6" },
+                    { nome: "Burpees Táticos", series: "3", reps: "12" }
+                ],
+                avancado: [
+                    { nome: "Corrida de Resistência (TAF)", series: "1", reps: "40 min" },
+                    { nome: "Burpees Táticos", series: "5", reps: "20" },
+                    { nome: "Abdominais Remador", series: "5", reps: "50" },
+                    { nome: "Barra Fixa Pronada", series: "4", reps: "12" },
+                    { nome: "Flexões Padrão Militar", series: "5", reps: "30" }
+                ]
+            };
+
+            let arquivoTreinosSalvos = [
+                { id: 1, doutrina: "Calistenia", nome: "Rotina Fibra Corporal", itens: [{ nome: "Barra Fixa Pronada", series: "4", reps: "8" }, { nome: "Paralelas (Dips)", series: "4", reps: "12" }] },
+                { id: 2, doutrina: "Musculação / Hipertrofia", nome: "Força Bruta: Pernas", itens: [{ nome: "Agachamento Livre com Barra", series: "4", reps: "10" }, { nome: "Levantamento Terra", series: "3", reps: "8" }] }
+            ];
+
+            const selectTipo = document.getElementById('tipo-treino');
+            const inputData = document.getElementById('data-missao');
+            const blocoMilitares = document.getElementById('bloco-modelos-militares');
+            const previaContainer = document.getElementById('previa-exercicios');
+            const areaChecklist = document.getElementById('area-checklist');
+            const historicoContainer = document.getElementById('historico-salvos');
+            const bannerSucesso = document.getElementById('banner-missao-cumprida');
+
+            const inputPlanoNome = document.getElementById('nome-plano');
+            const inputNome = document.getElementById('nome-exercicio');
+            const inputSeries = document.getElementById('series');
+            const inputReps = document.getElementById('reps');
+
+            inputData.value = new Date().toISOString().split('T')[0];
+
+            selectTipo.addEventListener('change', () => {
+                blocoMilitares.style.display = (selectTipo.value === "Militar / Operacional") ? "block" : "none";
+            });
+
+            document.querySelectorAll('.btn-modelo').forEach(botao => {
+                botao.addEventListener('click', () => {
+                    const nivel = botao.getAttribute('data-nivel');
+                    exerciciosTemporarios = [...modelosMilitares[nivel]];
+                    atualizarPrevia();
+                });
+            });
+
+            document.getElementById('btn-add-exercicio').addEventListener('click', () => {
+                const nome = inputNome.value.trim();
+                const series = inputSeries.value.trim();
+                const reps = inputReps.value.trim();
+
+                if (!nome || !series || !reps) return;
+
+                exerciciosTemporarios.push({ nome, series, reps });
+                atualizarPrevia();
+
+                inputNome.value = ''; inputSeries.value = ''; inputReps.value = '';
+            });
+
+            function atualizarPrevia() {
+                if (exerciciosTemporarios.length === 0) {
+                    previaContainer.innerHTML = '<p class="missao-vazia" style="margin-top: 50px;">Nenhum exercício adicionado ao escopo.</p>';
+                    return;
+                }
+                previaContainer.innerHTML = '';
+                exerciciosTemporarios.forEach((ex, index) => {
+                    previaContainer.innerHTML += `<div class="item-previa"><span><strong>${index + 1}. ${ex.nome}</strong></span><span>${ex.series}x${ex.reps}</span></div>`;
+                });
+            }
+
+            // Publicar novo treino criado na tela e empilhar na execução
+            document.getElementById('btn-publicar-treino').addEventListener('click', () => {
+                if (exerciciosTemporarios.length === 0) return;
+
+                let nomeFinalTreino = inputPlanoNome.value.trim();
+                if (!nomeFinalTreino) {
+                    nomeFinalTreino = `Op. ${selectTipo.value.split(' ')[0]} #${arquivoTreinosSalvos.length + 1}`;
+                }
+
+                // Cria o objeto do novo treino
+                const novoTreino = {
+                    id: Date.now(),
+                    doutrina: selectTipo.value,
+                    nome: nomeFinalTreino,
+                    itens: exerciciosTemporarios.map(ex => ({ ...ex, concluido: false }))
+                };
+
+                // Adiciona ao banco de históricos estáticos
+                arquivoTreinosSalvos.push({
+                    id: novoTreino.id,
+                    doutrina: novoTreino.doutrina,
+                    nome: novoTreino.nome,
+                    itens: exerciciosTemporarios.map(ex => ({ ...ex }))
+                });
+
+                dataMissaoAtiva = inputData.value;
+                
+                // Empilha o treino completo estruturado na lista ativa
+                missaoAtiva.push(novoTreino);
+
+                exerciciosTemporarios = [];
+                inputPlanoNome.value = '';
+                atualizarPrevia();
+                renderizarHistoricoSalvos();
+
+                bannerSucesso.style.display = "none"; 
+                construirChecklist();
+                atualizarProgresso();
+            });
+
+            // RECONSTRUÇÃO DO CHECKLIST COM IDENTIFICAÇÃO VISUAL AGREGADA POR TREINO
+            function construirChecklist() {
+                if (missaoAtiva.length === 0) {
+                    areaChecklist.innerHTML = '<p class="missao-vazia">Nenhum plano operacional ativo na tela. Aloque ou crie uma missão ao lado.</p>';
+                    return;
+                }
+
+                areaChecklist.innerHTML = '';
+
+                missaoAtiva.forEach((treino, tIndex) => {
+                    // Bloco do Treino
+                    const blocoTreino = document.createElement('div');
+                    blocoTreino.style.marginBottom = '25px';
+
+                    // Cabeçalho identificando a origem dos exercícios abaixo dele
+                    const cabecalho = document.createElement('div');
+                    cabecalho.style.display = 'flex';
+                    cabecalho.style.justifyContent = 'space-between';
+                    cabecalho.style.alignItems = 'center';
+                    cabecalho.style.borderBottom = '1px solid #222';
+                    cabecalho.style.paddingBottom = '4px';
+
+                    cabecalho.innerHTML = `
+                        <span class="tipo-badge" style="margin:0;">${treino.doutrina} &bull; ${treino.nome}</span>
+                        <button class="btn-deletar-salvo" style="padding: 2px 8px; font-size:0.75rem;" title="Remover este treino do dia"><i class="fa-solid fa-times"></i></button>
+                    `;
+
+                    // Botão para retirar apenas este treino específico da execução do dia
+                    cabecalho.querySelector('button').addEventListener('click', () => {
+                        missaoAtiva.splice(tIndex, 1);
+                        construirChecklist();
+                        atualizarProgresso();
+                    });
+
+                    blocoTreino.appendChild(cabecalho);
+
+                    // Lista contendo os exercícios deste treino específico
+                    const containerItens = document.createElement('div');
+                    containerItens.className = 'checklist-container';
+
+                    treino.itens.forEach((ex, iIndex) => {
+                        const itemElement = document.createElement('div');
+                        itemElement.className = `check-item ${ex.concluido ? 'completo' : ''}`;
+                        itemElement.innerHTML = `
+                            <input type="checkbox" ${ex.concluido ? 'checked' : ''}>
+                            <div class="check-item-info">
+                                <h4>${ex.nome}</h4>
+                                <p>${ex.series} Séries &bull; ${ex.reps} Repetições</p>
+                            </div>
+                        `;
+
+                        const alternarEstado = () => {
+                            ex.concluido = !ex.concluido;
+                            itemElement.querySelector('input[type="checkbox"]').checked = ex.concluido;
+                            itemElement.classList.toggle('completo', ex.concluido);
+                            atualizarProgresso();
+                        };
+
+                        itemElement.addEventListener('click', (e) => {
+                            if (e.target.tagName !== 'INPUT') {
+                                alternarEstado();
+                            } else {
+                                ex.concluido = e.target.checked;
+                                itemElement.classList.toggle('completo', ex.concluido);
+                                atualizarProgresso();
+                            }
+                        });
+
+                        containerItens.appendChild(itemElement);
+                    });
+
+                    blocoTreino.appendChild(containerItens);
+                    areaChecklist.appendChild(blocoTreino);
+                });
+            }
+
+            function atualizarProgresso() {
+                if (missaoAtiva.length === 0) {
+                    document.getElementById('barra-progresso').style.width = `0%`;
+                    document.getElementById('texto-progresso').textContent = `0% CONCLUÍDO`;
+                    return;
+                }
+
+                let totalExercicios = 0;
+                let totalConcluidos = 0;
+
+                missaoAtiva.forEach(treino => {
+                    totalExercicios += treino.itens.length;
+                    treino.itens.forEach(ex => {
+                        if (ex.concluido) totalConcluidos++;
+                    });
+                });
+
+                const porcentagem = totalExercicios > 0 ? Math.round((totalConcluidos / totalExercicios) * 100) : 0;
+
+                document.getElementById('barra-progresso').style.width = `${porcentagem}%`;
+                document.getElementById('texto-progresso').textContent = `${porcentagem}% CONCLUÍDO`;
+
+                if (porcentagem === 100 && totalExercicios > 0) {
+                    bannerSucesso.style.display = "block";
+                    bannerSucesso.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    
+                    marcarDiaNoCalendario(dataMissaoAtiva);
+                    missaoAtiva = []; 
+                    construirChecklist();
+                }
+            }
+
+            document.getElementById('btn-fechar-sucesso').addEventListener('click', () => {
+                bannerSucesso.style.display = "none";
+            });
+
+            // RENDERIZAR HISTÓRICO EXIBINDO OS SEUS EXERCÍCIOS EMBUTIDOS
+            function renderizarHistoricoSalvos() {
+                historicoContainer.innerHTML = '';
+                if (arquivoTreinosSalvos.length === 0) {
+                    historicoContainer.innerHTML = '<p style="color:#555; font-size:0.85rem; font-style:italic;">Nenhuma missão arquivada ainda.</p>';
+                    return;
+                }
+
+                arquivoTreinosSalvos.forEach(treino => {
+                    const div = document.createElement('div');
+                    div.className = 'treino-salvo-item';
+                    div.style.flexDirection = 'column';
+                    div.style.alignItems = 'stretch';
+                    div.style.gap = '8px';
+
+                    // Mapeia os exercícios salvos para exibi-los em texto reduzido na aba de histórico
+                    const exerciciosInternosHtml = treino.itens.map(ex => `• ${ex.nome} (${ex.series}x ${ex.reps})`).join('<br>');
+
+                    div.innerHTML = `
+                        <div style="display:flex; justify-content:space-between; align-items:center; width:100%;">
+                            <div>
+                                <strong style="color:#fff;">${treino.nome}</strong><br>
+                                <small style="color:var(--gold-tactical); font-weight:700; text-transform:uppercase; font-size:0.75rem;">${treino.doutrina}</small>
+                            </div>
+                            <div class="acoes-historico">
+                                <button class="btn-carregar-salvo">Alocar</button>
+                                <button class="btn-deletar-salvo"><i class="fa-solid fa-trash-can"></i></button>
+                            </div>
+                        </div>
+                        <div style="font-size:0.78rem; color:#858a91; border-top:1px solid #1c2127; padding-top:6px; line-height:1.3;">
+                            ${exerciciosInternosHtml}
+                        </div>
+                    `;
+
+                    // Alocar sem limpar o que já está na tela, mantendo os exercícios agrupados
+                    div.querySelector('.btn-carregar-salvo').addEventListener('click', () => {
+                        const novoTreinoAtivo = {
+                            id: Date.now() + Math.random(),
+                            doutrina: treino.doutrina,
+                            nome: treino.nome,
+                            itens: treino.itens.map(ex => ({ ...ex, concluido: false }))
+                        };
+                        
+                        missaoAtiva.push(novoTreinoAtivo);
+                        dataMissaoAtiva = inputData.value; 
+
+                        bannerSucesso.style.display = "none";
+                        construirChecklist();
+                        atualizarProgresso();
+                    });
+
+                    div.querySelector('.btn-deletar-salvo').addEventListener('click', () => {
+                        arquivoTreinosSalvos = arquivoTreinosSalvos.filter(t => t.id !== treino.id);
+                        renderizarHistoricoSalvos();
+                    });
+
+                    historicoContainer.appendChild(div);
+                });
+            }
+
+            function gerarCalendarioDias() {
+                const grid = document.getElementById('calendario-ops');
+                grid.innerHTML = '';
+                
+                for(let i = 1; i <= 31; i++) {
+                    grid.innerHTML += `
+                        <div class="dia-box">
+                            <span class="dia-num">Dia ${String(i).padStart(2, '0')}</span>
+                            <div class="dia-status neutro" id="dia-id-${i}">&bull;</div>
+                        </div>
+                    `;
+                }
+            }
+
+            function marcarDiaNoCalendario(dataString) {
+                if (!dataString) return;
+                
+                const partes = dataString.split('-');
+                const numeroDia = parseInt(partes[2], 10);
+
+                const diaAlvo = document.getElementById(`dia-id-${numeroDia}`);
+                if (diaAlvo) {
+                    if (!diaAlvo.classList.contains('check')) {
+                        diaAlvo.className = "dia-status check";
+                        diaAlvo.innerHTML = "&#10003;";
+                        
+                        diasSeguidos++;
+                        document.getElementById('contador-dias').textContent = `${String(diasSeguidos).padStart(2, '0')} Dias Seguidos`;
+                    } else {
+                        diaAlvo.className = "dia-status check";
+                        diaAlvo.innerHTML = "&#10003;";
+                    }
+                }
+            }
+
+            renderizarHistoricoSalvos();
+            gerarCalendarioDias();
+
+            const fadeEls = document.querySelectorAll('.revelar-ao-scroll');
+            fadeEls.forEach(el => {
+                el.style.opacity = '0'; el.style.transform = 'translateY(40px)';
+                el.style.transition = 'opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1)';
+            });
+
+            const fadeObserver = new IntersectionObserver((entries) => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) {
+                        const target = e.target;
+                        target.style.opacity = '1'; target.style.transform = 'translateY(0)';
+                        setTimeout(() => {
+                            target.style.transform = ''; target.style.transition = ''; target.style.opacity = '1'; 
+                        }, 800);
+                        fadeObserver.unobserve(target);
+                    }
+                });
+            }, { threshold: 0.05 });
+            fadeEls.forEach(el => fadeObserver.observe(el));
+        });
+    </script>
+</body>
+</html>

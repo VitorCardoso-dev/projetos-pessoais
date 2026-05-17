@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Faca na Caveira | Mentalidade Tática</title>
+    <title>Mentalidade Caveira</title>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:wght@300;400;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="shortcut icon" href="logo.ico">
     <style> 
         :root {
             --primary-red: #b30000;
@@ -19,7 +20,7 @@
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
             font-family: 'Roboto', sans-serif;
             background-color: var(--light-bg);
@@ -145,7 +146,7 @@
             border-radius: 4px;
             width: 320px;
             border: 1px solid #b1aeae;
-            transition: all 0.4s ease;
+            transition:0.4s;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             display: flex;
             flex-direction: column;
@@ -202,16 +203,12 @@
             display: block;
         }
 
-        
-
-
-        
         .sobre {
-    padding: 100px 5%;
-    background-color: #f9f9f9; /* Fundo levemente cinza para destacar do branco */
-    border-top: 2px solid #eee;
-    text-align: left;
-        }
+        padding: 100px 5%;
+        background-color: #f9f9f9; /* Fundo levemente cinza para destacar do branco */
+        border-top: 2px solid #eee;
+        text-align: left;
+            }
 
         .sobre h1 {
             font-family: 'Oswald', sans-serif;
@@ -263,8 +260,7 @@
     padding: 100px 5%;
     
     /* Usando a mesma lógica do seu header, mas com background-attachment fixo */
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)),
-    url('soldado.png');
+    background:linear-gradient(rgb(0 0 0 / 79%), rgb(0 0 0 / 68%)), url(soldado.png);
     background-size: cover;
     background-position: center;
     background-attachment:cover; /* Isso cria um efeito visual premium ao rolar a página */
@@ -414,7 +410,6 @@
     padding: 15px;
     background: #1a1a1a; /* Moldura escura tática */
     border-radius: 4px;
-    box-shadow: 0 30px 60px rgba(0,0,0,0.4);
     margin-bottom: 60px;
 }
 
@@ -446,7 +441,9 @@
     margin-bottom: 40px;
     line-height: 1.8;
 }
-
+a>.btn-chamada{
+    text-decoration: none;
+}
 .btn-chamada {
     padding: 22px 50px;
     background-color: var(--primary-red);
@@ -519,7 +516,7 @@
             <h1>Mentalidade <span>Caveira</span></h1>
             <p>Onde a maioria enxerga sacrifício, nós estabelecemos doutrina. O Faca na Caveira não é apenas um portal de motivação, é um ecossistema tático desenhado para quem busca a soberania sobre o próprio tempo, corpo e mente.
             Não oferecemos atalhos, oferecemos o protocolo. Uma metodologia de alta performance baseada na tríade: Intelecto, Força e Ordem.</p>
-            <span>um bom homem sempre vai a luta</span>
+            <span>"um bom homem levanta e vai a luta"</span>
         </div>
         <nav>
             <a href="#sobre">Sobre</a>
@@ -563,7 +560,7 @@
             <i class="fa-solid fa-dumbbell"></i>
             <h3>Treino</h3>
             <p>Construção de um corpo resiliente. Força física como base para a resistência mental inabalável.</p>
-            <button onclick="window.location.href='treino.html'">Saiba Mais</button>
+            <button><a href="treino.html">Saiba Mais</a></button>
         </div>
         
         <div class="card-funcao">
@@ -636,7 +633,7 @@
                 "O protocolo não é um fardo, é o seu escudo." A excelência não é um ato isolado, mas um hábito contínuo. 
                 Este é o chamado para quem cansou de desculpas e está pronto para a virada de chave definitiva.
             </p>
-            <button class="btn-chamada">Quero Iniciar o Protocolo</button>
+            <a href="#pilares"><button class="btn-chamada">Quero Iniciar o Protocolo</button></a>
         </div>
     </div>
 </section>
@@ -645,6 +642,47 @@
         &copy; 2026 - Feito por Vitor da Silva <br> 
         <p class="caveira">Faca na Caveira | Missão Dada é Missão Cumprida</p>
     </footer>
+    <script>
+document.addEventListener("DOMContentLoaded", () => {
+    // 1. Seleciona os elementos exatos do seu site
+    const fadeEls = document.querySelectorAll('.sobre, .card-funcao, .beneficios-item, .video-container-premium, .texto-introducao');
+    
+    // 2. Configura o estado inicial diretamente (Invisível e 50px abaixo)
+    fadeEls.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(50px)';
+        // Usamos uma transição suave idêntica à que você gostou antes
+        el.style.transition = 'opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1)';
+    });
 
+    // 3. O Observador que detecta a rolagem da tela
+    const fadeObserver = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                const target = e.target;
+                
+                // Faz o elemento subir sozinho para a posição original
+                target.style.opacity = '1';
+                target.style.transform = 'translateY(0)';
+                
+                // O SEGREDO TÁTICO AQUI:
+                // Esperamos a animação de 800ms acabar e REMOVEMOS os estilos que travavam o hover
+                setTimeout(() => {
+                    target.style.transform = '';
+                    target.style.transition = '';
+                    // Deixamos apenas a opacidade fixa para ele não sumir
+                    target.style.opacity = '1'; 
+                }, 800);
+
+                // Para de assistir o elemento para economizar memória do navegador
+                fadeObserver.unobserve(target);
+            }
+        });
+    }, { threshold: 0.10 }); // Dispara quando 10% do item surge na tela
+
+    // Ativa o sensor em cada um deles
+    fadeEls.forEach(el => fadeObserver.observe(el));
+});
+</script>
 </body>
 </html>

@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estudos | Protocolo Faca na Caveira</title>
+    <title>Estudos | Mentalidade Caveira</title>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:wght@300;400;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="shortcut icon" href="logo.ico">
     <style> 
         :root {
             --primary-red: #b30000;
@@ -28,12 +29,12 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 5%;
+            padding: 10px;
             background: linear-gradient(var(--dark-overlay), var(--dark-overlay)), url('biblioteca-tatica.jpg');
             background-size: cover;
             background-position: center;
             color: white;
-            border-bottom: 4px solid var(--primary-red);
+            border-bottom: 2px solid var(--primary-red);
         }
 
         .logo h1 {
@@ -58,9 +59,12 @@
 
         /* SEÇÃO INTRODUTÓRIA */
         .intro-estudos {
-            padding: 60px 5%;
-            background: #f4f4f4;
+            padding: 20vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgb(0 0 0 / 79%)), url(foco-caveira.png);
+            background-size: cover;
+            background-position: center;
             text-align: center;
+            color: white;
         }
 
         .intro-estudos h2 {
@@ -74,7 +78,6 @@
             max-width: 800px;
             margin: 0 auto;
             font-size: 1.1rem;
-            color: #555;
         }
 
         /* GRID DE MATÉRIAS/MÓDULOS */
@@ -106,6 +109,7 @@
             color: var(--primary-red);
             margin-bottom: 20px;
         }
+        
 
         .modulo-card h3 {
             font-family: 'Oswald', sans-serif;
@@ -127,7 +131,9 @@
         }
 
         .btn-acesso {
-            display: inline-block;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             margin-top: 20px;
             color: var(--primary-red);
             text-decoration: none;
@@ -163,8 +169,8 @@
     </header>
 
     <section class="intro-estudos">
-        <h2>Forja Intelectual</h2>
-        <p>O conhecimento é a única arma que você carrega sem peso. Abaixo, selecione o módulo de doutrina para iniciar sua progressão hoje.</p>
+        <h2>Forja <span style="color: var(--primary-red);font-style: italic;">Intelectual</span></h2>
+        <p>O conhecimento é a única arma que você carrega sem peso. <br> Abaixo, selecione o módulo de doutrina para iniciar sua progressão hoje.</p>
     </section>
 
     <main class="grid-estudos">
@@ -173,7 +179,7 @@
             <i class="fa-solid fa-brain"></i>
             <h3>Neurociência do Foco</h3>
             <p>Aprenda como blindar seu cérebro contra distrações e entrar em estado de Flow operacional.</p>
-            <a href="#" class="btn-acesso">Acessar Material <i class="fa-solid fa-chevron-right"></i></a>
+            <a href="neurociencia.html" class="btn-acesso">Acessar Material</a>
         </div>
 
         <div class="modulo-card">
@@ -181,7 +187,7 @@
             <i class="fa-solid fa-shield-halved"></i>
             <h3>Estratégia e Tática</h3>
             <p>A aplicação dos princípios de Sun Tzu e Clausewitz na tomada de decisão do cotidiano profissional.</p>
-            <a href="#" class="btn-acesso">Acessar Material <i class="fa-solid fa-chevron-right"></i></a>
+            <a href="#" class="btn-acesso">Acessar Material</a>
         </div>
 
         <div class="modulo-card">
@@ -189,13 +195,13 @@
             <i class="fa-solid fa-pen-nib"></i>
             <h3>Escrita e Retórica</h3>
             <p>Domine a arte de comunicar suas ideias com autoridade e clareza absoluta.</p>
-            <a href="#" class="btn-acesso">Ver Detalhes <i class="fa-solid fa-chevron-right"></i></a>
+            <a href="#" class="btn-acesso">Ver Detalhes</a>
         </div>
     </main>
 
     <footer>
-        &copy; 2026 - Protocolo de Estudos Faca na Caveira <br>
-        <span style="font-family: 'Oswald'; margin-top: 10px; display: block;">Conhecimento para dominar.</span>
+        &copy; 2026 - Feito por Vitor da Silva <br> 
+        <p class="caveira">Faca na Caveira | Missão Dada é Missão Cumprida</p>
     </footer>
 
 </body>
