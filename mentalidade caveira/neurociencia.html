@@ -8,370 +8,453 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="shortcut icon" href="logo.ico">
     <style> 
-        :root {
-            --primary-red: #b30000;
-            --steel-gray: #2d2d2d;
-            --dark-bg: #111111;
-            --card-bg: #ffffff;
-            --light-gray: #f4f4f4;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: var(--light-gray);
-            color: #333;
-            line-height: 1.6;
-        }
-
-        /* HEADER INTERNO */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 5%;
-            background: #1a1a1a;
-            color: white;
-            border-bottom: 3px solid var(--primary-red);
-        }
-
-        .logo h1 {
-            font-family: 'Oswald', sans-serif;
-            text-transform: uppercase;
-            font-size: 22px;
-            letter-spacing: -1px;
-        }
-
-        .logo span { color: var(--primary-red); }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin-left: 20px;
-            font-size: 13px;
-            font-weight: 700;
-            text-transform: uppercase;
-            transition: 0.3s;
-        }
-
-        nav a:hover, nav a.active { color: var(--primary-red); }
-
-        /* NOVO: NAVEGAÇÃO DE MÓDULOS DE AULAS */
-        .modulos-abas {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            max-width: 1300px;
-            margin: 30px auto 0;
-            padding: 0 5%;
-            flex-wrap: wrap;
-        }
-
-        .aba-btn {
-            background: #1a1a1a;
-            color: #fff;
-            border: 1px solid #333;
-            padding: 5px;
-            text-align: center;
-            font-family: 'Oswald', sans-serif;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: 0.3s ease;
-            letter-spacing: 1px;
-            font-size: 14px;
-        }
-
-        .aba-btn:hover, .aba-btn.active {
-            background: var(--primary-red);
-            border-color: var(--primary-red);
-        }
-
-        /* INTRODUÇÃO DO MÓDULO */
-        .modulo-intro {
-            background: white;
-            padding: 40px 5%;
-            border-bottom: 1px solid #ddd;
-            margin-top: 20px;
-        }
-
-        .modulo-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .modulo-intro h2 {
-            font-family: 'Oswald', sans-serif;
-            font-size: 38px;
-            text-transform: uppercase;
-            color: var(--steel-gray);
-            margin-bottom: 15px;
-        }
-
-        .modulo-intro h2 span { color: var(--primary-red); }
-
-        .modulo-intro p {
-            font-size: 1.1rem;
-            color: #555;
-            max-width: 900px;
-            text-align: justify;
-        }
-
-        /* DASHBOARD DE AULAS */
-        .plataforma-grid {
-            display: flex;
-            gap: 30px;
-            padding: 40px 5%;
-            max-width: 1300px;
-            margin: 0 auto;
-        }
-
-        .area-player {
-            flex: 2;
-            min-width: 320px;
-        }
-
-        .video-wrapper {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-            background: #000;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-            border-radius: 4px;
-            border: 2px solid #2d2d2d;
-        }
-
-        .video-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        .detalhes-aula {
-            background: white;
-            padding: 30px;
-            margin-top: 20px;
-            border-radius: 4px;
-            border: 1px solid #ddd;
-            border-left: 4px solid var(--primary-red);
-        }
-
-        .detalhes-aula h3 {
-            font-family: 'Oswald', sans-serif;
-            font-size: 24px;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-        }
-
-        .sidebar-aulas {
-            flex: 1;
-            min-width: 300px;
-            background: #1a1a1a;
-            color: white;
-            border-radius: 4px;
-            padding: 25px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            align-self: flex-start;
-        }
-
-        .sidebar-aulas h3 {
-            font-family: 'Oswald', sans-serif;
-            text-transform: uppercase;
-            font-size: 18px;
-            letter-spacing: 1px;
-            margin-bottom: 20px;
-            border-bottom: 2px solid var(--primary-red);
-            padding-bottom: 10px;
-        }
-
-        .lista-aulas { list-style: none; }
-
-        .item-aula {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            padding: 15px 10px;
-            border-bottom: 1px solid #2d2d2d;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .item-aula:hover, .item-aula.assistindo {
-            background: rgba(255, 255, 255, 0.05);
-            border-left: 3px solid var(--primary-red);
-            padding-left: 15px;
-        }
-
-        .item-aula i { color: var(--primary-red); font-size: 1.2rem; }
-
-        .item-aula .info-aula p { font-size: 0.95rem; font-weight: bold; }
-
-        .item-aula .info-aula span { font-size: 0.8rem; color: #888; }
-
-
-        /* SEÇÃO: ARSENAL TÁTICO (CAMPO PERSONALIZADO DO USUÁRIO) */
-        .arsenal-secao {
-            background: linear-gradient(rgb(0 0 0 / 93%), rgba(0, 0, 0, 0.4)), url("selva-amazonica.jpeg");
-            background-size: cover;
-            background-position: center;
-            color: white;
-            padding: 60px 5%;
-            width: 100%;
-        }
-
-        .arsenal-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .arsenal-secao h2 {
-            font-family: 'Oswald', sans-serif;
-            text-transform: uppercase;
-            font-size: 30px;
-            margin-bottom: 10px;
-        }
-
-        .arsenal-secao h2 span { color: var(--primary-red); }
-
-        .exploracao-campo {
-            font-size: 1rem;
-            color: #bbb;
-            margin-bottom: 40px;
-            max-width: 850px;
-        }
-
-        /* Painel de Cadastro de Materiais */
-        .painel-cadastro {
-            background: #1a1a1a;
-            padding: 30px;
-            border-radius: 4px;
-            border: 1px solid #444;
-            margin-bottom: 40px;
-        }
-
-        .painel-cadastro h3 {
-            font-family: 'Oswald', sans-serif;
-            text-transform: uppercase;
-            font-size: 18px;
-            margin-bottom: 20px;
-            color: white;
-        }
-
-        .form-grupo {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .form-grupo input, .form-grupo select {
-            flex: 1;
-            min-width: 200px;
-            padding: 12px;
-            background: #2d2d2d;
-            border: 1px solid #444;
-            color: white;
-            font-size: 15px;
-            border-radius: 4px;
-        }
-
-        .form-grupo input:focus, .form-grupo select:focus {
-            border-color: var(--primary-red);
-            outline: none;
-        }
-
-        .btn-adicionar {
-            background: var(--primary-red);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            font-family: 'Oswald', sans-serif;
-            text-transform: uppercase;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-            border-radius: 4px;
-        }
-
-        .btn-adicionar:hover { background: #8a0000; }
-
-        /* Grid de Exibição dos Materiais Salvos */
-        .grid-arquivos {
-            
-    display: grid;
-    /* Mudamos 'auto-fit' para 'auto-fill' para o card não esticar 100% quando estiver sozinho */
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 20px;
-}
+    :root {
+        --primary-red: #d90429; /* Vermelho operacional vibrante */
+        --steel-gray: #BEBEBE; /* Cinza metálico */
+        --dark-bg: #050505; /* Fundo operacional absoluto */
+        --card-bg: #111111; /* Cinza de equipamentos táticos */
+        --light-gray: #1A1A1A; /* Textura de blindagem secundária */
         
+        /* Gradiente Tático Metálico (Aço Escovado) */
+        --metal-gradient: linear-gradient(
+            90deg,
+            #4A4A4A 0%,
+            #C2C2C2 45%,
+            #7A7A7A 70%,
+            #1B1B1B 100%
+        );
+        
+        /* Gradiente Radial de Profundidade */
+        --bg-radial: radial-gradient(
+            circle,
+            #232323 0%,
+            #0E0E0E 45%,
+            #050505 100%
+        );
+    }
 
-        .card-usuario {
-            background: #1a1a1a;
-            padding:10px;
-            border-radius: 4px;
-            border: 1px solid #444;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            position: relative;
-        }
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
-        .badge-tipo {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: var(--steel-gray);
-            font-size: 11px;
-            padding: 3px 8px;
-            text-transform: uppercase;
-            font-weight: bold;
-            color: #ddd;
-        }
+    body {
+        font-family: 'Roboto', sans-serif;
+        background-color: var(--dark-bg);
+        background: var(--bg-radial);
+        color: #D9D9D9;
+        line-height: 1.6;
+    }
 
-        .card-usuario h4 {
-            font-family: 'Oswald', sans-serif;
-            font-size: 19px;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-            color: #fff;
-        }
+    /* HEADER INTERNO */
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 5%;
+        background: #0B0B0B;
+        color: #ffffff;
+        border-bottom: 3px solid var(--primary-red);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    }
 
-        .card-usuario p {
-            font-size: 0.9rem;
-            color: #aaa;
-            margin-bottom: 20px;
-        }
+    .logo h1 {
+        font-family: 'Oswald', sans-serif;
+        text-transform: uppercase;
+        font-size: 22px;
+        letter-spacing: -1px;
+        color: #ffffff;
+    }
 
-        .btn-remover {
-            background: none;
-            border: none;
-            color: #ff4444;
-            cursor: pointer;
-            font-size: 13px;
-            text-transform: uppercase;
-            font-weight: bold;
-            align-self: flex-start;
-            transition: 0.3s;
-        }
+    .logo span { 
+        color: var(--primary-red); 
+    }
 
-        .btn-remover:hover { color: white; text-decoration: underline; }
+    nav a {
+        color: #ffffff;
+        text-decoration: none;
+        margin-left: 20px;
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: uppercase;
+        transition: 0.3s;
+    }
 
-        /* FOOTER */
-        footer {
-            background: #111;
-            color: #888;
-            padding: 30px;
-            text-align: center;
-            font-size: 12px;
-            text-transform: uppercase;
-        }
-    </style>
+    nav a:hover, 
+    nav a.active { 
+        color: var(--primary-red); 
+    }
+
+    /* NAVEGAÇÃO DE MÓDULOS DE AULAS (ESTILO SELEÇÃO DE ARMAMENTO) */
+    .modulos-abas {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        max-width: 1300px;
+        margin: 30px auto 0;
+        padding: 0 5%;
+        flex-wrap: wrap;
+    }
+
+    .aba-btn {
+        background: #111111;
+        color: #BEBEBE;
+        border: 1px solid #3A3A3A;
+        padding: 10px 15px;
+        text-align: center;
+        font-family: 'Oswald', sans-serif;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: 0.3s ease;
+        letter-spacing: 1px;
+        font-size: 14px;
+        font-weight: 700;
+        box-shadow: inset 0 0 5px rgba(0,0,0,0.5);
+    }
+
+    .aba-btn:hover, 
+    .aba-btn.active {
+        background: red;
+    color: white;
+    /* background: var(--metal-gradient); */
+    /* color: #050505; */
+    /* border-color: #C2C2C2; */
+    
+    /* box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); */
+}
+    
+
+    /* INTRODUÇÃO DO MÓDULO */
+    .modulo-intro {
+        background: #111111;
+        padding: 40px 5%;
+        border-bottom: 1px solid #2C2C2C;
+        margin-top: 20px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    .modulo-container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .modulo-intro h2 {
+        font-family: 'Oswald', sans-serif;
+        font-size: 38px;
+        text-transform: uppercase;
+        color: #ffffff;
+        margin-bottom: 15px;
+    }
+
+    .modulo-intro h2 span { 
+        color: var(--primary-red); 
+    }
+
+    .modulo-intro p {
+        font-size: 1.1rem;
+        color: #A5A5A5;
+        max-width: 900px;
+        text-align: justify;
+    }
+
+    /* DASHBOARD DE AULAS */
+    .plataforma-grid {
+        display: flex;
+        gap: 30px;
+        padding: 40px 5%;
+        max-width: 1300px;
+        margin: 0 auto;
+    }
+
+    .area-player {
+        flex: 2;
+        min-width: 320px;
+    }
+
+    .video-wrapper {
+        position: relative;
+        padding-bottom: 56.25%;
+        height: 0;
+        overflow: hidden;
+        background: #000000;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.7);
+        border-radius: 4px;
+        border: 2px solid #3A3A3A;
+    }
+
+    .video-wrapper iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .detalhes-aula {
+        background: #111111;
+        padding: 30px;
+        margin-top: 20px;
+        border-radius: 4px;
+        border: 1px solid #2C2C2C;
+        border-left: 4px solid var(--primary-red);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .detalhes-aula h3 {
+        font-family: 'Oswald', sans-serif;
+        font-size: 24px;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+        color: #ffffff;
+    }
+    
+    .detalhes-aula p {
+        color: #D9D9D9;
+    }
+
+    .sidebar-aulas {
+        flex: 1;
+        min-width: 300px;
+        background: #111111;
+        color: #ffffff;
+        border-radius: 4px;
+        padding: 25px;
+        border: 1px solid #2C2C2C;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+        align-self: flex-start;
+    }
+
+    .sidebar-aulas h3 {
+        font-family: 'Oswald', sans-serif;
+        text-transform: uppercase;
+        font-size: 18px;
+        letter-spacing: 1px;
+        margin-bottom: 20px;
+        border-bottom: 2px solid var(--primary-red);
+        padding-bottom: 10px;
+        color: #ffffff;
+    }
+
+    .lista-aulas { 
+        list-style: none; 
+    }
+
+    .item-aula {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        padding: 15px 10px;
+        border-bottom: 1px solid #232323;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .item-aula:hover, 
+    .item-aula.assistindo {
+        background: #1A1A1A;
+        border-left: 3px solid var(--primary-red);
+        padding-left: 15px;
+    }
+
+    .item-aula i { 
+        color: var(--primary-red); 
+        font-size: 1.2rem; 
+    }
+
+    .item-aula .info-aula p { 
+        font-size: 0.95rem; 
+        font-weight: bold; 
+        color: #ffffff;
+    }
+
+    .item-aula .info-aula span { 
+        font-size: 0.8rem; 
+        color: #8A8A8A; 
+    }
+
+    /* SEÇÃO: ARSENAL TÁTICO */
+    .arsenal-secao {
+        background: linear-gradient(rgba(5, 5, 5, 0.95), rgba(11, 11, 11, 0.75)), url('imagens/selva-amazonica.jpeg');
+        background-size: cover;
+        background-position: center;
+        color: #ffffff;
+        padding: 60px 5%;
+        width: 100%;
+        border-top: 1px solid #2C2C2C;
+    }
+
+    .arsenal-container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .arsenal-secao h2 {
+        font-family: 'Oswald', sans-serif;
+        text-transform: uppercase;
+        font-size: 30px;
+        margin-bottom: 10px;
+        color: #ffffff;
+    }
+
+    .arsenal-secao h2 span { 
+        color: var(--primary-red); 
+    }
+
+    .exploracao-campo {
+        font-size: 1rem;
+        color: #BEBEBE;
+        margin-bottom: 40px;
+        max-width: 850px;
+    }
+
+    /* Painel de Cadastro de Materiais */
+    .painel-cadastro {
+        background: #111111;
+        padding: 30px;
+        border-radius: 4px;
+        border: 1px solid #2C2C2C;
+        margin-bottom: 40px;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+    }
+
+    .painel-cadastro h3 {
+        font-family: 'Oswald', sans-serif;
+        text-transform: uppercase;
+        font-size: 18px;
+        margin-bottom: 20px;
+        color: #ffffff;
+    }
+
+    .form-grupo {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+    .form-grupo input, 
+    .form-grupo select {
+        flex: 1;
+        min-width: 200px;
+        padding: 12px;
+        background: #1A1A1A;
+        border: 1px solid #3A3A3A;
+        color: #ffffff;
+        font-size: 15px;
+        border-radius: 4px;
+    }
+
+    .form-grupo input:focus, 
+    .form-grupo select:focus {
+        border-color: var(--primary-red);
+        background: #232323;
+        outline: none;
+    }
+
+    .btn-adicionar {
+        background: var(--primary-red);
+        color: #ffffff;
+        border: none;
+        padding: 12px 30px;
+        font-family: 'Oswald', sans-serif;
+        text-transform: uppercase;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+        border-radius: 4px;
+        box-shadow: 0 4px 10px rgba(217, 4, 41, 0.3);
+    }
+
+    .btn-adicionar:hover { 
+        background: #a0001a; 
+        box-shadow: 0 4px 15px rgba(217, 4, 41, 0.5);
+    }
+
+    /* Grid de Exibição dos Materiais Salvos */
+    .grid-arquivos {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 20px;
+    }
+
+    .card-usuario {
+        background: #111111;
+        padding: 25px;
+        border-radius: 4px;
+        border: 1px solid #2C2C2C;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+    
+    .card-usuario:hover {
+        border-color: #4A4A4A;
+        background: #1A1A1A;
+    }
+
+    .badge-tipo {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: #3A3A3A;
+        border: 1px solid #4A4A4A;
+        font-size: 11px;
+        padding: 3px 8px;
+        text-transform: uppercase;
+        font-weight: bold;
+        color: #D9D9D9;
+    }
+
+    .card-usuario h4 {
+        font-family: 'Oswald', sans-serif;
+        font-size: 19px;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+        color: #ffffff;
+    }
+
+    .card-usuario p {
+        font-size: 0.9rem;
+        color: #A5A5A5;
+        margin-bottom: 20px;
+    }
+
+    .btn-remover {
+        background: none;
+        border: none;
+        color: #ff4444;
+        cursor: pointer;
+        font-size: 13px;
+        text-transform: uppercase;
+        font-weight: bold;
+        align-self: flex-start;
+        transition: 0.3s;
+    }
+
+    .btn-remover:hover { 
+        color: #ffffff; 
+        text-decoration: underline; 
+    }
+
+    /* FOOTER */
+    footer {
+        background: #050505;
+        border-top: 2px solid #2C2C2C;
+        color: #6E6E6E;
+        padding: 40px;
+        text-align: center;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+    .caveira {
+        font-family: 'Oswald', sans-serif;
+        margin-top: 10px;
+        color: var(--primary-red);
+    }
+</style>
 </head>
 <body>
 
@@ -457,7 +540,8 @@
     </section>
 
     <footer>
-        &copy; 2026 - Área de Treinamento Intelectual | Protocolo Caveira
+         &copy; 2026 - Feito por Vitor da Silva <br> 
+        <p class="caveira">Faca na Caveira | Missão Dada é Missão Cumprida</p>
     </footer>
 
     <script>

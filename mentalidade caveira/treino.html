@@ -8,213 +8,641 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="shortcut icon" href="logo.ico">
     <style>
-        :root {
-            --bg-dark-1: #0b0c10;   /* Preto BOPE */
-            --bg-dark-2: #12161a;   /* Cinza Blindado */
-            --bg-dark-3: #1b2416;   /* Verde Oliva Noturno */
-            
-            --primary-red: #b30000;
-            --alert-red: #ff3333;
-            --gold-tactical: #cfb997;
-            --text-clear: #e0e0e0;
-            --success-green: #2d3b26;
-            --bright-green: #39ff14;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: 'Roboto', sans-serif;
-            background: linear-gradient(180deg, var(--bg-dark-1) 0%, var(--bg-dark-2) 60%, var(--bg-dark-3) 100%);
-            color: var(--text-clear);
-            min-height: 100vh;
-            padding-bottom: 50px;
-        }
-
-        header {
-            text-align: center;
-            padding: 50px 5%;
-            background: rgba(0, 0, 0, 0.4);
-            border-bottom: 2px solid var(--primary-red);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-        }
-
-        header h1 {
-            font-family: 'Oswald', sans-serif;
-            font-size: 3rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: #fff;
-        }
-
-        header h1 span { color: var(--alert-red); }
-        header p { font-size: 1.1rem; color: var(--gold-tactical); font-style: italic; margin-top: 5px; }
-
-        /* DASHBOARD */
-        .dashboard-status {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 5%;
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 30px;
-        }
-
-        .status-card {
-            background: linear-gradient(135deg, #111418 0%, #171d24 50%, #222b35 100%);
-            border: 1px solid #333;
-            padding: 30px;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            position: relative;
-        }
-
-        .status-card::before {
-            content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 4px; background: var(--alert-red);
-        }
-
-        .status-card i { font-size: 3rem; color: var(--alert-red); }
-        .status-info h3 { font-family: 'Oswald', sans-serif; text-transform: uppercase; font-size: 1.2rem; }
-        .status-info p { font-size: 1.8rem; font-weight: 700; color: #fff; }
-
-        .progress-container {
-            width: 100%; background: #090b0d; height: 25px; border: 1px solid #444; margin-top: 15px; position: relative; overflow: hidden;
-        }
-
-        .progress-bar {
-            height: 100%; width: 0%; background: linear-gradient(90deg, #660000 0%, #b30000 50%, #ff3333 100%); transition: width 0.5s ease-in-out;
-        }
-
-        .progress-text {
-            position: absolute; width: 100%; text-align: center; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 0.85rem; font-weight: 700; color: #fff; text-shadow: 1px 1px 2px #000;
-        }
-
-        /* LAYOUT PRINCIPAL */
-        .main-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 5%;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-        }
-
-        .painel-operacional {
-            background: linear-gradient(135deg, #0e1114 0%, #15191f 50%, #1f2630 100%);
-            border: 1px solid #2a2a2a;
-            padding: 35px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .painel-operacional h2 {
-            font-family: 'Oswald', sans-serif;
-            text-transform: uppercase;
-            font-size: 1.8rem;
-            margin-bottom: 25px;
-            border-bottom: 1px solid #333;
-            padding-bottom: 10px;
-            color: #fff;
-        }
-
-        /* FORMULÁRIO */
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; font-family: 'Oswald', sans-serif; text-transform: uppercase; font-size: 0.95rem; margin-bottom: 8px; color: var(--gold-tactical); }
-        .form-group input, .form-group select { width: 100%; padding: 12px; background: #090b0d; border: 1px solid #444; color: #fff; font-size: 1rem; }
-        .form-group input:focus, .form-group select:focus { outline: none; border-color: var(--alert-red); }
+    :root {
+        --bg-dark-1: #050505;
+        --bg-dark-2: #0B0B0B;
+        --bg-dark-3: #111111;
         
-        .row-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-
-        /* SELETOR DE MODELOS PRONTOS MILITARES */
-        .area-modelos-prontos {
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px dashed #555;
-            padding: 15px;
-            margin-bottom: 20px;
-        }
-        .btn-grupo-modelos { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 8px; }
-        .btn-modelo {
-            padding: 8px; font-family: 'Oswald', sans-serif; font-size: 0.9rem; text-transform: uppercase; background: #222; border: 1px solid #444; color: #fff; cursor: pointer; transition: 0.3s;
-        }
-        .btn-modelo:hover { background: var(--primary-red); border-color: var(--alert-red); }
-
-        /* BOTÕES */
-        .btn-add-lista, .btn-gerar-missao, .btn-fechar-banner {
-            width: 100%; padding: 14px; font-family: 'Oswald', sans-serif; font-size: 1.1rem; text-transform: uppercase; border: none; cursor: pointer; transition: all 0.3s; margin-top: 10px;
-        }
-        .btn-add-lista { background: linear-gradient(135deg, #1b2416 0%, #2d3b26 50%, #3f5236 100%); color: #fff; border: 1px solid #3f5236; }
-        .btn-add-lista:hover { background: linear-gradient(135deg, #3f5236 0%, #2d3b26 50%, #1b2416 100%); }
-        .btn-gerar-missao { background: linear-gradient(135deg, #660000 0%, #b30000 50%, #ff3333 100%); color: white; border: 1px solid var(--alert-red); }
-        .btn-gerar-missao:hover { background: linear-gradient(135deg, #ff3333 0%, #b30000 50%, #660000 100%); transform: scale(1.02); }
-
-        .lista-previa-exercicios { margin: 20px 0; background: rgba(0, 0, 0, 0.2); padding: 10px; max-height: 150px; overflow-y: auto; border-left: 2px solid var(--gold-tactical); }
-        .item-previa { font-size: 0.9rem; padding: 5px 0; border-bottom: 1px solid #222; display: flex; justify-content: space-between; color: #bbb; }
-
-        /* HISTÓRICO DE TREINOS SALVOS */
-        .historico-treinos-container { margin-top: 25px; border-top: 1px dashed #444; padding-top: 20px; }
-        .lista-treinos-salvos { display: flex; flex-direction: column; gap: 10px; max-height: 250px; overflow-y: auto; margin-top: 10px; }
-        .treino-salvo-item {
-            background: #090b0d; padding: 12px; border: 1px solid #333; display: flex; font-size: 0.9rem; transition: 0.3s;
-        }
-        .treino-salvo-item:hover { border-color: var(--gold-tactical); }
+        --primary-red: #b30000;
+        --alert-red: #d90429;
+        --gold-tactical: #BEBEBE;
+        --text-clear: #D9D9D9;
+        --success-green: #1A1A1A;
+        --bright-green: #ff3333;
         
-        .acoes-historico { display: flex; gap: 8px; }
-        .btn-carregar-salvo { background: none; border: 1px solid var(--gold-tactical); color: var(--gold-tactical); padding: 4px 10px; font-family: 'Oswald', sans-serif; text-transform: uppercase; cursor: pointer; transition: 0.3s; height: fit-content; }
-        .btn-carregar-salvo:hover { background: var(--gold-tactical); color: #000; }
-        .btn-deletar-salvo { background: none; border: 1px solid var(--primary-red); color: var(--alert-red); padding: 4px 10px; cursor: pointer; transition: 0.3s; height: fit-content; }
-        .btn-deletar-salvo:hover { background: var(--primary-red); color: #fff; }
+        --metal-gradient: linear-gradient(
+            90deg, 
+            #4A4A4A 0%, 
+            #C2C2C2 45%, 
+            #7A7A7A 70%, 
+            #1B1B1B 100%
+        );
+        --bg-radial: radial-gradient(
+            circle, 
+            #232323 0%, 
+            #0E0E0E 60%, 
+            #050505 100%
+        );
+    }
 
-        /* CHECKLIST */
-        .missao-vazia { color: #666; font-style: italic; text-align: center; margin-top: 40px; }
-        .tipo-badge { display: inline-block; padding: 4px 10px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; background: var(--gold-tactical); color: #111; margin-bottom: 6px; }
-        .checklist-container { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; margin-bottom: 20px; }
-        
-        .check-item { display: flex; align-items: center; background: #090b0d; border: 1px solid #333; padding: 12px 18px; cursor: pointer; transition: all 0.3s ease; user-select: none; }
-        .check-item:hover { border-color: #555; background: #111418; }
-        .check-item input[type="checkbox"] { appearance: none; width: 20px; height: 20px; border: 2px solid #505050; margin-right: 15px; position: relative; cursor: pointer; }
-        .check-item input[type="checkbox"]:checked { background: var(--alert-red); border-color: var(--alert-red); }
-        .check-item input[type="checkbox"]:checked::after { content: '\2713'; position: absolute; color: white; font-size: 13px; font-weight: bold; top: 50%; left: 50%; transform: translate(-50%, -50%); }
-        .check-item-info { flex-grow: 1; }
-        .check-item-info h4 { font-size: 1rem; color: #fff; }
-        .check-item-info p { font-size: 0.8rem; color: #888; }
-        .check-item.completo { border-color: var(--bg-dark-3); background: rgba(27, 36, 22, 0.2); opacity: 0.6; }
-        .check-item.completo h4 { text-decoration: line-through; color: #666; }
+    * { 
+        margin: 0; 
+        padding: 0; 
+        box-sizing: border-box; 
+    }
 
-        /* BANNER DE MISSÃO CUMPRIDA NO SITE */
-        .banner-sucesso {
-            display: none; background: linear-gradient(135deg, #1b2416 0%, #2d3b26 50%, #0b0c10 100%);
-            border: 2px solid var(--bright-green); padding: 25px; text-align: center; margin: 30px auto; max-width: 1100px;
-            box-shadow: 0 0 20px rgba(57, 255, 20, 0.2); position: relative;
-        }
-        .banner-sucesso h2 { font-family: 'Oswald', sans-serif; color: var(--bright-green); text-transform: uppercase; font-size: 2rem; margin-bottom: 10px; }
-        .banner-sucesso p { color: #fff; font-size: 1.1rem; }
-        .btn-fechar-banner { background: #222; border: 1px solid #444; color: #fff; max-width: 180px; margin: 15px auto 0; padding: 8px; font-size: 0.9rem; }
-        .btn-fechar-banner:hover { background: #333; }
+    body {
+        font-family: 'Roboto', sans-serif;
+        background: var(--bg-dark-2);
+        background: var(--bg-radial);
+        color: var(--text-clear);
+        min-height: 100vh;
+        padding-bottom: 50px;
+    }
 
-        /* CALENDÁRIO DE CONSTÂNCIA */
-        .secao-calendario { max-width: 1100px; margin: 50px auto 0; padding: 0 5%; }
-        .secao-calendario h2 { font-family: 'Oswald', sans-serif; text-transform: uppercase; font-size: 1.5rem; margin-bottom: 15px; color: var(--gold-tactical); }
-        .calendario-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(75px, 1fr)); gap: 12px; background: rgba(0,0,0,0.4); padding: 25px; border: 1px solid #222; }
-        
-        .dia-box { background: #090b0d; border: 1px solid #333; padding: 10px 5px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 5px; }
-        .dia-num { font-size: 0.8rem; font-weight: 700; color: #666; }
-        .dia-status { width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; }
-        .dia-status.check { background: var(--success-green); color: var(--bright-green); border: 1px solid var(--bright-green); }
-        .dia-status.neutro { background: #222; color: #555; }
+    header {
+        text-align: center;
+        padding: 50px 5%;
+        background: linear-gradient(rgba(5, 5, 5, 0.85), rgba(11, 11, 11, 0.6)), url('imagens/foco-caveira.png');
+        background-size: cover;
+        background-position: center;
+        color: #ffffff;
+        border-bottom: 2px solid var(--primary-red);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.7);
+    }
 
-        /* ANIMAÇÃO */
-        .revelar-ao-scroll { opacity: 0; transform: translateY(40px); }
+    header h1 {
+        font-family: 'Oswald', sans-serif;
+        font-size: 3rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: #ffffff;
+    }
 
-        @media (max-width: 900px) { .main-container { grid-template-columns: 1fr; } }
-    </style>
+    header h1 span { 
+        color: var(--alert-red); 
+    }
+    
+    header p { 
+        font-size: 1.1rem; 
+        color: #d6d4d4; 
+        font-style: italic; 
+        margin-top: 5px; 
+    }
+
+    .btn-voltar {
+        display: inline-block; 
+        margin-top: 20px; 
+        padding: 10px 20px; 
+        background: var(--bg-light);
+        color: var(--dark-pure); 
+        text-decoration: none; 
+        font-family: 'Oswald', sans-serif;
+        text-transform: uppercase; 
+        font-size: 0.85rem; 
+        border: 1px solid var(--border-color); 
+        transition: 0.3s;
+        letter-spacing: 1px; 
+        font-weight: 600;
+    }
+    
+    .btn-voltar:hover { 
+        background: var(--alert-red); 
+        color: #fff; 
+        border-color: var(--alert-red); 
+    }
+
+    /* DASHBOARD */
+    .dashboard-status {
+        max-width: 1200px;
+        margin: 40px auto;
+        padding: 0 5%;
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 30px;
+    }
+
+    .status-card {
+        background: #111111;
+        border: 1px solid #2C2C2C;
+        padding: 30px;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        position: relative;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    }
+
+    .status-card::before {
+        content: ''; 
+        position: absolute; 
+        left: 0; 
+        top: 0; 
+        height: 100%; 
+        width: 4px; 
+        background: var(--alert-red); 
+    }
+
+    .status-card i { 
+        font-size: 3rem; 
+        color: var(--alert-red); 
+    }
+    
+    .status-info h3 { 
+        font-family: 'Oswald', sans-serif; 
+        text-transform: uppercase; 
+        font-size: 1.2rem; 
+        color: #ffffff; 
+    }
+    
+    .status-info p { 
+        font-size: 1.8rem; 
+        font-weight: 700; 
+        color: #ffffff; 
+    }
+
+    .progress-container {
+        width: 100%; 
+        background: #050505; 
+        height: 25px; 
+        border: 1px solid #3A3A3A; 
+        margin-top: 15px; 
+        position: relative; 
+        overflow: hidden; 
+    }
+
+    .progress-bar {
+        height: 100%; 
+        width: 0%; 
+        background: linear-gradient(90deg, #660000 0%, #b30000 50%, #ff3333 100%); 
+        transition: width 0.5s ease-in-out; 
+    }
+
+    .progress-text {
+        position: absolute; 
+        width: 100%; 
+        text-align: center; 
+        top: 50%; 
+        left: 50%; 
+        transform: translate(-50%, -50%); 
+        font-size: 0.85rem; 
+        font-weight: 700; 
+        color: #ffffff; 
+        text-shadow: 1px 1px 2px #000; 
+    }
+
+    /* LAYOUT PRINCIPAL */
+    .main-container {
+        margin: 0 auto;
+        padding: 0 5%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+    }
+
+    .painel-operacional {
+        background: #111111;
+        border: 1px solid #2C2C2C;
+        padding: 35px;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+        display: flex;
+        flex-direction: column;
+    }
+
+    .painel-operacional h2 {
+        font-family: 'Oswald', sans-serif;
+        text-transform: uppercase;
+        font-size: 1.8rem;
+        margin-bottom: 25px;
+        border-bottom: 1px solid #232323;
+        padding-bottom: 10px;
+        color: #ffffff;
+    }
+
+    /* FORMULÁRIO */
+    .form-group { 
+        margin-bottom: 20px; 
+    }
+    
+    .form-group label {
+        display: block; 
+        font-family: 'Oswald', sans-serif; 
+        text-transform: uppercase; 
+        font-size: 0.95rem; 
+        margin-bottom: 8px; 
+        color: #A5A5A5; 
+    }
+    
+    .form-group input, 
+    .form-group select {
+        width: 100%; 
+        padding: 12px; 
+        background: #1A1A1A; 
+        border: 1px solid #3A3A3A; 
+        color: #ffffff; 
+        font-size: 1rem; 
+    }
+    
+    .form-group input:focus, 
+    .form-group select:focus {
+        outline: none; 
+        border-color: var(--alert-red); 
+        background: #232323; 
+    }
+
+    .row-inputs { 
+        display: grid; 
+        grid-template-columns: 1fr 1fr; 
+        gap: 15px; 
+    }
+
+    /* SELETOR DE MODELOS PRONTOS MILITARES */
+    .area-modelos-prontos {
+        background: #050505; 
+        border: 1px dashed #4A4A4A; 
+        padding: 15px; 
+        margin-bottom: 20px; 
+    }
+    
+    .btn-grupo-modelos {
+        display: grid; 
+        grid-template-columns: 1fr 1fr 1fr; 
+        gap: 10px; 
+        margin-top: 8px; 
+    }
+    
+    .btn-modelo {
+        padding: 8px; 
+        font-family: 'Oswald', sans-serif; 
+        font-size: 0.9rem; 
+        text-transform: uppercase; 
+        background: #1A1A1A; 
+        border: 1px solid #3A3A3A; 
+        color: #ffffff; 
+        cursor: pointer; 
+        transition: 0.3s; 
+    }
+    
+    .btn-modelo:hover {
+        background: var(--metal-gradient); 
+        color: #050505; 
+        border-color: #C2C2C2; 
+        font-weight: 700; 
+    }
+
+    /* BOTÕES */
+    .btn-add-lista, 
+    .btn-gerar-missao, 
+    .btn-fechar-banner {
+        width: 100%; 
+        padding: 14px; 
+        font-family: 'Oswald', sans-serif; 
+        font-size: 1.1rem; 
+        text-transform: uppercase; 
+        border: none; 
+        cursor: pointer; 
+        transition: all 0.3s; 
+        margin-top: 10px; 
+    }
+    
+    .btn-add-lista {
+        background: var(--metal-gradient); 
+        color: #050505; 
+        font-weight: 700; 
+        border: 1px solid #C2C2C2; 
+    }
+    
+    .btn-add-lista:hover {
+        background: var(--primary-red); 
+        color: #ffffff; 
+        border-color: var(--alert-red); 
+        box-shadow: 0 0 10px rgba(217,4,41,0.4); 
+    }
+    
+    .btn-gerar-missao {
+        background: linear-gradient(135deg, #660000 0%, #b30000 50%, #ff3333 100%); 
+        color: #ffffff; 
+        border: 1px solid var(--alert-red); 
+    }
+    
+    .btn-gerar-missao:hover {
+        background: linear-gradient(135deg, #ff3333 0%, #b30000 50%, #660000 100%); 
+        transform: scale(1.02); 
+        box-shadow: 0 0 15px rgba(217,4,41,0.5); 
+    }
+
+    .lista-previa-exercicios {
+        margin: 20px 0; 
+        background: #050505; 
+        padding: 10px; 
+        max-height: 150px; 
+        overflow-y: auto; 
+        border-left: 2px solid var(--primary-red); 
+    }
+    
+    .item-previa {
+        font-size: 0.9rem; 
+        padding: 5px 0; 
+        border-bottom: 1px solid #1A1A1A; 
+        display: flex; 
+        justify-content: space-between; 
+        color: #A5A5A5; 
+    }
+
+    /* HISTÓRICO DE TREINOS SALVOS */
+    .historico-treinos-container {
+        margin-top: 25px; 
+        border-top: 1px dashed #3A3A3A; 
+        padding-top: 20px; 
+    }
+    
+    .lista-treinos-salvos {
+        display: flex; 
+        flex-direction: column; 
+        gap: 10px; 
+        max-height: 250px; 
+        overflow-y: auto; 
+        margin-top: 10px; 
+    }
+    
+    .treino-salvo-item {
+        background: #050505; 
+        padding: 12px; 
+        border: 1px solid #2C2C2C; 
+        display: flex; 
+        font-size: 0.9rem; 
+        transition: 0.3s; 
+    }
+    
+    .treino-salvo-item:hover {
+        border-color: #4A4A4A; 
+        background: #0B0B0B; 
+    }
+    
+    .acoes-historico { 
+        display: flex; 
+        gap: 8px; 
+    }
+    
+    .btn-carregar-salvo {
+        background: none; 
+        border: 1px solid #A5A5A5; 
+        color: #BEBEBE; 
+        padding: 4px 10px; 
+        font-family: 'Oswald', sans-serif; 
+        text-transform: uppercase; 
+        cursor: pointer; 
+        transition: 0.3s; 
+        height: fit-content; 
+    }
+    
+    .btn-carregar-salvo:hover {
+        background: #ffffff; 
+        color: #050505; 
+        border-color: #ffffff; 
+    }
+    
+    .btn-deletar-salvo {
+        background: none; 
+        border: 1px solid var(--primary-red); 
+        color: var(--alert-red); 
+        padding: 4px 10px; 
+        cursor: pointer; 
+        transition: 0.3s; 
+        height: fit-content; 
+    }
+    
+    .btn-deletar-salvo:hover {
+        background: var(--primary-red); 
+        color: #ffffff; 
+    }
+
+    /* CHECKLIST */
+    .missao-vazia {
+        color: #4A4A4A; 
+        font-style: italic; 
+        text-align: center; 
+        margin-top: 40px; 
+    }
+    
+    .tipo-badge {
+        display: inline-block; 
+        padding: 4px 10px; 
+        font-size: 0.75rem; 
+        font-weight: 700; 
+        text-transform: uppercase; 
+        background: #232323; 
+        border: 1px solid #3A3A3A; 
+        color: #ffffff; 
+        margin-bottom: 6px; 
+    }
+    
+    .checklist-container {
+        display: flex; 
+        flex-direction: column; 
+        gap: 10px; 
+        margin-top: 10px; 
+        margin-bottom: 20px; 
+    }
+
+    .check-item {
+        display: flex; 
+        align-items: center; 
+        background: #050505; 
+        border: 1px solid #2C2C2C; 
+        padding: 12px 18px; 
+        cursor: pointer; 
+        transition: all 0.3s ease; 
+        user-select: none; 
+    }
+    
+    .check-item:hover {
+        border-color: #4A4A4A; 
+        background: #111111; 
+    }
+    
+    .check-item input[type="checkbox"] {
+        appearance: none; 
+        width: 20px; 
+        height: 20px; 
+        border: 2px solid #4A4A4A; 
+        margin-right: 15px; 
+        position: relative; 
+        cursor: pointer; 
+    }
+    
+    .check-item input[type="checkbox"]:checked {
+        background: var(--alert-red); 
+        border-color: var(--alert-red); 
+    }
+    
+    .check-item input[type="checkbox"]:checked::after {
+        content: '\2713'; 
+        position: absolute; 
+        color: white; 
+        font-size: 13px; 
+        font-weight: bold; 
+        top: 50%; 
+        left: 50%; 
+        transform: translate(-50%, -50%); 
+    }
+    
+    .check-item-info { 
+        flex-grow: 1; 
+    }
+    
+    .check-item-info h4 { 
+        font-size: 1rem; 
+        color: #ffffff; 
+    }
+    
+    .check-item-info p { 
+        font-size: 0.8rem; 
+        color: #8A8A8A; 
+    }
+    
+    .check-item.completo {
+        border-color: #232323; 
+        background: rgba(35, 35, 35, 0.3); 
+        opacity: 0.5; 
+    }
+    
+    .check-item.completo h4 {
+        text-decoration: line-through; 
+        color: #4A4A4A; 
+    }
+
+    /* BANNER DE MISSÃO CUMPRIDA NO SITE */
+    .banner-sucesso {
+        display: none; 
+        background: #111111; 
+        border: 2px solid var(--bright-green); 
+        padding: 25px; 
+        text-align: center; 
+        margin: 30px auto; 
+        max-width: 1100px; 
+        box-shadow: 0 0 20px rgba(255, 51, 51, 0.3); 
+        position: relative; 
+    }
+    
+    .banner-sucesso h2 {
+        font-family: 'Oswald', sans-serif; 
+        color: var(--bright-green); 
+        text-transform: uppercase; 
+        font-size: 2rem; 
+        margin-bottom: 10px; 
+    }
+    
+    .banner-sucesso p { 
+        color: #ffffff; 
+        font-size: 1.1rem; 
+    }
+    
+    .btn-fechar-banner {
+        background: #1A1A1A; 
+        border: 1px solid #3A3A3A; 
+        color: #ffffff; 
+        max-width: 180px; 
+        margin: 15px auto 0; 
+        padding: 8px; 
+        font-size: 0.9rem; 
+    }
+    
+    .btn-fechar-banner:hover {
+        background: var(--primary-red); 
+        border-color: var(--alert-red); 
+    }
+
+    /* CALENDÁRIO DE CONSTÂNCIA */
+    .secao-calendario {
+        max-width: 1100px; 
+        margin: 50px auto 0; 
+        padding: 0 5%; 
+    }
+    
+    .secao-calendario h2 {
+        font-family: 'Oswald', sans-serif; 
+        text-transform: uppercase; 
+        font-size: 1.5rem; 
+        margin-bottom: 15px; 
+        color: #ffffff; 
+    }
+    
+    .calendario-grid {
+        display: grid; 
+        grid-template-columns: repeat(auto-fill, minmax(75px, 1fr)); 
+        gap: 12px; 
+        background: #111111; 
+        padding: 25px; 
+        border: 1px solid #2C2C2C; 
+        box-shadow: 0 10px 20px rgba(0,0,0,0.4); 
+    }
+
+    .dia-box {
+        background: #050505; 
+        border: 1px solid #2C2C2C; 
+        padding: 10px 5px; 
+        text-align: center; 
+        display: flex; 
+        flex-direction: column; 
+        align-items: center; 
+        gap: 5px; 
+    }
+    
+    .dia-num { 
+        font-size: 0.8rem; 
+        font-weight: 700; 
+        color: #6E6E6E; 
+    }
+    
+    .dia-status {
+        width: 24px; 
+        height: 24px; 
+        border-radius: 50%; 
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        font-size: 0.8rem; 
+        font-weight: 700; 
+    }
+    
+    .dia-status.check {
+        background: var(--primary-red); 
+        color: #ffffff; 
+        border: 1px solid var(--alert-red); 
+        box-shadow: 0 0 5px rgba(217,4,41,0.5); 
+    }
+    
+    .dia-status.neutro { 
+        background: #1A1A1A; 
+        color: #4A4A4A; 
+    }
+
+    /* ANIMAÇÃO */
+    .revelar-ao-scroll { 
+        margin-bottom: 20px;
+    }
+
+    footer {
+        background: #050505;
+        border-top: 1px solid #2C2C2C;
+        color: #ffffff;
+        padding: 30px;
+        text-align: center;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    .caveira {
+        font-family: 'Oswald', sans-serif;
+        margin-top: 10px;
+        color: var(--primary-red);
+    }
+
+    @media (max-width: 900px) { 
+        .main-container { 
+            grid-template-columns: 1fr; 
+        } 
+    }
+</style>
 </head>
 <body>
 
     <header>
         <h1>Central de <span>Operações de Treino</span></h1>
         <p>Construa a carcaça. Forje a mente. Sem desculpas.</p>
+        <a href="index.html" class="btn-voltar"><i class="fa-solid fa-arrow-left"></i> Voltar ao Menu Principal</a>
     </header>
 
     <div class="banner-sucesso" id="banner-missao-cumprida">
@@ -344,7 +772,10 @@
         <div class="calendario-grid" id="calendario-ops">
             </div>
     </section>
-
+    <footer>
+        &copy; 2026 - Feito por Vitor da Silva <br> 
+        <p class="caveira">Faca na Caveira | Missão Dada é Missão Cumprida</p>
+    </footer>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             let exerciciosTemporarios = [];

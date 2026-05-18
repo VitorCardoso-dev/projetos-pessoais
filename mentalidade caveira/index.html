@@ -6,508 +6,553 @@
     <title>Mentalidade Caveira</title>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:wght@300;400;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="shortcut icon" href="logo.ico">
+    <link rel="shortcut icon" href="imagens/logo.ico">
     <style> 
-        :root {
-            --primary-red: #b30000;
-            --steel-gray: #2d2d2d;
-            --light-bg: #ffffff;
-            --card-bg: #fdffdf; 
-        }
+    :root {
+        --primary-red: #b30000;
+        --steel-gray: #BEBEBE;
+        --light-bg: #050505;
+        --card-bg: #111111; 
+    }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: var(--light-bg);
-            color: #333;
-            line-height: 1.6;
-        }
-
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            padding: 40px 5%;
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)), url('exercito-fundo.jpg');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            min-height: 600px;
-        }
-
-        .titulo {
-            margin-top: 50px;
-            flex: 1; 
-            width: 80%;
-        }
-
-        .titulo h1 {
-            font-family: 'Oswald', sans-serif;
-            font-size: 80px;
-            text-transform: uppercase;
-            letter-spacing: -2px;
-            line-height: 1;
-            margin-bottom: 20px;
-            max-width: 900px;
-        }
-
-        .titulo h1>span{
-            color: var(--primary-red);
-        }
-
-        .titulo p {
-            font-size: 1.2rem;
-            max-width: 850px;
-            opacity: 0.9;
-            text-align: justify;
-        }
-
-        .titulo span {
-            font-size: 1.1em;
-            font-style: italic;
-            opacity: 0.8;
-            display: block;
-            margin-top: 10px;
-        }
-
-        nav {
-            display: flex;
-            gap: 20px;
-            align-items: center;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 10px 0;
-            font-size: 14px;
-            font-weight: 700;
-            text-transform: uppercase;
-            transition: 0.3s;
-            letter-spacing: 1px;
-        }
-
-        nav a:hover {
-            color: var(--primary-red);
-        }
-
-        main {
-            padding: 80px 5%;
-            text-align: center;
-        }
-
-        .intro-pilares {
-            max-width: 800px; /* Mantém o texto centralizado e fácil de ler */
-            margin: 0 auto 50px; /* Centraliza e dá espaço para os cards abaixo */
-            font-size: 1.15rem;
-            color: #555;
-            line-height: 1.7;
-            text-align: center;
-        }
-
-        .intro-pilares strong {
-            color: var(--primary-red);
-            font-weight: 700;
-        }
-        .funcoes-container h2 {
-            font-family: 'Oswald', sans-serif;
-            font-size: 40px;
-            text-transform: uppercase;
-            margin-bottom: 50px;
-            position: relative;
-            display: inline-block;
-        }
-
-        .funcoes-container h2::after {
-            content: '';
-            width: 50%;
-            height: 4px;
-            background: var(--primary-red);
-            position: absolute;
-            bottom: -10px;
-            left: 25%;
-        }
-
-        .cards {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-        }
-
-        .card-funcao {
-            background-color: white;
-            padding: 40px 25px;
-            border-radius: 4px;
-            width: 320px;
-            border: 1px solid #b1aeae;
-            transition:0.4s;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .card-funcao:hover {
-            transform: translateY(-15px);
-            border-color: var(--primary-red);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-        }
-
-        .card-funcao i {
-            font-size: 35px;
-            color: var(--primary-red);
-            margin-bottom: 15px;
-        }
-
-        .card-funcao h3 {
-            font-family: 'Oswald', sans-serif;
-            text-transform: uppercase;
-            font-size: 24px;
-            margin-bottom: 15px;
-            color: var(--steel-gray);
-        }
-
-        .card-funcao p {
-            font-size: 0.95rem;
-            color: #666;
-            flex-grow: 1; /* Faz o parágrafo ocupar o espaço restante, alinhando o botão embaixo */
-            margin-bottom: 20px;
-        }
-
-        .card-funcao button {
-            padding: 12px 30px;
-            background-color: var(--primary-red);
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 700;
-            text-transform: uppercase;
-            transition: 0.3s;
-            width: 100%; /* Botão ocupa a largura do card para visual tático */
-        }
-
-        .card-funcao button:hover {
-            background-color: #8a0000;
-        }
-        .card-funcao button a {
-            color: white;
-            text-decoration: none;
-            display: block;
-        }
-
-        .sobre {
-        padding: 100px 5%;
-        background-color: #f9f9f9; /* Fundo levemente cinza para destacar do branco */
-        border-top: 2px solid #eee;
-        text-align: left;
-            }
-
-        .sobre h1 {
-            font-family: 'Oswald', sans-serif;
-            font-size: 45px;
-            text-transform: uppercase;
-            color: var(--steel-gray);
-            margin-bottom: 40px;
-            position: relative;
-            padding-bottom: 15px;
-        }
-
-        /* Linha vermelha abaixo do título do Sobre */
-        .sobre h1::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 60px;
-            height: 5px;
-            background-color: var(--primary-red);
-        }
-
-        .sobre-content {
-            max-width: 900px; /* Alinhado com a largura do header */
-        }
-
-        .sobre p {
-            font-size: 1.15rem;
-            color: #444;
-            margin-bottom: 25px;
-            line-height: 1.8;
-            text-align: justify;
-        }
-
-        .sobre p strong {
-            color: var(--primary-red);
-            font-weight: 900;
-        }
-
-        /* Efeito sutil de hover na seção para dar profundidade */
-        .sobre:hover {
-            background-color: #fff;
-            transition: background-color 0.5s ease;
-        }
-        .beneficios {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 100px 5%;
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
     
-    /* Usando a mesma lógica do seu header, mas com background-attachment fixo */
-    background:linear-gradient(rgb(0 0 0 / 79%), rgb(0 0 0 / 68%)), url(soldado.png);
+    body {
+        font-family: 'Roboto', sans-serif;
+        background-color: var(--light-bg);
+        background: radial-gradient(
+            circle,
+            #1E1E1E 0%,
+            #0E0E0E 45%,
+            #050505 100%
+        );
+        color: #D9D9D9;
+        line-height: 1.6;
+    }
+
+    header {
+            display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 40px 5%;
+    background: linear-gradient(rgb(0 0 0 / 20%), rgb(28 28 28 / 0%)), url('imagens/exercito-fundo.jpg');
     background-size: cover;
     background-position: center;
-    background-attachment:cover; /* Isso cria um efeito visual premium ao rolar a página */
-    color: white;
-    min-height: 500px;
-}
+    color: #ffffff;
+    min-height: 600px;
+    }
 
-.beneficios-content {
-    max-width: 1200px;
-    width: 100%;
-}
+    .titulo {
+        margin-top: 50px;
+        flex: 1; 
+        width: 80%;
+    }
 
-.beneficios-header {
-    text-align: center;
-    margin-bottom: 60px;
-}
+    .titulo h1 {
+        font-family: 'Oswald', sans-serif;
+        font-size: 80px;
+        text-transform: uppercase;
+        letter-spacing: -2px;
+        line-height: 1;
+        margin-bottom: 20px;
+        max-width: 900px;
+        color: #ffffff;
+    }
 
-.beneficios-header h1 {
-    font-family: 'Oswald', sans-serif;
-    font-size: 50px;
-    text-transform: uppercase;
-    letter-spacing: -1px;
-}
+    .titulo h1>span{
+        color: var(--primary-red);
+    }
 
-.beneficios-header h1 span {
-    color: var(--primary-red);
-}
+    .titulo p {
+        font-size: 1.2rem;
+        max-width: 850px;
+        opacity: 0.9;
+        text-align: justify;
+        color: #D9D9D9;
+    }
 
-.beneficios-header p {
-    font-size: 1.2rem;
-    max-width: 700px;
-    margin: 15px auto;
-    opacity: 0.8;
-}
+    .titulo span {
+        font-size: 1.1em;
+        font-style: italic;
+        opacity: 0.8;
+        font-weight: bolder;
+        display: block;
+        margin-top: 10px;
+        color: #ffffff;
+    }
 
-.beneficios-grid {
-    display: flex;
-    gap: 30px;
-    justify-content: space-between;
-    flex-wrap: wrap;
-}
+    nav {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+    }
 
-.beneficios-item {
-    flex: 1;
-    min-width: 300px;
-    background: rgba(255, 255, 255, 0.05); /* Efeito de vidro sutil */
-    backdrop-filter: blur(5px);
-    padding: 40px;
-    border-left: 3px solid var(--primary-red);
-    transition: 0.4s;
-}
+    nav a {
+        color: #ffffff;
+        text-decoration: none;
+        margin: 10px 0;
+        font-size: 14px;
+        font-weight: 700;
+        text-transform: uppercase;
+        transition: 0.3s;
+        letter-spacing: 1px;
+    }
 
-.beneficios-item:hover {
-    background: rgba(255, 255, 255, 0.1);
-    transform: translateY(-10px);
-}
+    nav a:hover {
+        color:#ff0000ba;
+    }
 
-.icon-box {
-    font-size: 40px;
-    color: var(--primary-red);
-    margin-bottom: 20px;
-}
+    main {
+        padding: 80px 5%;
+        text-align: center;
+        background-color: #0B0B0B;
+    }
 
-.beneficios-item h3 {
-    font-family: 'Oswald', sans-serif;
-    text-transform: uppercase;
-    font-size: 22px;
-    margin-bottom: 15px;
-    letter-spacing: 1px;
-}
+    .intro-pilares {
+        max-width: 800px; 
+        margin: 0 auto 50px; 
+        font-size: 1.15rem;
+        color: #BEBEBE;
+        line-height: 1.7;
+        text-align: center;
+    }
 
-.beneficios-item p {
-    font-size: 1rem;
-    color: #ccc;
-    line-height: 1.5;
-}
+    .intro-pilares strong {
+        color: var(--primary-red);
+        font-weight: 700;
+    }
+    
+    .funcoes-container h2 {
+        font-family: 'Oswald', sans-serif;
+        font-size: 40px;
+        text-transform: uppercase;
+        margin-bottom: 50px;
+        position: relative;
+        display: inline-block;
+        color: #ffffff;
+    }
 
-.motivos {
-    padding: 100px 5%;
-    background-color: #ffffff;
-    color: #1a1a1a;
-    text-align: center;
-}
+    .funcoes-container h2::after {
+        content: '';
+        width: 50%;
+        height: 4px;
+        background: var(--primary-red);
+        position: absolute;
+        bottom: -10px;
+        left: 25%;
+    }
 
-.motivos-container {
-    max-width: 1000px;
-    margin: 0 auto;
-}
+    .cards {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        flex-wrap: wrap;
+    }
 
-.motivos h1 {
-    font-family: 'Oswald', sans-serif;
-    font-size: 3rem;
-    text-transform: uppercase;
-    letter-spacing: -1px;
-    margin-bottom: 40px;
-}
+    .card-funcao {
+        background-color: #111111;
+        padding: 40px 25px;
+        border-radius: 4px;
+        width: 320px;
+        border: 1px solid #2C2C2C;
+        transition: 0.4s;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 
-.motivos h1 span {
-    color: var(--primary-red);
-}
+    .card-funcao:hover {
+        transform: translateY(-15px);
+        border-color: var(--primary-red);
+        box-shadow: 0 15px 35px rgba(179, 0, 0, 0.2);
+    }
 
-.texto-introducao {
-    margin-bottom: 40px;
-    border-left: 4px solid var(--primary-red);
-    padding-left: 25px;
+    .card-funcao i {
+        font-size: 35px;
+        color: var(--primary-red);
+        margin-bottom: 15px;
+    }
+
+    .card-funcao h3 {
+        font-family: 'Oswald', sans-serif;
+        text-transform: uppercase;
+        font-size: 24px;
+        margin-bottom: 15px;
+        color: #ffffff;
+    }
+
+    .card-funcao p {
+        font-size: 0.95rem;
+        color: #A5A5A5;
+        flex-grow: 1; 
+        margin-bottom: 20px;
+    }
+
+    .card-funcao button {
+        padding: 12px 30px;
+        background-color: var(--primary-red);
+        color: #ffffff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 700;
+        text-transform: uppercase;
+        transition: 0.3s;
+        width: 100%; 
+    }
+
+    .card-funcao button:hover {
+        background: linear-gradient(
+            90deg,
+            #4A4A4A 0%,
+            #C2C2C2 45%,
+            #7A7A7A 70%,
+            #1B1B1B 100%
+        );
+        color: #000000;
+    }
+    
+    .card-funcao button a {
+        color: inherit;
+        text-decoration: none;
+        display: block;
+    }
+
+    .sobre {
+            padding: 100px 5%;
+    background:linear-gradient(rgb(0 0 0 / 90%), rgb(0 0 0 / 40%));
+    background-size: cover;
+    background-position: center;
+    border-top: 2px solid #2C2C2C;
     text-align: left;
-}
+    /* transition: background-color 0.5s ease; */
+    margin-bottom: 20px;
+    }
 
-.legenda-topo {
-    font-size: 1.25rem;
-    line-height: 1.6;
-    margin-bottom: 15px;
-    color: #333;
-}
+    .sobre h1 {
+        font-family: 'Oswald', sans-serif;
+        font-size: 45px;
+        text-transform: uppercase;
+        color: #ffffff;
+        margin-bottom: 40px;
+        position: relative;
+        padding-bottom: 15px;
+    }
 
-.destaque-protocolo {
-    font-size: 1.1rem;
-    color: #666;
-    font-weight: 300;
-}
+    .sobre h1::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 60px;
+        height: 5px;
+        background-color: var(--primary-red);
+    }
 
-.chamada-video {
-    margin: 50px 0 25px;
-    font-family: 'Oswald', sans-serif;
-    text-transform: uppercase;
-    font-size: 1.1rem;
-    letter-spacing: 1px;
-}
+    .sobre-content {
+        max-width: 900px; 
+    }
 
-.chamada-video a {
-    color: #4a4a4a;
-    font-style: italic;
-    border-bottom: 1px solid #ccc;
-    text-decoration: none;
-}
-.chamada-video a:hover {
-    color:var(--primary-red);
-    border-bottom: none;
-}
-.chamada-video strong {
-    color: var(--primary-red);
-}
+    .sobre p {
+        font-size: 1.15rem;
+        color: #D9D9D9;
+        margin-bottom: 25px;
+        line-height: 1.8;
+        text-align: justify;
+    }
 
-/* CONTAINER DO VÍDEO COM EFEITO DE PROFUNDIDADE */
-.video-container-premium {
-    position: relative;
-    padding: 15px;
-    background: #1a1a1a; /* Moldura escura tática */
-    border-radius: 4px;
-    margin-bottom: 60px;
-}
+    .sobre p strong {
+        color: var(--primary-red);
+        font-weight: 900;
+    }
 
-.video-wrapper {
-    position: relative;
-    padding-bottom: 56.25%; /* 16:9 */
-    height: 0;
-    overflow: hidden;
-}
+    .sobre:hover {
+        background-color: #232323;
+    }
+    
+    .beneficios {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 100px 5%;
+        background: linear-gradient(rgb(5 5 5 / 80%), rgb(11 11 11 / 0%)), url('imagens/soldado.png');
+        background-size: cover;
+        background-position: center;
+        background-attachment: cover; 
+        color: #ffffff;
+        min-height: 500px;
+    }
 
-.video-wrapper iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
+    .beneficios-content {
+        max-width: 1200px;
+        width: 100%;
+    }
 
-/* BOX FINAL E BOTÃO */
-.conclusao-box {
-    max-width: 800px;
-    margin: 0 auto;
-}
+    .beneficios-header {
+        text-align: center;
+        margin-bottom: 60px;
+    }
 
-.legenda-baixo {
-    font-size: 1.2rem;
-    font-style: italic;
-    color: #444;
-    margin-bottom: 40px;
-    line-height: 1.8;
-}
-a>.btn-chamada{
-    text-decoration: none;
-}
-.btn-chamada {
-    padding: 22px 50px;
-    background-color: var(--primary-red);
-    color: white;
-    border: none;
-    font-family: 'Oswald', sans-serif;
-    font-size: 1.3rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    box-shadow: 0 10px 20px rgba(179, 0, 0, 0.3);
-}
+    .beneficios-header h1 {
+        font-family: 'Oswald', sans-serif;
+        font-size: 50px;
+        text-transform: uppercase;
+        letter-spacing: -1px;
+        color: #ffffff;
+    }
 
-.btn-chamada:hover {
-    background-color: #000;
-    transform: scale(1.05);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.4);
-}
+    .beneficios-header h1 span {
+        color: var(--primary-red);
+    }
 
-/* Responsividade */
-@media (max-width: 768px) {
-    .motivos h1 { font-size: 2.2rem; }
-    .texto-introducao { padding-left: 15px; }
-    .btn-chamada { width: 100%; padding: 20px; }
-}
+    .beneficios-header p {
+        font-size: 1.2rem;
+        max-width: 700px;
+        margin: 15px auto;
+        opacity: 0.8;
+        color: #D9D9D9;
+    }
 
-/* Ajuste Responsivo */
-@media (max-width: 768px) {
-    .motivos h1 { font-size: 32px; }
-    .motivos p { font-size: 1rem; }
-}
-/* Responsividade para celulares */
-@media (max-width: 768px) {
-    .beneficios-header h1 { font-size: 35px; }
-    .beneficios-grid { flex-direction: column; }
-}
-        footer {
-            background: #1a1a1a;
-            color: white;
-            padding: 30px;
+    .beneficios-grid {
+        display: flex;
+        gap: 30px;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    .beneficios-item {
+        flex: 1;
+        min-width: 300px;
+        background: rgba(44, 44, 44, 0.4); 
+        backdrop-filter: blur(5px);
+        padding: 40px;
+        border-left: 3px solid var(--primary-red);
+        border-top: 1px solid #3A3A3A;
+        border-right: 1px solid #3A3A3A;
+        border-bottom: 1px solid #3A3A3A;
+        transition: 0.4s;
+    }
+
+    .beneficios-item:hover {
+        background: rgba(138, 138, 138, 0.15);
+        transform: translateY(-10px);
+    }
+
+    .icon-box {
+        font-size: 40px;
+        color: var(--primary-red);
+        margin-bottom: 20px;
+    }
+
+    .beneficios-item h3 {
+        font-family: 'Oswald', sans-serif;
+        text-transform: uppercase;
+        font-size: 22px;
+        margin-bottom: 15px;
+        letter-spacing: 1px;
+        color: #ffffff;
+    }
+
+    .beneficios-item p {
+        font-size: 1rem;
+        color: #BEBEBE;
+        line-height: 1.5;
+    }
+
+    .motivos {
+        padding: 100px 5%;
+        background-color: #050505;
+        background: radial-gradient(
+            circle,
+            #1E1E1E 0%,
+            #0E0E0E 45%,
+            #050505 100%
+        );
+        color: #ffffff;
+        text-align: center;
+    }
+
+    .motivos-container {
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    .motivos h1 {
+        font-family: 'Oswald', sans-serif;
+        font-size: 3rem;
+        text-transform: uppercase;
+        letter-spacing: -1px;
+        margin-bottom: 40px;
+        color: #ffffff;
+    }
+
+    .motivos h1 span {
+        color: var(--primary-red);
+    }
+
+    .texto-introducao {
+        margin-bottom: 40px;
+        border-left: 4px solid var(--primary-red);
+        padding-left: 25px;
+        text-align: left;
+    }
+
+    .legenda-topo {
+        font-size: 1.25rem;
+        line-height: 1.6;
+        margin-bottom: 15px;
+        color: #D9D9D9;
+    }
+
+    .destaque-protocolo {
+        font-size: 1.1rem;
+        color: #A5A5A5;
+        font-weight: 300;
+    }
+
+    .chamada-video {
+        margin: 50px 0 25px;
+        font-family: 'Oswald', sans-serif;
+        text-transform: uppercase;
+        font-size: 1.1rem;
+        letter-spacing: 1px;
+        color: #ffffff;
+    }
+
+    .chamada-video a {
+        color: #BEBEBE;
+        font-style: italic;
+        border-bottom: 1px solid #4A4A4A;
+        text-decoration: none;
+    }
+    
+    .chamada-video a:hover {
+        color: var(--primary-red);
+        border-bottom: none;
+    }
+    
+    .chamada-video strong {
+        color: var(--primary-red);
+    }
+
+    .video-container-premium {
+        position: relative;
+        padding: 15px;
+        background: #1A1A1A; 
+        border: 1px solid #3A3A3A;
+        border-radius: 4px;
+        margin-bottom: 60px;
+    }
+
+    .video-wrapper {
+        position: relative;
+        padding-bottom: 56.25%; 
+        height: 0;
+        overflow: hidden;
+    }
+
+    .video-wrapper iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .conclusao-box {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .legenda-baixo {
+        font-size: 1.2rem;
+        font-style: italic;
+        color: #D9D9D9;
+        margin-bottom: 40px;
+        line-height: 1.8;
+    }
+    
+    a>.btn-chamada{
+        text-decoration: none;
+    }
+    
+    .btn-chamada {
+        padding: 22px 50px;
+        background-color: var(--primary-red);
+        color: #ffffff;
+        border: none;
+        font-family: 'Oswald', sans-serif;
+        font-size: 1.3rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        box-shadow: 0 10px 20px rgba(179, 0, 0, 0.4);
+    }
+
+    .btn-chamada:hover {
+        background: linear-gradient(
+            135deg,
+            #2B2B2B 0%,
+            #8A8A8A 50%,
+            #1A1A1A 100%
+        );
+
+        transform: scale(1.05);
+        box-shadow: 0 15px 30px rgba(255,255,255,0.1);
+    }
+
+    @media (max-width: 768px) {
+        .motivos h1 { font-size: 2.2rem; }
+        .texto-introducao { padding-left: 15px; }
+        .btn-chamada { width: 100%; padding: 20px; }
+    }
+
+    @media (max-width: 768px) {
+        .motivos h1 { font-size: 32px; }
+        .motivos p { font-size: 1rem; }
+    }
+    
+    @media (max-width: 768px) {
+        .beneficios-header h1 { font-size: 35px; }
+        .beneficios-grid { flex-direction: column; }
+    }
+    
+    footer {
+        background: #050505;
+        border-top: 1px solid #2C2C2C;
+        color: #ffffff;
+        padding: 30px;
+        text-align: center;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    .caveira {
+        font-family: 'Oswald', sans-serif;
+        margin-top: 10px;
+        color: var(--primary-red);
+    }
+
+    @media (max-width: 768px) {
+        header {
+            flex-direction: column;
+            align-items: center;
             text-align: center;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
         }
-
-        .caveira {
-            font-family: 'Oswald', sans-serif;
-            margin-top: 10px;
-        }
-
-        @media (max-width: 768px) {
-            header {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-            }
-            .titulo { width: 100%; }
-            nav { margin-top: 30px; }
-            nav a { margin: 0 10px; }
-        }
-    </style>
+        .titulo { width: 100%; }
+        nav { margin-top: 30px; }
+        nav a { margin: 0 10px; }
+    }
+</style>
 </head>
 <body>
 
@@ -520,8 +565,8 @@ a>.btn-chamada{
         </div>
         <nav>
             <a href="#sobre">Sobre</a>
-            <a href="#beneficios">beneficios</a>
-            <a href="#pilares">ferramentas</a>
+            <a href="#pilares">Pilares</a>
+            <a href="#beneficios">benefícios</a>
             <a href="#motivos">motivos</a>
         </nav>
     </header>
@@ -567,7 +612,7 @@ a>.btn-chamada{
             <i class="fa-solid fa-gears"></i>
             <h3>Rotina</h3>
             <p>Sistemas de hábitos táticos. A gestão do tempo aplicada à eficiência máxima do seu dia a dia.</p>
-            <button onclick="window.location.href='rotina.html'">Saiba Mais</button>
+            <button><a href="rotina.html">Saiba Mais</a></button>
         </div>
     </div>
 </div>
