@@ -82,7 +82,23 @@
 
         .form-row input[type="text"] { flex: 2; min-width: 150px; }
         .form-row input[type="number"] { flex: 1; min-width: 80px; }
+        /* RESPONSIVIDADE PARA O FORMULÁRIO */
+        @media (max-width: 600px) {
+            .form-row {
+                flex-direction: column;
+                align-items: stretch; /* Faz os campos ocuparem toda a largura */
+                gap: 12px;            /* Aumenta o respiro entre os campos no celular */
+            }
 
+            .form-row input[type="text"], 
+            .form-row input[type="number"], 
+            .form-row select,
+            .form-row button {
+                width: 100%;    /* Garante que nenhum campo fique "esmagado" */
+                flex: none;     /* Desativa o crescimento proporcional do desktop */
+                padding: 10px;  /* Melhora a área de toque */
+            }
+        }
         /* ORGANIZAÇÃO DOS CARDS LADO A LADO */
         .colunas-habitos {
             display: grid;
@@ -102,12 +118,15 @@
         }
         .coluna-boa{
             background:#ceffce38;
+            border-left: 3px solid #20d720;
         }
         .coluna-mal{
             background:#e6a4a41f;
+            border-left: 3px solid #ef4444;
         }
         .coluna-recompensas{
             background-color: #b3d7e83b;;
+            border-left: 3px solid #3b82f6;
         }
         .coluna h3 {
             border-bottom: 2px solid #eee;
@@ -143,30 +162,36 @@
             font-weight: bold;
         }
 
-        .btn-add { background-color: #e6f4ea; color: #137333; }
-        .btn-sub { background-color: #fce8e6; color: #c5221f; }
-        .btn-gastar { background-color: #e8f0fe; color: #1a73e8; }
-        .btn-delete { background-color: transparent; color: #999; font-size: 12px; padding: 4px 6px; }
-        .btn-delete:hover { color: #e63946; }
-        
-        .corrosivo { background-color: #c5221f; color: white; }
+        .btn-add { background-color: #22c55e; color: white;transition: 0.3s; }
+    .btn-add:hover { background-color:white;color: #22c55e; box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);transition: 0.3s;}
 
-        .btn-reset {
-            width: 80%;
-            padding: 10px;
-            margin: auto;
-            background: #eee;
-            color: #353434;
-            border: 1px solid #dadada;
-            margin-top: 15px;
-            display: block;
-            transition:0.5s;
-        }
-        .btn-reset:hover{
-            background:red;
-            color: white;
-            transform: translateY(-5px);
-        }
+    .btn-sub { background-color: #ef4444; color: white; }
+    .btn-sub:hover { background-color: white; color: #ef4444; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);transition: 0.3s; }
+
+    .btn-gastar { background-color: #3b82f6; color: white; }
+    .btn-gastar:hover { background-color:white; color: #3b82f6; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);transition: 0.3s; }
+
+    .btn-delete { background: none; color: #94a3b8; font-size: 16px; }
+    .btn-delete:hover { color: #ef4444; }
+
+    .corrosivo { 
+        background: #7f1d1d; 
+        color: white; 
+        width: 100%;
+        margin-top: 10px;
+    }
+    .corrosivo:hover { background: #b91c1c; transition: 0.3s; }
+
+    .btn-reset {
+        display: block;
+        width: 200px;
+        margin: 20px auto 0;
+        background: #f1f5f9;
+        color: #64748b;
+        border: 1px solid #cbd5e1;
+        padding: 10px;
+    }
+    .btn-reset:hover { background: #ef4444; color: white; border-color: #ef4444; }
 
         /* PAINEL DE SOMAS E SALDO FIXO EMBAIXO */
         .painel-saldos-fixo {
@@ -174,12 +199,12 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: #ffffff;
-            box-shadow: 0 -3px 15px rgba(0,0,0,0.1);
+            background: #080839;
+            box-shadow: 0 -3px 15px rgba(0, 0, 0, 0.1);
             display: flex;
             justify-content: center;
             padding: 15px 20px;
-            z-index: 1000;
+            z-index: 10005
         }
 
         .conteudo-saldos {
@@ -272,15 +297,15 @@
 <div class="painel-saldos-fixo">
     <div class="conteudo-saldos">
         <div class="caixa-saldo">
-            <span style="font-size: 11px; color: #666; font-weight: bold;">Total Ganho</span>
+            <span style="font-size: 15px; color: #666; font-weight: bold;">Total Ganho</span>
             <div id="soma-ganhos" class="numero positivo">0 pts</div>
         </div>
         <div class="caixa-saldo">
-            <span style="font-size: 11px; color: #666; font-weight: bold;">Total Perdido</span>
+            <span style="font-size: 15px; color: #666; font-weight: bold;">Total Perdido</span>
             <div id="soma-perdas" class="numero negativo">0 pts</div>
         </div>
         <div class="caixa-saldo">
-            <span style="font-size: 11px; color: #666; font-weight: bold;">Saldo Atual</span>
+            <span style="font-size: 15px; color: #666; font-weight: bold;">Saldo Atual</span>
             <div id="saldo-final" class="numero destaque">0 pts</div>
         </div>
     </div>
