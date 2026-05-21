@@ -1,10 +1,16 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <title>Controle de Dopamina Avançado</title>
+    
     <style>
+        /* ==========================================================================
+           ESTILOS GERAIS E ESTRUTURA
+           ========================================================================== */
         *{
             margin: 0;
             padding:0;
@@ -15,11 +21,16 @@
             background-color:#cecece4a;
             color: #333;
             padding: 20px;
-            padding-bottom: 140px; /* Espaço para o painel fixo no rodapé */
+            padding-bottom: 140px; /* Espaço para o painel fixo no rodapé não cobrir o conteúdo */
             display: flex;
+            flex-direction: column;
             justify-content: center;
         }
-
+        header{
+            width: 100%;
+            max-width: 850px;
+            margin-bottom: 25px;
+        }
         .container {
             width: 100%;
             background: #ffffff;
@@ -33,17 +44,18 @@
             color: #222;
         }
 
+        /* Box de metas de estudo e contagem de dias */
         .meta-estudo {
             text-align: center;
             font-size: 14px;
-            color: #777;
+            color: #393939;
             margin-bottom: 20px;
             background: #f1f5f9;
             padding: 10px;
             border-radius: 6px;
         }
 
-        /* BANNER DE RECOMPENSA BÔNUS LIBERADA */
+        /* Banner de aviso de Recompensa Bônus */
         .bonus-banner {
             display: none;
             background-color: #fef3c7;
@@ -56,7 +68,9 @@
             font-weight: bold;
         }
 
-        /* FORMULÁRIO DE CRIAÇÃO */
+        /* ==========================================================================
+           FORMULÁRIO DE CRIAÇÃO DE ITENS
+           ========================================================================== */
         .form-criacao {
             background: #f8f9fa;
             border: 1px dashed #ccc;
@@ -82,24 +96,28 @@
 
         .form-row input[type="text"] { flex: 2; min-width: 150px; }
         .form-row input[type="number"] { flex: 1; min-width: 80px; }
-        /* RESPONSIVIDADE PARA O FORMULÁRIO */
+
+        /* Ajustes para Celular (Responsividade do Form) */
         @media (max-width: 600px) {
             .form-row {
                 flex-direction: column;
-                align-items: stretch; /* Faz os campos ocuparem toda a largura */
-                gap: 12px;            /* Aumenta o respiro entre os campos no celular */
+                align-items: stretch;
+                gap: 12px;
             }
 
             .form-row input[type="text"], 
             .form-row input[type="number"], 
             .form-row select,
             .form-row button {
-                width: 100%;    /* Garante que nenhum campo fique "esmagado" */
-                flex: none;     /* Desativa o crescimento proporcional do desktop */
-                padding: 10px;  /* Melhora a área de toque */
+                width: 100%;
+                flex: none;
+                padding: 10px;
             }
         }
-        /* ORGANIZAÇÃO DOS CARDS LADO A LADO */
+
+        /* ==========================================================================
+           COLUNAS E CARDS (DEGRADÊS DE 3 TONS)
+           ========================================================================== */
         .colunas-habitos {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -116,18 +134,25 @@
             padding: 15px;
             border-radius: 6px;
         }
-        .coluna-boa{
-            background:#ceffce38;
+
+        /* Degradê Verde (Bons Hábitos) */
+        .coluna-boa {
+            background: linear-gradient(90deg, #22ad2245 0%, #22ad2225 50%, #22ad2210 100%);
             border-left: 3px solid #20d720;
         }
-        .coluna-mal{
-            background:#e6a4a41f;
+
+        /* Degradê Vermelho (Maus Hábitos) */
+        .coluna-mal {
+            background: linear-gradient(90deg, #ff000045 0%, #ff000025 50%, #ff000010 100%);
             border-left: 3px solid #ef4444;
         }
-        .coluna-recompensas{
-            background-color: #b3d7e83b;;
+
+        /* Degradê Azul (Loja de Recompensas) */
+        .coluna-recompensas {
+            background: linear-gradient(90deg, #a6ccddcc 0%, #a6ccdd70 50%, #a6ccdd30 100%);
             border-left: 3px solid #3b82f6;
         }
+
         .coluna h3 {
             border-bottom: 2px solid #eee;
             padding-bottom: 5px;
@@ -135,17 +160,20 @@
             margin-top: 0;
         }
 
-        .positivo { color: #73ff00;; }
+        /* Classes auxiliares de cores de texto */
+        .positivo { color: #22c55e; }
         .negativo { color: #f11124; }
         .destaque { color: #1c79e2; }
 
+        /* Estilo de cada linha de hábito na lista */
         .linha-habito {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 8px 0;
+            color: black;
             border-bottom: 1px solid #f5f5f5;
-            font-size: 14px;
+            font-size: 15px;
         }
 
         .botoes-acoes {
@@ -154,6 +182,9 @@
             align-items: center;
         }
 
+        /* ==========================================================================
+           ESTILIZAÇÃO DOS BOTÕES
+           ========================================================================== */
         button {
             padding: 6px 12px;
             border: none;
@@ -163,37 +194,43 @@
         }
 
         .btn-add { background-color: #22c55e; color: white;transition: 0.3s; }
-    .btn-add:hover { background-color:white;color: #22c55e; box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);transition: 0.3s;}
+        .btn-add:hover { background-color:white;color: #22c55e; box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);transition: 0.3s;}
 
-    .btn-sub { background-color: #ef4444; color: white; }
-    .btn-sub:hover { background-color: white; color: #ef4444; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);transition: 0.3s; }
+        .btn-sub { background-color: #ef4444; color: white; }
+        .btn-sub:hover { background-color: white; color: #ef4444; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);transition: 0.3s; }
 
-    .btn-gastar { background-color: #3b82f6; color: white; }
-    .btn-gastar:hover { background-color:white; color: #3b82f6; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);transition: 0.3s; }
+        .btn-gastar { background-color: #3b82f6; color: white; }
+        .btn-gastar:hover { background-color:white; color: #3b82f6; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);transition: 0.3s; }
 
-    .btn-delete { background: none; color: #94a3b8; font-size: 16px; }
-    .btn-delete:hover { color: #ef4444; }
+        .btn-delete { background: none; color: #94a3b8; font-size: 16px; }
+        .btn-delete:hover { color: #ef4444; }
 
-    .corrosivo { 
-        background: #7f1d1d; 
-        color: white; 
-        width: 100%;
-        margin-top: 10px;
-    }
-    .corrosivo:hover { background: #b91c1c; transition: 0.3s; }
+        /* Botão de Hábito Corrosivo */
+        .corrosivo { 
+            background: #7f1d1d; 
+            color: white; 
+            width: 100%;
+            margin-top: 10px;
+        }
+        .corrosivo:hover { background: #b91c1c; transition: 0.3s; }
 
-    .btn-reset {
-        display: block;
-        width: 200px;
-        margin: 20px auto 0;
-        background: #f1f5f9;
-        color: #64748b;
-        border: 1px solid #cbd5e1;
-        padding: 10px;
-    }
-    .btn-reset:hover { background: #ef4444; color: white; border-color: #ef4444; }
+        /* Botão de Reset */
+        .btn-reset,.btn-reset-ponts {
+            display: block;
+            width: 200px;
+            margin: 10px auto 0;
+            background: #f1f5f9;
+            color: #64748b;
+            border: 1px solid #cbd5e1;
+            padding: 10px;
+            transition: 0.3s;
+        }
+        .btn-reset:hover { background: #ef4444; color: white; border-color: #ef4444; }
+        .btn-reset-ponts:hover { background: #fad592; color:black; border-color: #ecef44; }
 
-        /* PAINEL DE SOMAS E SALDO FIXO EMBAIXO */
+        /* ==========================================================================
+           PAINEL DE SALDOS (FIXO NO RODAPÉ)
+           ========================================================================== */
         .painel-saldos-fixo {
             position: fixed;
             bottom: 0;
@@ -202,11 +239,15 @@
             background: #080839;
             box-shadow: 0 -3px 15px rgba(0, 0, 0, 0.1);
             display: flex;
-            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            flex-direction: column;
             padding: 15px 20px;
-            z-index: 10005
+            z-index: 10005;
         }
-
+        .painel-saldos-fixo h2{
+            color: #79aae2;
+        }
         .conteudo-saldos {
             width: 100%;
             max-width: 850px;
@@ -228,23 +269,33 @@
             font-weight: bold;
             margin-top: 5px;
         }
+        .footer-creditos {
+        width: 100%;
+        text-align: center;
+        color: #94a3b8;
+        margin-top: 10px;
+        border-top: 1px solid #ffffff1a;
+        padding-top: 5px;
+    }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>Regulação de Dopamina</h1>
+<header>
+    <div class="container">
+        <h1>Regulação de Dopamina</h1>
     
-    <div class="meta-estudo">
-        <div>Dias seguidos estudando: <span id="contador-estudo" style="font-weight:bold;">0</span>/5</div>
-        <div style="margin-top: 5px; font-size: 12px; color: #555;">
-            Cliques consecutivos em Treino/Estudo (Sem recaídas): <span id="combo-streak" style="font-weight:bold; color: #2a9d8f;">0</span>/5
+        <div class="meta-estudo">
+            <div>Dias seguidos estudando: <span id="contador-estudo" style="font-weight:bold;">0</span>/5</div>
+            <div style="margin-top: 5px; font-size: 12px; color: #555;">
+                Cliques consecutivos em Treino/Estudo (Sem recaídas): <span id="combo-streak" style="font-weight:bold; color: #2a9d8f;">0</span>/5
+            </div>
         </div>
-    </div>
-
-    <div id="banner-bonus" class="bonus-banner">
-        🔥 EXCELENTE CONSTÂNCIA! Uma recompensa bônus de alto nível foi liberada na sua loja!
-    </div>
+    
+        <div id="banner-bonus" class="bonus-banner">
+            🔥 EXCELENTE CONSTÂNCIA! Uma recompensa bônus de alto nível foi liberada na sua loja!
+        </div>
+</header>
 
     <div class="form-criacao">
         <h4 style="margin-bottom: 10px; color: #555;">Criar Novo Item (Hábito ou Recompensa)</h4>
@@ -262,39 +313,43 @@
                 <input type="checkbox" id="novo-corrosivo"> Corrosivo?
             </label>
 
-            <button class="btn-add" style="background: #222; color: #fff;" onclick="criarItemPersonalizado()">+ Adicionar</button>
+            <button class="btn-add" style="background: #222; color: #fff;" onclick="criarItemPersonalizado()"><i class="fa-solid fa-plus"></i> Adicionar</button>
         </div>
     </div>
 
     <div class="colunas-habitos">
         <div class="coluna-boa">
             <h3 class="positivo">Bons Hábitos</h3>
-            <div id="lista-bons">
-                </div>
+            <div id="lista-bons"></div>
         </div>
 
         <div class="coluna-mal">
             <h3 class="negativo">Maus Hábitos</h3>
-            <div id="lista-ruins">
-                </div>
+            <div id="lista-ruins"></div>
         </div>
     </div>
 
     <div class="coluna-recompensas" style="margin-bottom: 20px;">
         <h3 class="destaque">Trocar por Recompensa (Gastar Saldo)</h3>
-        <div id="lista-recompensas">
-            </div>
+        <div id="lista-recompensas"></div>
         
-        <div id="item-bonus-loja" class="linha-habito" style="display: none; background: #fef3c7; padding: 6px; border-radius: 4px; margin-top: 10px;">
+        <div id="item-bonus-loja" class="linha-habito" style="display: none; background: #fef3c7; padding: 6px; border-radius: 4px; margin-top: 10px; justify-content: space-between;">
             <span style="font-weight: bold; color: #92400e;">🎁 RECOMPENSA BÔNUS (Super Saída / Dia de Folga) (Custo: 0 pts)</span>
-            <button class="btn-gastar" style="background: #f59e0b; color: white;" onclick="gastarRecompensaBonus()">Resgatar</button>
+            <button class="btn-gastar" style="background: #f59e0b; color: white;" onclick="gastarRecompensaBonus()"><i class="fa-solid fa-star"></i> Resgatar</button>
         </div>
     </div>
 
-    <button class="btn-reset" onclick="resetarTudo()">Zerar Todo o Painel</button>
+    <button class="btn-reset-ponts" onclick="resetarSaldos()" style="margin-top: 0;">
+        <i class="fa-solid fa-coins"></i> Zerar Apenas Pontos
+    </button>
+    
+    <button class="btn-reset" onclick="resetarTudo()">
+        <i class="fa-solid fa-rotate-left"></i> Restaurar Lista Padrão
+    </button>
 </div>
 
 <div class="painel-saldos-fixo">
+    <h2>Saldos e pontuações</h2>
     <div class="conteudo-saldos">
         <div class="caixa-saldo">
             <span style="font-size: 15px; color: #666; font-weight: bold;">Total Ganho</span>
@@ -309,10 +364,15 @@
             <div id="saldo-final" class="numero destaque">0 pts</div>
         </div>
     </div>
+    <footer class="footer-creditos">
+        &copy; 2026 Controle de Dopamina • Feito por Vitor da Silva
+    </footer>
 </div>
 
 <script>
-    // Listas base de itens padrão caso não existam no localStorage
+    /* ==========================================================================
+       DADOS E CONFIGURAÇÕES INICIAIS
+       ========================================================================== */
     const habitosPadrao = [
         { id: 1, nome: "Estudar (bloco de 1h)", valor: 15, tipo: "bom", corrosivo: false, rastreável: true },
         { id: 2, nome: "Treino / Atividade Física", valor: 15, tipo: "bom", corrosivo: false, rastreável: true },
@@ -332,21 +392,25 @@
         { id: 103, nome: "Sair para algum canto", custo: 80 },
     ];
 
-    // Carregamento de variáveis globais
-    let itensHabitos = JSON.parse(localStorage.getItem('itensHabitos')) || habitosPadrao;
-    let itensRecompensas = JSON.parse(localStorage.getItem('itensRecompensas')) || recompensasPadrao;
+    /* CARREGAMENTO DE VARIÁVEIS DO LOCALSTORAGE */
+    let itensHabitos = JSON.parse(localStorage.getItem('itensHabitos')) || JSON.parse(JSON.stringify(habitosPadrao));
+    let itensRecompensas = JSON.parse(localStorage.getItem('itensRecompensas')) || JSON.parse(JSON.stringify(recompensasPadrao));
 
     let ganhos = parseInt(localStorage.getItem('ganhos')) || 0;
     let perdas = parseInt(localStorage.getItem('perdas')) || 0;
     let saldo = parseInt(localStorage.getItem('saldo')) || 0;
     let diasEstudo = parseInt(localStorage.getItem('diasEstudo')) || 0;
     
-    // Contadores para o algoritmo de análise do bônus
     let comboCliques = parseInt(localStorage.getItem('comboCliques')) || 0;
     let bonusLiberado = localStorage.getItem('bonusLiberado') === 'true';
 
+    /* INICIALIZAÇÃO DA TELA */
     renderizarListas();
     atualizarTela();
+
+    /* ==========================================================================
+       FUNÇÕES DE INTERFACE (UI)
+       ========================================================================== */
 
     function toggleOpcaoCorrosivo() {
         const tipo = document.getElementById('novo-tipo').value;
@@ -367,7 +431,6 @@
         if (tipo === 'recompensa') {
             itensRecompensas.push({ id: Date.now(), nome: nome, custo: valor });
         } else {
-            // Se for Estudar ou Treino digitados manualmente, vamos habilitar o rastreamento deles também
             const rastrear = nome.toLowerCase().includes("estud") || nome.toLowerCase().includes("trein");
             itensHabitos.push({
                 id: Date.now(),
@@ -379,7 +442,6 @@
             });
         }
 
-        // Limpa campos
         document.getElementById('novo-nome').value = "";
         document.getElementById('novo-valor').value = "";
         document.getElementById('novo-corrosivo').checked = false;
@@ -390,16 +452,22 @@
         renderizarListas();
     }
 
+    // ADICIONADO ALERTA DE CONFIRMAÇÃO PARA APAGAR HÁBITO
     function deletarHabito(id) {
-        itensHabitos = itensHabitos.filter(item => item.id !== id);
-        localStorage.setItem('itensHabitos', JSON.stringify(itensHabitos));
-        renderizarListas();
+        if (confirm("Tem certeza que deseja excluir permanentemente este hábito da sua lista?")) {
+            itensHabitos = itensHabitos.filter(item => item.id !== id);
+            localStorage.setItem('itensHabitos', JSON.stringify(itensHabitos));
+            renderizarListas();
+        }
     }
 
+    // ADICIONADO ALERTA DE CONFIRMAÇÃO PARA APAGAR RECOMPENSA
     function deletarRecompensa(id) {
-        itensRecompensas = itensRecompensas.filter(item => item.id !== id);
-        localStorage.setItem('itensRecompensas', JSON.stringify(itensRecompensas));
-        renderizarListas();
+        if (confirm("Tem certeza que deseja excluir permanentemente esta recompensa da sua loja?")) {
+            itensRecompensas = itensRecompensas.filter(item => item.id !== id);
+            localStorage.setItem('itensRecompensas', JSON.stringify(itensRecompensas));
+            renderizarListas();
+        }
     }
 
     function renderizarListas() {
@@ -419,8 +487,8 @@
                 div.innerHTML = `
                     <span>${item.nome} (+${item.valor} pts)</span>
                     <div class="botoes-acoes">
-                        <button class="btn-add" onclick="cliqueHabitoBom(${item.valor}, ${item.rastreável})">+</button>
-                        <button class="btn-delete" onclick="deletarHabito(${item.id})">✕</button>
+                        <button class="btn-add" onclick="cliqueHabitoBom(${item.valor}, ${item.rastreável})"><i class="fa-solid fa-plus"></i></button>
+                        <button class="btn-delete" onclick="deletarHabito(${item.id})"><i class="fa-solid fa-trash"></i></button>
                     </div>`;
                 listaBons.appendChild(div);
             } else {
@@ -431,15 +499,15 @@
                     div.innerHTML = `
                         <span style="color: #c5221f; font-weight: bold;">${item.nome} (Corrosivo: -50%)</span>
                         <div class="botoes-acoes">
-                            <button class="corrosivo" onclick="cliqueHabitoCorrosivo()">Ativar</button>
-                            <button class="btn-delete" onclick="deletarHabito(${item.id})">✕</button>
+                            <button class="corrosivo" onclick="cliqueHabitoCorrosivo()"><i class="fa-solid fa-skull"></i> Ativar</button>
+                            <button class="btn-delete" onclick="deletarHabito(${item.id})"><i class="fa-solid fa-trash"></i></button>
                         </div>`;
                 } else {
                     div.innerHTML = `
                         <span>${item.nome} (-${item.valor} pts)</span>
                         <div class="botoes-acoes">
-                            <button class="btn-sub" onclick="cliqueHabitoRuim(${item.valor})">-</button>
-                            <button class="btn-delete" onclick="deletarHabito(${item.id})">✕</button>
+                            <button class="btn-sub" onclick="cliqueHabitoRuim(${item.valor})"><i class="fa-solid fa-minus"></i></button>
+                            <button class="btn-delete" onclick="deletarHabito(${item.id})"><i class="fa-solid fa-trash"></i></button>
                         </div>`;
                 }
                 listaRuins.appendChild(div);
@@ -452,8 +520,8 @@
             div.innerHTML = `
                 <span>${item.nome} (Custo: ${item.custo} pts)</span>
                 <div class="botoes-acoes">
-                    <button class="btn-gastar" onclick="gastarPontos(${item.custo})">Gastar</button>
-                    <button class="btn-delete" onclick="deletarRecompensa(${item.id})">✕</button>
+                    <button class="btn-gastar" onclick="gastarPontos(${item.custo})"><i class="fa-solid fa-cart-shopping"></i> Gastar</button>
+                    <button class="btn-delete" onclick="deletarRecompensa(${item.id})"><i class="fa-solid fa-trash"></i></button>
                 </div>`;
             listaRecs.appendChild(div);
         });
@@ -466,7 +534,6 @@
         document.getElementById('contador-estudo').innerText = diasEstudo;
         document.getElementById('combo-streak').innerText = comboCliques;
 
-        // Gerencia exibição do bônus
         if (bonusLiberado) {
             document.getElementById('banner-bonus').style.display = 'block';
             document.getElementById('item-bonus-loja').style.display = 'flex';
@@ -483,15 +550,16 @@
         localStorage.setItem('bonusLiberado', bonusLiberado);
     }
 
+    /* ==========================================================================
+       LÓGICA DE PONTUAÇÃO E REGRAS
+       ========================================================================== */
+
     function cliqueHabitoBom(valor, ehRastreavel) {
         ganhos += valor;
         saldo = ganhos - perdas;
 
         if (ehRastreavel) {
-            // Análise comportamental ativa: incrementa contador de consistência pura
             comboCliques++;
-            
-            // Regra do bônus de 5 dias corridos de estudo (apenas exemplo visual mantido)
             if (ehRastreavel && valor === 15) { 
                 diasEstudo++;
                 if (diasEstudo === 5) {
@@ -500,8 +568,6 @@
                     diasEstudo = 0;
                 }
             }
-
-            // Se atingir 5 cliques contínuos em treino/estudo sem nenhum corrosivo intermitente
             if (comboCliques >= 5 && !bonusLiberado) {
                 bonusLiberado = true;
                 alert("🌟 Recompensa Máxima Desbloqueada na sua Loja de Recompensas!");
@@ -520,7 +586,6 @@
 
     function cliqueHabitoCorrosivo() {
         if (confirm("Confirmar ocorrência deste hábito corrosivo? Seu combo zera e você perde metade do saldo.")) {
-            // Quebra o combo imediatamente
             comboCliques = 0;
             bonusLiberado = false;
 
@@ -549,23 +614,35 @@
     function gastarRecompensaBonus() {
         alert("Aproveite seu super bônus merecido por não ceder aos hábitos corrosivos!");
         bonusLiberado = false;
-        comboCliques = 0; // Reinicia o ciclo para o próximo bônus
+        comboCliques = 0; 
         atualizarTela();
     }
 
-    function resetarTudo() {
-        if (confirm("Gostaria de zerar todos os saldos e restaurar a lista original de hábitos?")) {
-            localStorage.clear();
-            itensHabitos = habitosPadrao;
-            itensRecompensas = recompensasPadrao;
+    function resetarSaldos() {
+        if (confirm("Deseja zerar apenas os pontos e o saldo, mantendo seus hábitos criados?")) {
             ganhos = 0;
             perdas = 0;
             saldo = 0;
             diasEstudo = 0;
             comboCliques = 0;
             bonusLiberado = false;
-            renderizarListas();
             atualizarTela();
+        }
+    }
+
+    // AJUSTADO: AGORA APENAS OS HÁBITOS VOLTAM AO PADRÃO, OS PONTOS CONTINUAM
+    function resetarTudo() {
+        if (confirm("Deseja restaurar a lista de hábitos para a configuração inicial padrão? (Seus pontos e saldo atual NÃO serão apagados)")) {
+            // Copia os dados padrão novamente para as variáveis ativas
+            itensHabitos = JSON.parse(JSON.stringify(habitosPadrao));
+            itensRecompensas = JSON.parse(JSON.stringify(recompensasPadrao));
+            
+            // Salva no LocalStorage
+            localStorage.setItem('itensHabitos', JSON.stringify(itensHabitos));
+            localStorage.setItem('itensRecompensas', JSON.stringify(itensRecompensas));
+            
+            renderizarListas();
+            alert("Lista de hábitos restaurada para o padrão!");
         }
     }
 </script>
