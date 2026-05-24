@@ -6,7 +6,7 @@
     <title>Mentalidade Caveira</title>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:wght@300;400;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="shortcut icon" href="imagens/logo.ico">
+    <link rel="shortcut icon" href="logo.ico">
     <style> 
     :root {
         --primary-red: #b30000;
@@ -35,15 +35,15 @@
     }
 
     header {
-            display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding: 40px 5%;
-    background: linear-gradient(rgb(0 0 0 / 20%), rgb(28 28 28 / 0%)), url('imagens/exercito-fundo.jpg');
-    background-size: cover;
-    background-position: center;
-    color: #ffffff;
-    min-height: 600px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 40px 5%;
+        background: linear-gradient(rgba(5, 5, 5, 0.85), rgba(11, 11, 11, 0.6)), url('exercito-fundo.jpg');
+        background-size: cover;
+        background-position: center;
+        color: #ffffff;
+        min-height: 600px;
     }
 
     .titulo {
@@ -79,10 +79,9 @@
         font-size: 1.1em;
         font-style: italic;
         opacity: 0.8;
-        font-weight: bolder;
         display: block;
         margin-top: 10px;
-        color: #ffffff;
+        color: #A5A5A5;
     }
 
     nav {
@@ -103,7 +102,7 @@
     }
 
     nav a:hover {
-        color:#ff0000ba;
+        color: var(--primary-red);
     }
 
     main {
@@ -208,8 +207,14 @@
     }
 
     .card-funcao button:hover {
-        background: linear-gradient(90deg, #4A4A4A 0%, #636161 45%, #7A7A7A 70%, #1B1B1B 100%);
-        
+        background: linear-gradient(
+            90deg,
+            #4A4A4A 0%,
+            #C2C2C2 45%,
+            #7A7A7A 70%,
+            #1B1B1B 100%
+        );
+        color: #000000;
     }
     
     .card-funcao button a {
@@ -219,14 +224,12 @@
     }
 
     .sobre {
-            padding: 100px 5%;
-    background:linear-gradient(rgb(0 0 0 / 90%), rgb(0 0 0 / 40%));
-    background-size: cover;
-    background-position: center;
-    border-top: 2px solid #2C2C2C;
-    text-align: left;
-    /* transition: background-color 0.5s ease; */
-    margin-bottom: 20px;
+        padding: 100px 5%;
+        background-color: #1A1A1A; 
+        border-top: 2px solid #2C2C2C;
+        text-align: left;
+        transition: background-color 0.5s ease;
+        margin-bottom: 20px;
     }
 
     .sobre h1 {
@@ -275,7 +278,7 @@
         justify-content: center;
         align-items: center;
         padding: 100px 5%;
-        background: linear-gradient(rgb(5 5 5 / 80%), rgb(11 11 11 / 0%)), url('imagens/soldado.png');
+        background: linear-gradient(rgba(5, 5, 5, 0.85), rgba(11, 11, 11, 0.85)), url('soldado.png');
         background-size: cover;
         background-position: center;
         background-attachment: cover; 
@@ -559,8 +562,8 @@
         </div>
         <nav>
             <a href="#sobre">Sobre</a>
-            <a href="#pilares">Pilares</a>
-            <a href="#beneficios">benefícios</a>
+            <a href="#beneficios">beneficios</a>
+            <a href="#pilares">ferramentas</a>
             <a href="#motivos">motivos</a>
         </nav>
     </header>
@@ -592,21 +595,21 @@
             <i class="fa-solid fa-book-skull"></i>
             <h3>Estudos</h3>
             <p>Desenvolvimento intelectual focado em estratégia e absorção de conhecimento crítico para tomada de decisão sob pressão.</p>
-            <a href="estudos.html"><button>Saiba Mais</button></a>
+            <button><a href="estudos.html">Saiba Mais</a></button>
         </div>
         
         <div class="card-funcao">
             <i class="fa-solid fa-dumbbell"></i>
             <h3>Treino</h3>
             <p>Construção de um corpo resiliente. Força física como base para a resistência mental inabalável.</p>
-            <a href="treino.html"><button>Saiba Mais</button></a>
+            <button><a href="treino.html">Saiba Mais</a></button>
         </div>
         
         <div class="card-funcao">
             <i class="fa-solid fa-gears"></i>
             <h3>Rotina</h3>
             <p>Sistemas de hábitos táticos. A gestão do tempo aplicada à eficiência máxima do seu dia a dia.</p>
-            <a href="rotina.html"><button>Saiba Mais</button></a>
+            <button><a href="rotina.html">Saiba Mais</a></button>
         </div>
     </div>
 </div>

@@ -6,24 +6,26 @@
     <title>Central de Desenvolvimento de Hábitos</title>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="shortcut icon" href="imagens/logo.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="logo.ico" type="image/x-icon">
     <style>
     :root {
-        /* Transição completa para Paleta Dark Operacional */
-        --bg-body: #0b0b0b;
-        --bg-card: #111111;
-        --bg-light: #1a1a1a;
+        /* Paleta Dark Operacional Premium (Fosca/Carbono) */
+        --bg-body: #060606;
+        --bg-card: #0d0d0d;
+        --bg-light: #141414;
         
         --dark-pure: #ffffff;       
-        --dark-gray: #d9d9d9;       
-        --text-muted: #8a8a8a;
-        --border-color: #2c2c2c;
+        --dark-gray: #cccccc;       
+        --text-muted: #707070;
+        --border-color: #1f1f1f;
 
-        --tactical-red: #b30000;     
-        --alert-red: #d90429;
+        /* Tons de Vermelho Ajustados para Estilo Laser/Militar */
+        --tactical-red: #8b0000;     
+        --alert-red: #cc001b;
 
-        --silver-gradient: linear-gradient(135deg, #4a4a4a 0%, #c2c2c2 50%, #1b1b1b 100%);
-        --dark-gradient: linear-gradient(135deg, #d90429 0%, #660000 100%);
+        /* Gradientes Suavizados */
+        --silver-gradient: linear-gradient(135deg, #2b2b2b 0%, #5e5e5e 50%, #141414 100%);
+        --dark-gradient: linear-gradient(135deg, #cc001b 0%, #4a0000 100%);
     }
 
     * { 
@@ -44,12 +46,12 @@
     header {
         text-align: center;
         padding: 50px 5%;
-        background: linear-gradient(rgba(5, 5, 5, 0.85), rgba(11, 11, 11, 0.6)), url('imagens/foco-caveira.png');
+        background: linear-gradient(rgba(6, 6, 6, 0.9), rgba(13, 13, 13, 0.7)), url('foco-caveira.png');
         background-size: cover;
         background-position: center;
         color: #ffffff;
-        border-bottom: 2px solid var(--primary-red);
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.7);
+        border-bottom: 2px solid var(--alert-red);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
     }
 
     header h1 {
@@ -58,10 +60,12 @@
         text-transform: uppercase;
         letter-spacing: 1px;
         color: var(--dark-pure);
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
     }
 
     header h1 span { 
         color: var(--alert-red); 
+        text-shadow: 0 0 10px rgba(204, 0, 27, 0.3);
     }
     
     header p { 
@@ -80,24 +84,28 @@
         display: inline-block; 
         margin-top: 20px; 
         padding: 10px 20px; 
-        color: var(--dark-pure); 
+        color: var(--dark-gray); 
         text-decoration: none; 
         font-family: 'Oswald', sans-serif;
         text-transform: uppercase; 
         font-size: 0.85rem;  
-        transition: 0.3s;
+        border: 1px solid var(--border-color);
+        background: var(--bg-light);
+        transition: all 0.3s ease;
         letter-spacing: 1px; 
         font-weight: 600;
     }
     
     .btn-voltar:hover { 
         background: var(--alert-red); 
-        color: #fff; 
+        color: #ffffff; 
         border-color: var(--alert-red); 
+        box-shadow: 0 0 15px rgba(204, 0, 27, 0.4);
     }
 
     .main-container {
-        margin: 40px auto 0; 
+        max-width: 1200px; 
+        margin: 40px auto 80px; /* Aumentado a margem inferior para empurrar o footer */
         padding: 0 5%;
         display: grid; 
         grid-template-columns: 1fr 1fr; 
@@ -110,7 +118,7 @@
         background: var(--bg-card);
         padding: 40px;
         border: 1px solid var(--border-color);
-        box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
     }
 
     .secao-didatica h2 {
@@ -118,7 +126,7 @@
         font-size: 2rem; 
         text-transform: uppercase;
         margin-bottom: 15px; 
-        border-bottom: 2px solid var(--border-color); 
+        border-bottom: 1px solid var(--border-color); 
         padding-bottom: 15px;
         color: var(--dark-pure);
     }
@@ -140,13 +148,14 @@
         background: var(--bg-light); 
         padding: 25px; 
         border: 1px solid var(--border-color);
-        border-top: 4px solid var(--tactical-red); 
-        transition: transform 0.3s;
+        border-top: 3px solid var(--tactical-red); 
+        transition: all 0.3s ease;
     }
     
     .passo-card:hover { 
         transform: translateY(-5px); 
-        border-color: #4a4a4a;
+        border-color: #333333;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
     }
     
     .passo-num { 
@@ -179,8 +188,9 @@
     .painel-operacional {
         background: var(--bg-card); 
         border: 1px solid var(--border-color);
+        border-top: 3px solid var(--tactical-red);
         padding: 30px; 
-        box-shadow: 0 10px 30px rgba(0,0,0,0.4); 
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6); 
         display: flex; 
         flex-direction: column;
     }
@@ -190,7 +200,7 @@
         text-transform: uppercase; 
         font-size: 1.4rem;
         margin-bottom: 20px; 
-        border-bottom: 2px solid var(--border-color); 
+        border-bottom: 1px solid var(--border-color); 
         padding-bottom: 10px;
         display: flex; 
         align-items: center; 
@@ -228,6 +238,7 @@
         color: var(--dark-pure); 
         font-size: 0.95rem; 
         font-family: 'Roboto', sans-serif;
+        transition: all 0.3s ease;
     }
     
     .form-group input:focus, 
@@ -235,7 +246,7 @@
     .form-group textarea:focus { 
         outline: none; 
         border-color: var(--alert-red); 
-        background: #232323; 
+        background: #1a1a1a; 
     }
 
     .btn-acao {
@@ -244,19 +255,19 @@
         font-family: 'Oswald', sans-serif; 
         text-transform: uppercase;
         background: var(--alert-red); 
-        color: #fff; 
+        color: #ffffff; 
         border: none; 
         cursor: pointer; 
         font-size: 1rem;
         letter-spacing: 1px; 
-        transition: 0.3s; 
+        transition: all 0.3s ease; 
         font-weight: 600; 
-        box-shadow: 0 4px 10px rgba(217,4,41,0.3);
+        box-shadow: 0 4px 15px rgba(204, 0, 27, 0.2);
     }
     
     .btn-acao:hover { 
-        background: #a0001a; 
-        box-shadow: 0 4px 15px rgba(217,4,41,0.5);
+        background: #990014; 
+        box-shadow: 0 6px 20px rgba(204, 0, 27, 0.4);
     }
 
     /* SELETOR DE NÍVEL POR ABAS TÁTICAS */
@@ -276,21 +287,22 @@
         border: 1px solid var(--border-color);
         color: var(--dark-gray); 
         cursor: pointer; 
-        transition: 0.2s; 
+        transition: all 0.2s ease; 
         font-weight: 600; 
         text-align: center;
     }
     
     .btn-aba-patamar:hover { 
-        border-color: #4a4a4a; 
-        background: #232323; 
+        border-color: #333333; 
+        background: #1c1c1c; 
         color: var(--dark-pure);
     }
     
     .btn-aba-patamar.active { 
         background: var(--dark-gradient); 
-        color: #fff; 
+        color: #ffffff; 
         border-color: var(--alert-red); 
+        box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
     }
 
     /* GRUPOS DE CARDS SEPARADOS */
@@ -310,20 +322,20 @@
         border: 1px solid var(--border-color); 
         padding: 12px 15px;
         cursor: pointer; 
-        transition: 0.2s; 
+        transition: all 0.2s ease; 
         display: flex; 
         justify-content: space-between; 
         align-items: center;
     }
     
     .opcao-desafio:hover { 
-        border-color: #4a4a4a; 
-        background: #232323; 
+        border-color: #333333; 
+        background: #1c1c1c; 
     }
     
     .opcao-desafio.selecionado { 
         border-left: 4px solid var(--alert-red); 
-        background: #1c1c1c; 
+        background: #171717; 
         border-color: var(--border-color); 
         border-left-color: var(--alert-red);
     }
@@ -391,8 +403,8 @@
     .progress-bar { 
         height: 100%; 
         width: 0%; 
-        background: linear-gradient(90deg, #660000 0%, #b30000 50%, #ff3333 100%); 
-        transition: width 0.3s; 
+        background: linear-gradient(90deg, #4a0000 0%, #b30000 50%, #cc001b 100%); 
+        transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
     }
     
     .progress-text { 
@@ -404,8 +416,8 @@
         transform: translate(-50%, -50%); 
         font-size: 0.8rem; 
         font-weight: 700; 
-        color: #fff; 
-        text-shadow: 1px 1px 2px rgba(0,0,0,0.8); 
+        color: #ffffff; 
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9); 
     }
 
     /* DIVISÕES DE PERÍODO DOS HÁBITOS */
@@ -446,13 +458,13 @@
         border: 1px solid var(--border-color); 
         padding: 12px 15px; 
         cursor: pointer; 
-        transition: 0.2s; 
+        transition: all 0.2s ease; 
         user-select: none; 
     }
     
     .check-item:hover { 
-        border-color: #4a4a4a; 
-        background: #232323; 
+        border-color: #333333; 
+        background: #1c1c1c; 
     }
     
     .check-item input[type="checkbox"] { 
@@ -463,7 +475,8 @@
         margin-right: 12px; 
         position: relative; 
         cursor: pointer; 
-        background: #050505; 
+        background: #0d0d0d; 
+        transition: all 0.2s ease;
     }
     
     .check-item input[type="checkbox"]:checked { 
@@ -474,7 +487,7 @@
     .check-item input[type="checkbox"]:checked::after { 
         content: '\2713'; 
         position: absolute; 
-        color: white; 
+        color: #ffffff; 
         font-size: 12px; 
         font-weight: bold; 
         top: 50%; 
@@ -495,8 +508,8 @@
     
     .check-item.completo { 
         border-color: var(--border-color); 
-        background: #141414; 
-        opacity: 0.5; 
+        background: #0a0a0a; 
+        opacity: 0.4; 
     }
     
     .check-item.completo h4 { 
@@ -511,9 +524,9 @@
         text-transform: uppercase; 
         padding: 2px 6px; 
         background: var(--silver-gradient); 
-        color: #050505; 
+        color: #060606; 
         margin-left: 8px; 
-        border: 1px solid #bcbcbc; 
+        border: 1px solid #777777; 
     }
     
     .badge-desafio-alocado { 
@@ -523,7 +536,7 @@
         text-transform: uppercase; 
         padding: 2px 6px; 
         background: var(--tactical-red); 
-        color: #fff; 
+        color: #ffffff; 
     }
 
     /* GRID DE EXECUÇÃO DE 7 DIAS */
@@ -540,7 +553,7 @@
         padding: 10px 5px; 
         text-align: center; 
         cursor: pointer; 
-        transition: 0.2s; 
+        transition: all 0.2s ease; 
         display: flex; 
         flex-direction: column; 
         align-items: center; 
@@ -548,7 +561,7 @@
     }
     
     .dia-box:hover { 
-        border-color: #4a4a4a; 
+        border-color: #333333; 
     }
     
     .dia-box span { 
@@ -565,7 +578,8 @@
         border: 2px solid var(--text-muted); 
         cursor: pointer; 
         position: relative; 
-        background: #050505; 
+        background: #0d0d0d; 
+        transition: all 0.2s ease;
     }
     
     .dia-box input:checked { 
@@ -576,7 +590,7 @@
     .dia-box input:checked::after { 
         content: '\2713'; 
         position: absolute; 
-        color: white; 
+        color: #ffffff; 
         font-size: 10px; 
         font-weight: bold; 
         top: 50%; 
@@ -585,12 +599,12 @@
     }
     
     .dia-box.concluido { 
-        background: #141414; 
+        background: #0a0a0a; 
         border-color: var(--border-color); 
     }
 
     .quadrado-desafios-ativos { 
-        border-top: 4px solid var(--alert-red) !important; 
+        border-top: 3px solid var(--alert-red) !important; 
     }
     
     .data-container-desafio { 
@@ -601,20 +615,50 @@
         letter-spacing: 0.5px; 
     }
 
-    .banner-sucesso { 
-        display: none; 
-        background:linear-gradient(90deg, #297129, #0e830e, #043404);
-        padding: 20px; 
-        text-align: center; 
-        margin: 20px auto 0; 
-        max-width: 1100px; 
-        box-shadow: 0 0 15px rgba(18, 217, 4, 0.3);
+    /* CONFIGURAÇÃO DOS POP-UPS FLUTUANTES DE CONQUISTA */
+#banner-rotina-ok, #banner-semanal-ok {
+    position: fixed;
+    right: 20px;
+    z-index: 10000; /* Fica acima de absolutamente tudo */
+    width: 400px;
+    max-width: 90vw;
+    background: linear-gradient(135deg, #0e300e 0%, #051a05 100%);
+    padding: 18px 22px;
+    border-left: 4px solid #198754;
+    border-top: 1px solid #116611;
+    border-right: 1px solid #116611;
+    border-bottom: 1px solid #116611;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 15px rgba(25, 135, 84, 0.2);
+    border-radius: 4px;
+    display: none; /* Oculto por padrão */
+}
+
+/* Alinhamento vertical caso ambos apareçam juntos */
+#banner-rotina-ok { top: 20px; }
+#banner-semanal-ok { top: 145px; } 
+
+/* Gatilho de ativação com animação de entrada */
+#banner-rotina-ok.ativo, #banner-semanal-ok.ativo {
+    display: block !important;
+    animation: slideInAlerta 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* Animação deslizando da direita para a esquerda */
+@keyframes slideInAlerta {
+    from {
+        transform: translateX(120%);
+        opacity: 0;
     }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
     
     .banner-sucesso h2 { 
         font-family: 'Oswald', sans-serif; 
         text-transform: uppercase; 
-        color: white;
+        color: #ffffff;
         font-size: 1.6rem; 
     }
 
@@ -624,25 +668,29 @@
         font-style: italic; 
         padding: 8px; 
     }
+
     footer {
-        background: #050505;
-        border-top: 1px solid #2C2C2C;
-        color: #ffffff;
+        background: #060606;
+        border-top: 1px solid var(--border-color);
+        color: var(--text-muted);
         padding: 30px;
         text-align: center;
-        font-size: 14px;
+        font-size: 13px;
         text-transform: uppercase;
         letter-spacing: 2px;
+        margin-top: 60px; /* Garante que o rodapé nunca cole nos cards acima */
     }
 
     .caveira {
         font-family: 'Oswald', sans-serif;
         margin-top: 10px;
-        color: red;
+        color: var(--alert-red);
     }
+
     @media (max-width: 950px) { 
         .main-container { 
             grid-template-columns: 1fr; 
+            margin-bottom: 40px;
         } 
     }
 </style>
@@ -655,9 +703,18 @@
         <a href="index.html" class="btn-voltar"><i class="fa-solid fa-arrow-left"></i> Voltar ao Menu Principal</a>
     </header>
 
+    <div class="notificacao-container">
+    
     <div class="banner-sucesso" id="banner-rotina-ok">
         <h2><i class="fa-solid fa-circle-check"></i> Operação diária concluída!</h2>
         <p style="color: var(--dark-pure); font-size: 0.95rem; margin-top: 5px; font-weight: 500;">Todos os alvos e hábitos do dia foram completamente subjugados.</p>
+    </div>
+
+    <div class="banner-sucesso" id="banner-semanal-ok">
+        <h2><i class="fa-solid fa-trophy"></i> Missão semanal cumprida!</h2>
+        <p style="color: var(--dark-pure); font-size: 0.95rem; margin-top: 5px; font-weight: 500;">O quadrante de 7 dias de desafios táticos foi totalmente neutralizado.</p>
+    </div>
+
     </div>
 
     <main class="main-container">
@@ -883,14 +940,14 @@
                 "i2": { titulo: "Alvorada Limpa", nivel: "Iniciante", regras: ["Arrumar a cama imediatamente após levantar da cama.", "Proibido deixar objetos jogados no chão do quarto."], conquistas: ["Organização mental imediata."], nomeHabito: "Ambiente Organizado" },
                 "i3": { titulo: "Leitura de Ignição", nivel: "Iniciante", regras: ["Ler exatamente 5 páginas de um livro útil por dia.", "Horário fixo determinado pelo usuário."], conquistas: ["Sustentação do foco cognitivo."], nomeHabito: "Leitura Mínima Executada" },
                 "i4": { titulo: "Postura Operacional", nivel: "Iniciante", regras: ["Ajustar a coluna conscientemente sempre que sentar.", "Proibido trabalhar curvado."], conquistas: ["Consciência corporal ativa."], nomeHabito: "Postura Sob Controle" },
-                "m1": { titulo: "Mobilidade e Ativação", nivel: "Intermediário", regras: ["Executar 10 minutos de alongamentos logo ao acordar.", "Foco em destravar articulações fundamentais."], conquistas: ["Melhor amplitude mecânica matinal."], nomeHabito: "Mobilidade Cumprida" },
-                "m2": { titulo: "Constância de Passos", nivel: "Intermediário", regras: ["Atingir a marca mínima de 7.500 passos todos os dias.", "Substituir elevadores curtos por escadas comuns."], conquistas: ["Tônus cardiovascular basal estimulado."], nomeHabito: "Passos Concluídos" },
-                "m3": { titulo: "Blackout Digital Noturno", nivel: "Intermediário", regras: ["Desconectar de smartphones e notebooks 30 minutos antes de dormir.", "Leitura analógica ou meditação liberadas."], conquistas: ["Profundidade e reparação biológica do sono."], nomeHabito: "Blackout Pré-Sono" },
-                "m4": { titulo: "Mapeamento de Gratidão", nivel: "Intermediário", regras: ["Escrever 3 pontos construtivos que deram certo no seu dia à noite.", "Uso de caderno físico ou bloco de notas técnico."], conquistas: ["Redução de ansiedade analítica."], nomeHabito: "Pontos do Dia Mapeados" },
+                "m1": { titulo: "Mobilidade e Ativação", nivel: "Intermediario", regras: ["Executar 10 minutos de alongamentos logo ao acordar.", "Foco em destravar articulações fundamentais."], conquistas: ["Melhor amplitude mecânica matinal."], nomeHabito: "Mobilidade Cumprida" },
+                "m2": { titulo: "Constancia de Passos", nivel: "Intermediario", regras: ["Atingir a marca mínima de 7.500 passos todos os dias.", "Substituir elevadores curtos por escadas comuns."], conquistas: ["Tônus cardiovascular basal estimulado."], nomeHabito: "Passos Concluídos" },
+                "m3": { titulo: "Blackout Digital Noturno", nivel: "Intermediario", regras: ["Desconectar de smartphones e notebooks 30 minutos antes de dormir.", "Leitura analógica ou meditação liberadas."], conquistas: ["Profundidade e reparação biológica do sono."], nomeHabito: "Blackout Pré-Sono" },
+                "m4": { titulo: "Mapeamento de Gratidão", nivel: "Intermediario", regras: ["Escrever 3 pontos construtivos que deram certo no seu dia à noite.", "Uso de caderno físico ou bloco de notas técnico."], conquistas: ["Redução de ansiedade analítica."], nomeHabito: "Pontos do Dia Mapeados" },
                 "a1": { titulo: "Foco Profundo (Deep Work)", nivel: "Avançado", regras: ["Executar bloco isolado de 2 horas de trabalho ou estudo de elite.", "Celular desligado ou em outro cômodo durante o bloco."], conquistas: ["Produção hiperfocada livre de ruídos."], nomeHabito: "Bloco Deep Work Feito" },
-                "a2": { titulo: "Resiliência Térmica Total", nivel: "Avançado", regras: ["Terminar o banho diário com pelo menos 2 minutos de água 100% fria.", "Proibido recuar ou encurtar o tempo."], conquistas: ["Controle imediato sobre o conforto volitivo."], nomeHabito: "Choque Térmico Efetuado" },
+                "a2": { titulo: "Resiliencia Termica Total", nivel: "Avançado", regras: ["Terminar o banho diário com pelo menos 2 minutos de água 100% fria.", "Proibido recuar ou encurtar o tempo."], conquistas: ["Controle imediato sobre o conforto volitivo."], nomeHabito: "Choque Térmico Efetuado" },
                 "a3": { titulo: "Corte de Estímulos Baratos", nivel: "Avançado", regras: ["Zero consumo de redes de vídeo infinito rápido (Shorts/Reels).", "Proibido jogos de gratificação imediata."], conquistas: ["Restauração de receptores dopaminérgicos."], nomeHabito: "Jejum Dopaminérgico Ativo" },
-                "a4": { titulo: "Estratégia Antecipada", nivel: "Avançado", regras: ["Escrever o planejamento do dia EM DESTAQUE antes de deitar.", "Definir as 3 tarefas prioritárias inegociáveis."], conquistas: ["Eliminação da parálise de decisão matinal."], nomeHabito: "Dia Seguinte Planejado" }
+                "a4": { titulo: "Estrategia Antecipada", nivel: "Avançado", regras: ["Escrever o planejamento do dia EM DESTAQUE antes de deitar.", "Definir as 3 tarefas prioritárias inegociáveis."], conquistas: ["Eliminação da parálise de decisão matinal."], nomeHabito: "Dia Seguinte Planejado" }
             };
 
             let desafioSelecionadoId = null;
@@ -904,6 +961,10 @@
             const inputDataInicio = document.getElementById('data-inicio-desafio');
             const containerDesafioAlocado = document.getElementById('container-desafio-alocado-espaco');
             const msgSemDesafio = document.getElementById('msg-sem-desafio-ativo');
+            
+            // Seletores dos Banners
+            const bannerSemanal = document.getElementById('banner-semanal-ok');
+            const bannerRotina = document.getElementById('banner-rotina-ok');
 
             inputDataInicio.value = new Date().toISOString().split('T')[0];
 
@@ -917,13 +978,13 @@
                     const targetId = aba.getAttribute('data-target');
                     document.getElementById(`container-${targetId}`).classList.add('active');
 
-                    // Fecha o formulário de ativação ao mudar de nível para manter a tela limpa
+                    // Fecha o formulario de ativação ao mudar de nível para manter a tela limpa
                     painelForm.style.display = "none";
                     cardsDesafio.forEach(c => c.classList.remove('selecionado'));
                 });
             });
 
-            // 2. DETALHAR APENAS APÓS O CLIQUE NO CARD DO DESAFIO
+            // 2. DETALHAR APENAS APOS O CLIQUE NO CARD DO DESAFIO
             cardsDesafio.forEach(card => {
                 card.addEventListener('click', () => {
                     cardsDesafio.forEach(c => c.classList.remove('selecionado'));
@@ -941,7 +1002,7 @@
                 });
             });
 
-            // 3. ALOCAR DESAFIO E EXECUTAR JANELA DE TEMPO AUTOMÁTICA
+            //  ALOCAR DESAFIO E EXECUTAR JANELA DE TEMPO AUTOMÁTICA
             document.getElementById('btn-engajar-desafio').addEventListener('click', () => {
                 if (!desafioSelecionadoId) return;
 
@@ -949,7 +1010,7 @@
 
                 const dados = dicionarioDesafios[desafioSelecionadoId];
 
-                // Cálculo automático: Término exato 7 dias depois
+                // Calculo automatico: Terrmino exato 7 dias depois
                 const dataInicioRaw = new Date(inputDataInicio.value + "T00:00:00");
                 const dataFimRaw = new Date(dataInicioRaw);
                 dataFimRaw.setDate(dataInicioRaw.getDate() + 7);
@@ -1021,8 +1082,22 @@
                 const totalDias = 7;
                 const porcentagem = totalDias > 0 ? Math.round((diasMarcados / totalDias) * 100) : 0;
 
-                barra.style.width = `${porcentagem}%`;
-                texto.textContent = `${porcentagem}% CONCLUÍDO (${diasMarcados}/7 DIAS)`;
+                if (barra) barra.style.width = `${porcentagem}%`;
+                if (texto) texto.textContent = `${porcentagem}% CONCLUÍDO (${diasMarcados}/7 DIAS)`;
+
+                // MONITORAMENTO DO BANNER SEMANAL + TIMEOUT DE AUTODISMISS (5 SEGUNDOS)
+                if (bannerSemanal) {
+                    if (porcentagem === 100 && checks.length > 0) {
+                        if (!bannerSemanal.classList.contains('ativo')) {
+                            bannerSemanal.classList.add('ativo');
+                            setTimeout(() => {
+                                bannerSemanal.classList.remove('ativo');
+                            }, 5000); 
+                        }
+                    } else {
+                        bannerSemanal.classList.remove('ativo');
+                    }
+                }
             }
 
             // 4. CRIAÇÃO DE HÁBITOS E DIVISÃO CRONOLÓGICA DIÁRIA
@@ -1074,7 +1149,6 @@
                 const checks = document.querySelectorAll('.habito-check');
                 const barra = document.getElementById('barra-habitos');
                 const textoBarra = document.getElementById('texto-habitos');
-                const banner = document.getElementById('banner-rotina-ok');
 
                 let marcados = 0;
                 checks.forEach(check => {
@@ -1090,10 +1164,22 @@
                 const total = checks.length;
                 const porridge = total > 0 ? Math.round((marcados / total) * 100) : 0;
 
-                barra.style.width = `${porridge}%`;
-                textoBarra.textContent = `${porridge}% COMPLETO`;
+                if (barra) barra.style.width = `${porridge}%`;
+                if (textoBarra) textoBarra.textContent = `${porridge}% COMPLETO`;
 
-                banner.style.display = (porridge === 100 && total > 0) ? "block" : "none";
+                // MONITORAMENTO DO BANNER DIÁRIO + TIMEOUT DE AUTODISMISS (5 SEGUNDOS)
+                if (bannerRotina) {
+                    if (porridge === 100 && total > 0) {
+                        if (!bannerRotina.classList.contains('ativo')) {
+                            bannerRotina.classList.add('ativo');
+                            setTimeout(() => {
+                                bannerRotina.classList.remove('ativo');
+                            }, 5000);
+                        }
+                    } else {
+                        bannerRotina.classList.remove('ativo');
+                    }
+                }
             }
 
             function configurarEventosChecklistGeral() {

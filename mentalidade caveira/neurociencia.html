@@ -6,16 +6,15 @@
     <title>Neurociência do Foco | Mentalidade Caveira</title>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:wght@300;400;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="shortcut icon" href="imagens/logo.ico">
+    <link rel="shortcut icon" href="logo.ico">
     <style> 
     :root {
-        --primary-red: #d90429; /* Vermelho operacional vibrante */
-        --steel-gray: #BEBEBE; /* Cinza metálico */
-        --dark-bg: #050505; /* Fundo operacional absoluto */
-        --card-bg: #111111; /* Cinza de equipamentos táticos */
-        --light-gray: #1A1A1A; /* Textura de blindagem secundária */
+        --primary-red: #d90429; 
+        --steel-gray: #BEBEBE; 
+        --dark-bg: #050505; 
+        --card-bg: #111111; 
+        --light-gray: #1A1A1A; 
         
-        /* Gradiente Tático Metálico (Aço Escovado) */
         --metal-gradient: linear-gradient(
             90deg,
             #4A4A4A 0%,
@@ -24,7 +23,6 @@
             #1B1B1B 100%
         );
         
-        /* Gradiente Radial de Profundidade */
         --bg-radial: radial-gradient(
             circle,
             #232323 0%,
@@ -47,7 +45,6 @@
         line-height: 1.6;
     }
 
-    /* HEADER INTERNO */
     header {
         display: flex;
         justify-content: space-between;
@@ -86,7 +83,6 @@
         color: var(--primary-red); 
     }
 
-    /* NAVEGAÇÃO DE MÓDULOS DE AULAS (ESTILO SELEÇÃO DE ARMAMENTO) */
     .modulos-abas {
         display: flex;
         justify-content: center;
@@ -115,17 +111,10 @@
 
     .aba-btn:hover, 
     .aba-btn.active {
-        background: red;
-    color: white;
-    /* background: var(--metal-gradient); */
-    /* color: #050505; */
-    /* border-color: #C2C2C2; */
-    
-    /* box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); */
-}
-    
+        background: var(--primary-red);
+        color: white;
+    }
 
-    /* INTRODUÇÃO DO MÓDULO */
     .modulo-intro {
         background: #111111;
         padding: 40px 5%;
@@ -158,7 +147,6 @@
         text-align: justify;
     }
 
-    /* DASHBOARD DE AULAS */
     .plataforma-grid {
         display: flex;
         gap: 30px;
@@ -273,172 +261,6 @@
         color: #8A8A8A; 
     }
 
-    /* SEÇÃO: ARSENAL TÁTICO */
-    .arsenal-secao {
-        background: linear-gradient(rgba(5, 5, 5, 0.95), rgba(11, 11, 11, 0.75)), url('imagens/selva-amazonica.jpeg');
-        background-size: cover;
-        background-position: center;
-        color: #ffffff;
-        padding: 60px 5%;
-        width: 100%;
-        border-top: 1px solid #2C2C2C;
-    }
-
-    .arsenal-container {
-        max-width: 1200px;
-        margin: 0 auto;
-    }
-
-    .arsenal-secao h2 {
-        font-family: 'Oswald', sans-serif;
-        text-transform: uppercase;
-        font-size: 30px;
-        margin-bottom: 10px;
-        color: #ffffff;
-    }
-
-    .arsenal-secao h2 span { 
-        color: var(--primary-red); 
-    }
-
-    .exploracao-campo {
-        font-size: 1rem;
-        color: #BEBEBE;
-        margin-bottom: 40px;
-        max-width: 850px;
-    }
-
-    /* Painel de Cadastro de Materiais */
-    .painel-cadastro {
-        background: #111111;
-        padding: 30px;
-        border-radius: 4px;
-        border: 1px solid #2C2C2C;
-        margin-bottom: 40px;
-        box-shadow: 0 10px 20px rgba(0,0,0,0.4);
-    }
-
-    .painel-cadastro h3 {
-        font-family: 'Oswald', sans-serif;
-        text-transform: uppercase;
-        font-size: 18px;
-        margin-bottom: 20px;
-        color: #ffffff;
-    }
-
-    .form-grupo {
-        display: flex;
-        gap: 15px;
-        flex-wrap: wrap;
-    }
-
-    .form-grupo input, 
-    .form-grupo select {
-        flex: 1;
-        min-width: 200px;
-        padding: 12px;
-        background: #1A1A1A;
-        border: 1px solid #3A3A3A;
-        color: #ffffff;
-        font-size: 15px;
-        border-radius: 4px;
-    }
-
-    .form-grupo input:focus, 
-    .form-grupo select:focus {
-        border-color: var(--primary-red);
-        background: #232323;
-        outline: none;
-    }
-
-    .btn-adicionar {
-        background: var(--primary-red);
-        color: #ffffff;
-        border: none;
-        padding: 12px 30px;
-        font-family: 'Oswald', sans-serif;
-        text-transform: uppercase;
-        font-weight: bold;
-        cursor: pointer;
-        transition: 0.3s;
-        border-radius: 4px;
-        box-shadow: 0 4px 10px rgba(217, 4, 41, 0.3);
-    }
-
-    .btn-adicionar:hover { 
-        background: #a0001a; 
-        box-shadow: 0 4px 15px rgba(217, 4, 41, 0.5);
-    }
-
-    /* Grid de Exibição dos Materiais Salvos */
-    .grid-arquivos {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-        gap: 20px;
-    }
-
-    .card-usuario {
-        background: #111111;
-        padding: 25px;
-        border-radius: 4px;
-        border: 1px solid #2C2C2C;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        position: relative;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    }
-    
-    .card-usuario:hover {
-        border-color: #4A4A4A;
-        background: #1A1A1A;
-    }
-
-    .badge-tipo {
-        position: absolute;
-        top: 15px;
-        right: 15px;
-        background: #3A3A3A;
-        border: 1px solid #4A4A4A;
-        font-size: 11px;
-        padding: 3px 8px;
-        text-transform: uppercase;
-        font-weight: bold;
-        color: #D9D9D9;
-    }
-
-    .card-usuario h4 {
-        font-family: 'Oswald', sans-serif;
-        font-size: 19px;
-        text-transform: uppercase;
-        margin-bottom: 10px;
-        color: #ffffff;
-    }
-
-    .card-usuario p {
-        font-size: 0.9rem;
-        color: #A5A5A5;
-        margin-bottom: 20px;
-    }
-
-    .btn-remover {
-        background: none;
-        border: none;
-        color: #ff4444;
-        cursor: pointer;
-        font-size: 13px;
-        text-transform: uppercase;
-        font-weight: bold;
-        align-self: flex-start;
-        transition: 0.3s;
-    }
-
-    .btn-remover:hover { 
-        color: #ffffff; 
-        text-decoration: underline; 
-    }
-
-    /* FOOTER */
     footer {
         background: #050505;
         border-top: 2px solid #2C2C2C;
@@ -449,6 +271,7 @@
         text-transform: uppercase;
         letter-spacing: 2px;
     }
+
     .caveira {
         font-family: 'Oswald', sans-serif;
         margin-top: 10px;
@@ -464,12 +287,11 @@
         </div>
         <nav>
             <a href="index.html">Início</a>
-            <a href="estudos.html" class="active">Estudos</a>
+            <a href="aulas.html" class="active">Aulas</a>
+            <a href="arsenal.html">Arsenal</a>
             <a href="#">Suporte</a>
         </nav>
     </header>
-
-    
 
     <section class="modulo-intro">
         <div class="modulo-container">
@@ -481,12 +303,14 @@
             </p>
         </div>
     </section>
+
     <div class="modulos-abas">
         <button class="aba-btn active">Início</button>
-        <button class="aba-btn">Construção do Habito</button>
+        <button class="aba-btn">Construção do Hábito</button>
         <button class="aba-btn">Consistência</button>
         <button class="aba-btn">Protocolo</button>
     </div>
+
     <main class="plataforma-grid">
         <div class="area-player">
             <div class="video-wrapper">
@@ -509,110 +333,22 @@
                     <i class="fa-solid fa-circle-play"></i>
                     <div class="info-aula"><p>02. Protocolo de Estado de Flow</p><span>22 min</span></div>
                 </li>
+                <li class="item-aula">
+                    <i class="fa-solid fa-circle-play"></i>
+                    <div class="info-aula"><p>03. Reconstruindo o seu cérebro</p><span>10 min</span></div>
+                </li>
+                <li class="item-aula">
+                    <i class="fa-solid fa-circle-play"></i>
+                    <div class="info-aula"><p>04.Consistencia nos dias dificeis</p><span>14 min</span></div>
+                </li>
             </ul>
         </aside>
     </main>
-
-    <section class="arsenal-secao">
-        <div class="arsenal-container">
-            <h2>Arsenal de Estudos <span>Individual</span></h2>
-            
-            <p class="exploracao-campo">
-                <strong>O que é este campo?</strong> Este é o seu cofre tático pessoal. Diferente de materiais prontos da plataforma, aqui você centraliza as demandas da sua vida real. Guarde os PDFs das aulas da sua faculdade, links de apostilas ou cadernos de questões complexas que você precisa responder mais tarde. Todo o progresso fica salvo localmente no seu computador.
-            </p>
-
-            <div class="painel-cadastro">
-                <h3>Adicionar Novo Material ao Arsenal</h3>
-                <div class="form-grupo">
-                    <input type="text" id="material-titulo" placeholder="Ex: PDF - Anatomia Humana Cap 3">
-                    <select id="material-tipo">
-                        <option value="PDF Faculdade">PDF da Faculdade</option>
-                        <option value="Questões/Simulado">Questões para Responder</option>
-                        <option value="Anotações">Caderno de Notas</option>
-                    </select>
-                    <button class="btn-adicionar" onclick="adicionarMaterial()">Armazenar</button>
-                </div>
-            </div>
-
-            <div class="grid-arquivos" id="lista-materiais-usuario">
-                </div>
-        </div>
-    </section>
 
     <footer>
          &copy; 2026 - Feito por Vitor da Silva <br> 
         <p class="caveira">Faca na Caveira | Missão Dada é Missão Cumprida</p>
     </footer>
 
-    <script>
-        // Função executada ao carregar a página para recuperar os dados salvos
-        window.onload = function() {
-            carregarMateriais();
-        };
-
-        function adicionarMaterial() {
-            const tituloInput = document.getElementById('material-titulo');
-            const tipoSelect = document.getElementById('material-tipo');
-
-            if (tituloInput.value.trim() === '') {
-                alert('Por favor, digite o nome ou descrição do material.');
-                return;
-            }
-
-            const novoMaterial = {
-                id: Date.now(),
-                titulo: tituloInput.value,
-                tipo: tipoSelect.value
-            };
-
-            // Pega a lista existente ou cria uma nova
-            let materiais = JSON.parse(localStorage.getItem('materiais_caveira')) || [];
-            materiais.push(novoMaterial);
-
-            // Salva de volta no banco local do navegador
-            localStorage.setItem('materiais_caveira', JSON.stringify(materiais));
-
-            // Limpa o campo de texto e atualiza a tela
-            tituloInput.value = '';
-            carregarMateriais();
-        }
-
-        function carregarMateriais() {
-            const container = document.getElementById('lista-materiais-usuario');
-            container.innerHTML = ''; // Limpa o container antes de renderizar
-
-            let materiais = JSON.parse(localStorage.getItem('materiais_caveira')) || [];
-
-            if (materiais.length === 0) {
-                container.innerHTML = '<p style="color: #aaa;grid-column: 1 / -1;text-align: center;padding: 20px;font-weight: bolder;>Nenhum material cadastrado no seu arsenal ainda.</p>';
-                return;
-            }
-
-            materiais.forEach(item => {
-                // Define o ícone com base no tipo selecionado
-                let icone = 'fa-file-lines';
-                if (item.tipo.includes('PDF')) icone = 'fa-file-pdf';
-                if (item.tipo.includes('Questões')) icone = 'fa-circle-question';
-
-                const cardHTML = `
-                    <div class="card-usuario">
-                        <span class="badge-tipo">${item.tipo}</span>
-                        <div style="font-size: 2rem; color: var(--primary-red);"><i class="fa-solid ${icone}"></i></div>
-                        <h4>${item.titulo}</h4>
-                        <p>Material sob custódia do usuário. Pronto para revisão técnica.</p>
-                        <button class="btn-remover" onclick="removerMaterial(${item.id})"><i class="fa-solid fa-trash-can"></i> Excluir</button>
-                    </div>
-                `;
-                container.innerHTML += cardHTML;
-            });
-        }
-
-        function removerMaterial(id) {
-            let materiais = JSON.parse(localStorage.getItem('materiais_caveira')) || [];
-            materiais = materiais.filter(item => item.id !== id);
-            localStorage.setItem('materiais_caveira', JSON.stringify(materiais));
-            carregarMateriais();
-        }
-    </script>
 </body>
 </html>

@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arsenal de Estudos | Mentalidade Caveira</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:wght@300;400;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="shortcut icon" href="logo.ico">
+    <style> 
+    :root {
+        --primary-red: #d90429; 
+        --steel-gray: #BEBEBE; 
+        --dark-bg: #050505; 
+        --card-bg: #111111; 
+        --light-gray: #1A1A1A; 
+        
+        --metal-gradient: linear-gradient(
+            90deg,
+            #4A4A4A 0%,
+            #C2C2C2 45%,
+            #7A7A7A 70%,
+            #1B1B1B 100%
+        );
+        
+        --bg-radial: radial-gradient(
+            circle,
+            #232323 0%,
+            #0E0E0E 45%,
+            #050505 100%
+        );
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Roboto', sans-serif;
+        background-color: var(--dark-bg);
+        background: var(--bg-radial);
+        color: #D9D9D9;
+        line-height: 1.6;
+    }
+
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 5%;
+        background: #0B0B0B;
+        color: #ffffff;
+        border-bottom: 3px solid var(--primary-red);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    .logo h1 {
+        font-family: 'Oswald', sans-serif;
+        text-transform: uppercase;
+        font-size: 22px;
+        letter-spacing: -1px;
+        color: #ffffff;
+    }
+
+    .logo span { 
+        color: var(--primary-red); 
+    }
+
+    nav a {
+        color: #ffffff;
+        text-decoration: none;
+        margin-left: 20px;
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: uppercase;
+        transition: 0.3s;
+    }
+
+    nav a:hover, 
+    nav a.active { 
+        color: var(--primary-red); 
+    }
+
+    .arsenal-secao {
+        background: linear-gradient(rgba(5, 5, 5, 0.95), rgba(11, 11, 11, 0.75)), url("selva-amazonica.jpeg");
+        background-size: cover;
+        background-position: center;
+        color: #ffffff;
+        padding: 60px 5%;
+        width: 100%;
+        min-height: calc(100vh - 150px);
+    }
+
+    .arsenal-container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .arsenal-secao h2 {
+        font-family: 'Oswald', sans-serif;
+        text-transform: uppercase;
+        font-size: 30px;
+        margin-bottom: 10px;
+        color: #ffffff;
+    }
+
+    .arsenal-secao h2 span { 
+        color: var(--primary-red); 
+    }
+
+    .exploracao-campo {
+        font-size: 1rem;
+        color: #BEBEBE;
+        margin-bottom: 40px;
+        max-width: 850px;
+    }
+
+    .painel-cadastro {
+        background: #111111;
+        padding: 30px;
+        border-radius: 4px;
+        border: 1px solid #2C2C2C;
+        margin-bottom: 40px;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+    }
+
+    .painel-cadastro h3 {
+        font-family: 'Oswald', sans-serif;
+        text-transform: uppercase;
+        font-size: 18px;
+        margin-bottom: 20px;
+        color: #ffffff;
+    }
+
+    .form-grupo {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    .form-grupo select {
+        flex: 1;
+        min-width: 200px;
+        padding: 12px;
+        background: #1A1A1A;
+        border: 1px solid #3A3A3A;
+        color: #ffffff;
+        font-size: 15px;
+        border-radius: 4px;
+    }
+
+    .form-grupo select:focus {
+        border-color: var(--primary-red);
+        background: #232323;
+        outline: none;
+    }
+
+    .input-arquivo-oculto {
+        display: none !important;
+    }
+
+    .label-arquivo-tatico {
+        flex: 1;
+        min-width: 200px;
+        padding: 12px;
+        background: #1A1A1A;
+        border: 1px solid #3A3A3A;
+        color: #BEBEBE;
+        font-size: 15px;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .label-arquivo-tatico:hover {
+        border-color: var(--primary-red);
+        background: #232323;
+        color: #fff;
+    }
+
+    .label-arquivo-tatico i {
+        color: var(--primary-red);
+    }
+
+    .btn-adicionar {
+        background: var(--primary-red);
+        color: #ffffff;
+        border: none;
+        padding: 12px 30px;
+        font-family: 'Oswald', sans-serif;
+        text-transform: uppercase;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+        border-radius: 4px;
+        box-shadow: 0 4px 10px rgba(217, 4, 41, 0.3);
+    }
+
+    .btn-adicionar:hover { 
+        background: #a0001a; 
+        box-shadow: 0 4px 15px rgba(217, 4, 41, 0.5);
+    }
+
+    .grid-arquivos {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 20px;
+    }
+
+    .card-usuario {
+        background: #111111;
+        padding: 25px;
+        border-radius: 4px;
+        border: 1px solid #2C2C2C;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        cursor: pointer;
+        transition: 0.3s;
+        text-decoration: none;
+        color: inherit;
+    }
+    
+    .card-usuario:hover {
+        border-color: var(--primary-red);
+        background: #1A1A1A;
+        transform: translateY(-2px);
+    }
+
+    .badge-tipo {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: #3A3A3A;
+        border: 1px solid #4A4A4A;
+        font-size: 11px;
+        padding: 3px 8px;
+        text-transform: uppercase;
+        font-weight: bold;
+        color: #D9D9D9;
+    }
+
+    .card-usuario h4 {
+        font-family: 'Oswald', sans-serif;
+        font-size: 19px;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+        color: #ffffff;
+        word-break: break-all;
+    }
+
+    .card-usuario p {
+        font-size: 0.9rem;
+        color: #A5A5A5;
+        margin-bottom: 20px;
+    }
+
+    .btn-remover {
+        background: none;
+        border: none;
+        color: #ff4444;
+        cursor: pointer;
+        font-size: 13px;
+        text-transform: uppercase;
+        font-weight: bold;
+        align-self: flex-start;
+        transition: 0.3s;
+        z-index: 10;
+    }
+
+    .btn-remover:hover { 
+        color: #ffffff; 
+        text-decoration: underline; 
+    }
+
+    footer {
+        background: #050505;
+        border-top: 2px solid #2C2C2C;
+        color: #6E6E6E;
+        padding: 40px;
+        text-align: center;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    .caveira {
+        font-family: 'Oswald', sans-serif;
+        margin-top: 10px;
+        color: var(--primary-red);
+    }
+</style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <h1>Faca na <span>Caveira</span></h1>
+        </div>
+        <nav>
+            <a href="index.html">Início</a>
+            <a href="aulas.html">Aulas</a>
+            <a href="arsenal.html" class="active">Arsenal</a>
+            <a href="#">Suporte</a>
+        </nav>
+    </header>
+
+    <section class="arsenal-secao">
+        <div class="arsenal-container">
+            <h2>Arsenal de Estudos <span>Individual</span></h2>
+            
+            <p class="exploracao-campo">
+                <strong>O que é este campo?</strong> Este é o seu cofre tático pessoal. Diferente de materiais prontos da plataforma, aqui você centraliza as demandas da sua vida real. Guarde os PDFs das aulas da sua faculdade, links de apostilas ou cadernos de questões complexas. Todo o progresso fica guardado em segurança no banco interno do seu navegador.
+            </p>
+
+            <div class="painel-cadastro">
+                <h3>Adicionar Novo Material ao Arsenal</h3>
+                <div class="form-grupo">
+                    
+                    <label for="material-arquivo" class="label-arquivo-tatico">
+                        <span id="texto-nome-arquivo">Selecionar arquivo tático...</span>
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                    </label>
+                    <input type="file" id="material-arquivo" class="input-arquivo-oculto" onchange="atualizarNomeBotao()">
+
+                    <select id="material-tipo">
+                        <option value="PDF Faculdade">PDF da Faculdade</option>
+                        <option value="Questões/Simulado">Questões para Responder</option>
+                        <option value="Anotações">Caderno de Notas</option>
+                    </select>
+                    <button class="btn-adicionar" onclick="adicionarMaterial()">Armazenar</button>
+                </div>
+            </div>
+
+            <div class="grid-arquivos" id="lista-materiais-usuario"></div>
+        </div>
+    </section>
+
+    <footer>
+         &copy; 2026 - Feito por Vitor da Silva <br> 
+        <p class="caveira">Faca na Caveira | Missão Dada é Missão Cumprida</p>
+    </footer>
+    
+        <!-- este arquivo utiliza tecnologia "IndexedDB", metodo um pouco avançado para salvar arquivos no navegador, junto com uso de inteligencia artificial, achei o melhor jeito para fazer isso -->
+    <script>
+        
+        // Configuração do Banco de Dados Local IndexedDB (Persistente e Robusto)
+        const dbNome = "ArsenalCaveiraDB";
+        const dbVersao = 1;
+        let db;
+
+        // Inicializa a conexão com o banco ao carregar a página
+        const requisicao = indexedDB.open(dbNome, dbVersao);
+
+        requisicao.onupgradeneeded = function(e) {
+            let dbInstancia = e.target.result;
+            if (!dbInstancia.objectStoreNames.contains("materiais")) {
+                dbInstancia.createObjectStore("materiais", { keyPath: "id" });
+            }
+        };
+
+        requisicao.onsuccess = function(e) {
+            db = e.target.result;
+            carregarMateriaisDB();
+        };
+
+        requisicao.onerror = function(e) {
+            console.error("Erro ao abrir banco tático local:", e.target.error);
+        };
+
+        function atualizarNomeBotao() {
+            const input = document.getElementById('material-arquivo');
+            const texto = document.getElementById('texto-nome-arquivo');
+            
+            if (input.files.length > 0) {
+                texto.textContent = input.files[0].name;
+                texto.style.color = "#ffffff";
+            } else {
+                texto.textContent = "Selecionar arquivo tático...";
+                texto.style.color = "#BEBEBE";
+            }
+        }
+
+        function adicionarMaterial() {
+            const arquivoInput = document.getElementById('material-arquivo');
+            const tipoSelect = document.getElementById('material-tipo');
+
+            if (arquivoInput.files.length === 0) {
+                alert('Por favor, selecione um arquivo válido do seu computador.');
+                return;
+            }
+
+            const arquivo = arquivoInput.files[0];
+
+            // Criando estrutura com os metadados e o arquivo binário puro (Blob)
+            const novoMaterial = {
+                id: Date.now(),
+                titulo: arquivo.name,
+                tipo: tipoSelect.value,
+                arquivoBlob: arquivo // O banco aceita arquivos brutos sem precisar converter para texto pesado
+            };
+
+            const transacao = db.transaction(["materiais"], "readwrite");
+            const loja = transacao.objectStore("materials" in transacao ? "materials" : "materiais");
+            const pedido = loja.add(novoMaterial);
+
+            pedido.onsuccess = function() {
+                arquivoInput.value = '';
+                atualizarNomeBotao();
+                carregarMateriaisDB();
+            };
+
+            pedido.onerror = function(e) {
+                alert("Falha operacional ao guardar o arquivo no banco interno.");
+                console.error(e.target.error);
+            };
+        }
+
+        function carregarMateriaisDB() {
+            const container = document.getElementById('lista-materiais-usuario');
+            container.innerHTML = '';
+
+            if (!db) return;
+
+            const transacao = db.transaction(["materiais"], "readonly");
+            const loja = transacao.objectStore("materiais");
+            const pedidoCursor = loja.openCursor();
+            let temDados = false;
+
+            pedidoCursor.onsuccess = function(e) {
+                const cursor = e.target.result;
+                if (cursor) {
+                    temDados = true;
+                    const item = cursor.value;
+
+                    let icone = 'fa-file-lines';
+                    if (item.tipo.includes('PDF')) icone = 'fa-file-pdf';
+                    if (item.tipo.includes('Questões')) icone = 'fa-circle-question';
+
+                    const cardHTML = `
+                        <div class="card-usuario" onclick="abrirMaterialDoBanco(${item.id})">
+                            <span class="badge-tipo">${item.tipo}</span>
+                            <div style="font-size: 2rem; color: var(--primary-red);"><i class="fa-solid ${icone}"></i></div>
+                            <h4>${item.titulo}</h4>
+                            <p>Material sob custódia permanente. Clique para abrir.</p>
+                            <button class="btn-remover" onclick="removerMaterialDB(event, ${item.id})"><i class="fa-solid fa-trash-can"></i> Excluir</button>
+                        </div>
+                    `;
+                    container.innerHTML += cardHTML;
+                    cursor.continue();
+                } else if (!temDados) {
+                    container.innerHTML = '<p style="color: #aaa; grid-column: 1 / -1; text-align: center; padding: 20px; font-weight: bolder;">Nenhum material cadastrado no seu arsenal permanente ainda.</p>';
+                }
+            };
+        }
+
+        function abrirMaterialDoBanco(id) {
+            const transacao = db.transaction(["materiais"], "readonly");
+            const loja = transacao.objectStore("materiais");
+            const pedido = loja.get(id);
+
+            pedido.onsuccess = function(e) {
+                const item = e.target.result;
+                if (item && item.arquivoBlob) {
+                    // Cria uma URL temporária viva para abrir o arquivo que está salvo no banco
+                    const urlVisualizacao = URL.createObjectURL(item.arquivoBlob);
+                    
+                    const novaAba = window.open(urlVisualizacao, '_blank');
+                    
+                    // Libera a memória do navegador após um curto período
+                    setTimeout(() => {
+                        URL.revokeObjectURL(urlVisualizacao);
+                    }, 5000);
+                }
+            };
+        }
+
+        function removerMaterialDB(event, id) {
+            event.stopPropagation();
+            
+            const transacao = db.transaction(["materiais"], "readwrite");
+            const loja = transacao.objectStore("materiais");
+            const pedido = loja.delete(id);
+
+            pedido.onsuccess = function() {
+                carregarMateriaisDB();
+            };
+        }
+    </script>
+
+    <!-- este arquivo utiliza tecnologia "IndexedDB", metodo um pouco avançado para salvar arquivos no navegador, junto com uso de inteligencia artificial, achei o melhor jeito para fazer isso -->
+</body>
+</html>

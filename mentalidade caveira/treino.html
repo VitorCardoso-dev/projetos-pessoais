@@ -6,7 +6,7 @@
     <title>Central de Treino | Mentalidade Caveira</title>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="shortcut icon" href="imagens/logo.ico">
+    <link rel="shortcut icon" href="logo.ico">
     <style>
     :root {
         --bg-dark-1: #050505;
@@ -53,7 +53,7 @@
     header {
         text-align: center;
         padding: 50px 5%;
-        background: linear-gradient(rgba(5, 5, 5, 0.85), rgba(11, 11, 11, 0.6)), url('imagens/foco-caveira.png');
+        background: linear-gradient(rgba(5, 5, 5, 0.85), rgba(11, 11, 11, 0.6)), url('foco-caveira.png');
         background-size: cover;
         background-position: center;
         color: #ffffff;
@@ -183,6 +183,7 @@
 
     /* LAYOUT PRINCIPAL */
     .main-container {
+        max-width: 1200px;
         margin: 0 auto;
         padding: 0 5%;
         display: grid;
@@ -503,21 +504,24 @@
     }
 
     /* BANNER DE MISSÃO CUMPRIDA NO SITE */
-    .banner-sucesso { 
+    .banner-sucesso {
         display: none; 
-        background:linear-gradient(90deg, #297129, #0e830e, #043404);
-        padding: 20px; 
+        background: #111111; 
+        border: 2px solid var(--bright-green); 
+        padding: 25px; 
         text-align: center; 
-        margin: 20px auto 0; 
+        margin: 30px auto; 
         max-width: 1100px; 
-        box-shadow: 0 0 15px rgba(18, 217, 4, 0.3);
+        box-shadow: 0 0 20px rgba(255, 51, 51, 0.3); 
+        position: relative; 
     }
     
-    .banner-sucesso h2 { 
+    .banner-sucesso h2 {
         font-family: 'Oswald', sans-serif; 
+        color: var(--bright-green); 
         text-transform: uppercase; 
-        color: white;
-        font-size: 1.6rem; 
+        font-size: 2rem; 
+        margin-bottom: 10px; 
     }
     
     .banner-sucesso p { 
@@ -594,10 +598,10 @@
     }
     
     .dia-status.check {
-        background:green; 
+        background: var(--primary-red); 
         color: #ffffff; 
-        border: 1px solid rgb(22, 170, 22);
-        box-shadow: 0 0 5px rgba(10, 199, 19, 0.5); 
+        border: 1px solid var(--alert-red); 
+        box-shadow: 0 0 5px rgba(217,4,41,0.5); 
     }
     
     .dia-status.neutro { 
@@ -607,7 +611,8 @@
 
     /* ANIMAÇÃO */
     .revelar-ao-scroll { 
-        margin-bottom: 20px;
+        opacity: 0; 
+        transform: translateY(40px); 
     }
 
     footer {
