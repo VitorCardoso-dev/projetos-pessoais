@@ -6,7 +6,7 @@
     <title>Arsenal de Estudos | Mentalidade Caveira</title>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:wght@300;400;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="shortcut icon" href="logo.ico">
+    <link rel="shortcut icon" href="imagens/logo.ico">
     <style> 
     :root {
         --primary-red: #d90429; 
@@ -45,46 +45,29 @@
         line-height: 1.6;
     }
 
-    header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 20px 5%;
-        background: #0B0B0B;
-        color: #ffffff;
-        border-bottom: 3px solid var(--primary-red);
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-    }
-
-    .logo h1 {
+    .btn-voltar {
+        display: inline-block; 
+        margin-top: 20px; 
+        padding: 10px 20px; 
+        color: var(--steel-gray); 
+        text-decoration: none; 
         font-family: 'Oswald', sans-serif;
-        text-transform: uppercase;
-        font-size: 22px;
-        letter-spacing: -1px;
-        color: #ffffff;
+        text-transform: uppercase; 
+        font-size: 0.85rem;  
+        transition: all 0.3s ease;
+        letter-spacing: 1px; 
+        font-weight: 600;
     }
-
-    .logo span { 
-        color: var(--primary-red); 
-    }
-
-    nav a {
-        color: #ffffff;
-        text-decoration: none;
-        margin-left: 20px;
-        font-size: 13px;
-        font-weight: 700;
-        text-transform: uppercase;
-        transition: 0.3s;
-    }
-
-    nav a:hover, 
-    nav a.active { 
-        color: var(--primary-red); 
+    
+    .btn-voltar:hover { 
+        background: red; 
+        color: #ffffff; 
+        box-shadow: 0 0 15px rgba(204, 0, 27, 0.4);
     }
 
     .arsenal-secao {
-        background: linear-gradient(rgba(5, 5, 5, 0.95), rgba(11, 11, 11, 0.75)), url("selva-amazonica.jpeg");
+        background: linear-gradient(rgba(5, 5, 5, 0.95), rgba(11, 11, 11, 0.75)), 
+        url('imagens/selva-amazonica.jpeg');
         background-size: cover;
         background-position: center;
         color: #ffffff;
@@ -301,26 +284,17 @@
 </head>
 <body>
 
-    <header>
-        <div class="logo">
-            <h1>Faca na <span>Caveira</span></h1>
-        </div>
-        <nav>
-            <a href="index.html">Início</a>
-            <a href="aulas.html">Aulas</a>
-            <a href="arsenal.html" class="active">Arsenal</a>
-            <a href="#">Suporte</a>
-        </nav>
-    </header>
 
     <section class="arsenal-secao">
         <div class="arsenal-container">
+            <a href="index.html" class="btn-voltar"><i class="fa-solid fa-arrow-left"></i> Voltar ao Menu Principal</a>
+
             <h2>Arsenal de Estudos <span>Individual</span></h2>
             
             <p class="exploracao-campo">
                 <strong>O que é este campo?</strong> Este é o seu cofre tático pessoal. Diferente de materiais prontos da plataforma, aqui você centraliza as demandas da sua vida real. Guarde os PDFs das aulas da sua faculdade, links de apostilas ou cadernos de questões complexas. Todo o progresso fica guardado em segurança no banco interno do seu navegador.
             </p>
-
+            
             <div class="painel-cadastro">
                 <h3>Adicionar Novo Material ao Arsenal</h3>
                 <div class="form-grupo">

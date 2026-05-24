@@ -6,7 +6,7 @@
     <title>Estudos | Mentalidade Caveira</title>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:wght@300;400;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="shortcut icon" href="logo.ico">
+    <link rel="shortcut icon" href="imagens/logo.ico">
     <style> 
     :root {
         --primary-red: #d90429; 
@@ -41,48 +41,6 @@
         background: var(--bg-radial);
         color: #D9D9D9;
         line-height: 1.6;
-    }
-
-    /* HEADER COM SOBREPOSIÇÃO OPERACIONAL */
-    header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 20px 5%;
-        background: linear-gradient(rgba(17, 17, 17, 0.9), rgba(26, 26, 26, 0.85)), url('biblioteca-tatica.jpg');
-        background-size: cover;
-        background-position: center;
-        color: #ffffff;
-        border-bottom: 3px solid var(--primary-red);
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
-    }
-
-    .logo h1 {
-        font-family: 'Oswald', sans-serif;
-        text-transform: uppercase;
-        font-size: 26px;
-        letter-spacing: 1px;
-        color: #ffffff;
-    }
-
-    .logo span { 
-        color: var(--primary-red); 
-        text-shadow: 0 0 10px rgba(217, 4, 41, 0.6); 
-    }
-
-    nav a {
-        color: #D9D9D9;
-        text-decoration: none;
-        margin-left: 25px;
-        font-size: 13px;
-        font-weight: 700;
-        text-transform: uppercase;
-        transition: 0.3s;
-        letter-spacing: 1px;
-    }
-
-    nav a:hover { 
-        color: var(--primary-red); 
     }
 
     
@@ -123,13 +81,33 @@
         margin-bottom: 0;
     }
 
+    .btn-voltar {
+        display: inline-block; 
+        margin-top: 20px; 
+        padding: 10px 20px; 
+        color: var(--dark-gray); 
+        text-decoration: none; 
+        font-family: 'Oswald', sans-serif;
+        text-transform: uppercase; 
+        font-size: 0.85rem;  
+        transition: all 0.3s ease;
+        letter-spacing: 1px; 
+        font-weight: 600;
+    }
     
+    .btn-voltar:hover { 
+        background:red; 
+        color: #ffffff; 
+        border-color: var(--alert-red); 
+        box-shadow: 0 0 15px rgba(204, 0, 27, 0.4);
+    }
 
 
     /* SEÇÃO INTRODUTÓRIA - FOCO NA CAVEIRA/OPERAÇÕES */
     .intro-estudos {
         padding: 15vh 5%;
-        background: linear-gradient(rgba(5, 5, 5, 0.85), rgba(26, 26, 26, 0.9)), url(foco-caveira.png);
+        background: linear-gradient(rgba(5, 5, 5, 0.85), rgba(26, 26, 26, 0.9)), 
+        url('imagens/foco-caveira.png');
         background-size: cover;
         background-position: center;
         text-align: center;
@@ -278,22 +256,12 @@
 </head>
 <body>
 
-    <header>
-        <div class="logo">
-            <h1>Mentalidade <span>Caveira</span></h1>
-        </div>
-        <nav>
-            <a href="index.html">Início</a>
-            <a href="#">Módulos</a>
-            <a href="#">Biblioteca</a>
-            <a href="#">Suporte</a>
-        </nav>
-    </header>
-
     <section class="intro-estudos">
         <h2>Forja <span style="color: var(--primary-red);font-style: italic;">Intelectual</span></h2>
         <p>O conhecimento é a única arma que você carrega sem peso. <br> Abaixo, selecione o módulo de doutrina para iniciar sua progressão hoje.</p>
+        <a href="index.html" class="btn-voltar"><i class="fa-solid fa-arrow-left"></i> Voltar ao Menu Principal</a>
     </section>
+    
     <section class="apresentacao">
     <h1>Protocolo de Estudos <span>Doutrinários</span></h1>
     <p>Bem-vindo à central de inteligência e capacitação teórica. Este ambiente foi projetado para o desenvolvimento de competências analíticas e absorção de conhecimentos críticos necessários para a execução de operações complexas. A disciplina intelectual é o primeiro passo para a eficiência em campo.</p>

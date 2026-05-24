@@ -6,7 +6,8 @@
     <title>Neurociência do Foco | Mentalidade Caveira</title>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:wght@300;400;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="shortcut icon" href="logo.ico">
+    <link rel="shortcut icon" href="imagens/logo.ico">
+    <head>
     <style> 
     :root {
         --primary-red: #d90429; 
@@ -45,42 +46,24 @@
         line-height: 1.6;
     }
 
-    header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 20px 5%;
-        background: #0B0B0B;
-        color: #ffffff;
-        border-bottom: 3px solid var(--primary-red);
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-    }
-
-    .logo h1 {
+    .btn-voltar {
+        display: inline-block; 
+        margin-top: 20px; 
+        padding: 10px 20px; 
+        color: var(--steel-gray); 
+        text-decoration: none; 
         font-family: 'Oswald', sans-serif;
-        text-transform: uppercase;
-        font-size: 22px;
-        letter-spacing: -1px;
-        color: #ffffff;
+        text-transform: uppercase; 
+        font-size: 0.85rem;  
+        transition: all 0.3s ease;
+        letter-spacing: 1px; 
+        font-weight: 600;
     }
-
-    .logo span { 
-        color: var(--primary-red); 
-    }
-
-    nav a {
-        color: #ffffff;
-        text-decoration: none;
-        margin-left: 20px;
-        font-size: 13px;
-        font-weight: 700;
-        text-transform: uppercase;
-        transition: 0.3s;
-    }
-
-    nav a:hover, 
-    nav a.active { 
-        color: var(--primary-red); 
+    
+    .btn-voltar:hover { 
+        background: red; 
+        color: #ffffff; 
+        box-shadow: 0 0 15px rgba(204, 0, 27, 0.4);
     }
 
     .modulos-abas {
@@ -277,21 +260,90 @@
         margin-top: 10px;
         color: var(--primary-red);
     }
+
+    /* ==========================================
+       MEDIA QUERIES - RESPONSIVIDADE
+       ========================================== */
+
+    /* Tablets e Celulares grandes (Até 992px) */
+    @media (max-width: 992px) {
+        .plataforma-grid {
+            flex-direction: column; /* Joga a sidebar para baixo do player de vídeo */
+            gap: 25px;
+            padding: 20px 5%;
+        }
+
+        .area-player, 
+        .sidebar-aulas {
+            width: 100%;
+            min-width: 100%;
+        }
+
+        .sidebar-aulas {
+            align-self: stretch; /* Ocupa a largura total da tela */
+        }
+    }
+
+    /* Smartphones comuns (Até 768px) */
+    @media (max-width: 768px) {
+        .modulo-intro {
+            padding: 30px 5%;
+            text-align: center; /* Centraliza a introdução do módulo */
+        }
+
+        .modulo-intro h2 {
+            font-size: 28px; /* Reduz tamanho do título principal */
+        }
+
+        .modulo-intro p {
+            text-align: left; /* Justificado em telas pequenas deixa buracos no texto */
+            font-size: 1rem;
+        }
+
+        .modulos-abas {
+            gap: 8px;
+            margin-top: 20px;
+        }
+
+        .aba-btn {
+            font-size: 13px;
+            padding: 8px 12px;
+            flex-grow: 1; /* Faz as abas se distribuírem igualmente no espaço móvel */
+        }
+
+        .detalhes-aula {
+            padding: 20px;
+        }
+
+        .detalhes-aula h3 {
+            font-size: 20px;
+        }
+    }
+
+    /* Celulares pequenos (Até 480px) */
+    @media (max-width: 480px) {
+        .modulo-intro h2 {
+            font-size: 24px;
+        }
+
+        .aba-btn {
+            font-size: 12px;
+            padding: 8px 6px;
+        }
+
+        .item-aula {
+            padding: 12px 8px;
+            gap: 10px;
+        }
+
+        .item-aula .info-aula p {
+            font-size: 0.88rem;
+        }
+    }
 </style>
 </head>
 <body>
 
-    <header>
-        <div class="logo">
-            <h1>Faca na <span>Caveira</span></h1>
-        </div>
-        <nav>
-            <a href="index.html">Início</a>
-            <a href="aulas.html" class="active">Aulas</a>
-            <a href="arsenal.html">Arsenal</a>
-            <a href="#">Suporte</a>
-        </nav>
-    </header>
 
     <section class="modulo-intro">
         <div class="modulo-container">
@@ -302,6 +354,8 @@
                 protocolos científicos rigorosos para assumir o controle dos seus níveis de dopamina.
             </p>
         </div>
+        <a href="index.html" class="btn-voltar"><i class="fa-solid fa-arrow-left"></i> Voltar ao Menu Principal</a>
+
     </section>
 
     <div class="modulos-abas">
