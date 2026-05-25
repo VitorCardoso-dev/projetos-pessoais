@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hora do Dia</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: white;
+            background: #1a1a1a; /* Cor padrão inicial */
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            transition: background 0.5s ease; /* Transição suave de cor */
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .container {
+            color: #333;
+            background-color: rgba(255, 255, 255, 0.95);
+            width: 350px;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+        }
+
+        .container > h3 {
+            margin-bottom: 20px;
+            font-weight: 400;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        #Numhoras {
+            font-weight: 600;
+            color: #000;
+        }
+
+        .container > img {
+            width: 180px;
+            height: 180px;
+            object-fit: cover; /* Garante que a imagem não distorça */
+            border-radius: 50%;
+            border: 5px solid #eee;
+            margin: 0 auto;
+            display: block;
+        }
+
+        footer {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hora do Dia</h1>
+    
+    <div class="container">
+        <h3>Agora são <span id="Numhoras">...</span></h3>
+        <img src="" 
+        alt="Imagem do dia" id="imagem">
+    </div>
+
+    <footer>&copy; Vitor da Silva</footer>
+
+   <script>
+    function carregar() {
+        var data = new Date();
+        var hora = data.getHours();
+        var min = data.getMinutes(); //minutos
+        
+        var body = document.body;
+        var txtHora = document.querySelector('#Numhoras'); 
+        var imagem = document.getElementById('imagem');
+
+        // Formatação simples para 00:00
+        var horaFormatada = hora < 10 ? '0' + hora : hora;
+        var minFormatado = min < 10 ? '0' + min : min;
+        txtHora.innerHTML = `${horaFormatada}:${minFormatado}`;
+
+        if (hora >= 5 && hora < 12) {
+            // MANHÃ
+            body.style.background = 'linear-gradient(to bottom, #e4afcb, #b8cbb8, #b8d3fe)';
+            imagem.src = 'imagem-dia.jpeg'; 
+        } 
+        else if (hora >= 12 && hora < 18) {
+            // TARDE
+            body.style.background = 'linear-gradient(to bottom, #fc8e51, #fbc2eb)';
+            imagem.src = 'imagem-tarde.jpeg';
+        } 
+        else {
+            // NOITE
+            body.style.background = 'linear-gradient(to bottom, #2c3e50, #000000)';
+            imagem.src = 'imagem-noite.jpeg';
+        }
+    }
+    
+    
+    carregar();
+    setInterval(carregar, 60000);
+</script>
+</body>
+</html>

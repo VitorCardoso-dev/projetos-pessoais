@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de IMC</title>
+    <style>
+        /* Estilização Geral */
+        body {
+            background-color: #c6c6c6;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        header{
+            color: #333;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Container Principal */
+        main {
+            background-color: #2c3e50;
+            color: white;
+            width: 100%;
+            max-width: 400px;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
+
+        main:hover {
+            transform: scale(1.02);
+        }
+
+        /* Inputs e Textos */
+        section p {
+            margin-bottom: 15px;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: none;
+            box-sizing: border-box; /* Garante que o padding não quebre a largura */
+        }
+
+        /* Botão */
+        input[type="button"] {
+            width: 100%;
+            padding: 12px;
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: 0.3s;
+        }
+
+        input[type="button"]:hover {
+            background-color: #2ecc71;
+        }
+
+        /* Resultado */
+        .resultado {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-left: 5px solid #27ae60;
+            line-height: 1.6;
+        }
+
+        footer {
+            margin-top: 20px;
+            color: #414141;
+            
+        }
+    </style>
+</head>
+<body>
+    <header><h1>Calcule seu IMC</h1></header>
+    
+    <main>
+        <section>
+            <p>Peso (kg):
+                <input type="number" name="peso" id="txtpeso" placeholder="Ex: 75.5">
+            </p>
+            <p>
+                Altura (m):
+                <input type="number" name="altura" id="txtaltura" placeholder="Ex: 1.75">
+            </p>
+            <p>
+                <input type="button" value="Calcular Agora" onclick="calcular()">
+            </p>
+            <div  class="resultado">
+                Preencha os dados para ver o resultado.
+            </div>
+        </section>
+    </main>
+
+    <footer><h3>&copy; Vitor da Silva</h3></footer>
+
+    <script>
+        function calcular() {
+            var txtpeso = document.querySelector('#txtpeso')
+            var txtaltura = document.querySelector('#txtaltura')
+            var res = document.querySelector('.resultado')
+
+            // Convertendo valores para números
+            var peso = Number(txtpeso.value)
+            var altura = Number(txtaltura.value)
+
+            // Validação simples
+            if (txtpeso.value.length == 0 || txtaltura.value.length == 0) {
+                res.innerHTML = "[ERRO] Preencha os campos acima corretamente!"
+                return
+            }
+
+            var imc = peso / (altura * altura)
+            var classificacao = ""
+
+            
+            if (imc < 18.5) {
+                classificacao = "Abaixo do peso"
+            } else if (imc < 25) {
+                classificacao = "Peso ideal (Parabéns!)"
+            } else if (imc < 30) {
+                classificacao = "Levemente acima do peso"
+            } else if (imc < 35) {
+                classificacao = "Obesidade Grau I"
+            } else if (imc < 40) {
+                classificacao = "Obesidade Grau II (Severa)"
+            } else {
+                classificacao = "Obesidade Grau III (Mórbida)"
+            }
+
+            //Resultado final
+            res.innerHTML = `Seu IMC é <strong>${imc.toFixed(2)}</strong>.<br>`
+            res.innerHTML += `Status: <strong>${classificacao}</strong>`
+        }
+    </script>
+</body>
+</html>

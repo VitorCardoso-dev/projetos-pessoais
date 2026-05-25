@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vitor Silva | Portfólio JS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-bg: #000000;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --accent-gradient: linear-gradient(135deg, #3b82f6 0%, #2dd4bf 100%);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --card-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            /* Fundo alterado para degradê cinza, preto e branco suave */
+            background-color: var(--primary-bg);
+            background-image: linear-gradient(180deg, #2c2c2c 0%, #000000 50%, #1a1a1a 100%);
+            background-attachment: fixed;
+            
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        header {
+            text-align: center;
+            padding: 80px 20px 50px;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -2px;
+            margin-bottom: 15px;
+        }
+
+        /* Mantendo o seu span amarelo exatamente como pediu */
+        header h1 span {
+            color: #ffff56;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .grid-projetos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        /* Card Profissional Glassmorphism */
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 24px;
+            border: 1px solid var(--card-border);
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-12px) scale(1.02);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .card-image {
+            height: 220px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(20%);
+            transition: all 0.6s ease;
+        }
+
+        .card:hover .card-image img {
+            filter: grayscale(0%);
+            transform: scale(1.1);
+        }
+
+        .project-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+
+        .card:hover .project-overlay {
+            opacity: 1;
+        }
+
+        .btn-icon {
+            text-decoration: none;
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-icon:hover {
+            background: #fff;
+            color: #000;
+            transform: translateY(-2px);
+        }
+
+        .btn-icon.highlight-btn {
+            background: var(--accent-gradient);
+            border: none;
+        }
+
+        .btn-icon.highlight-btn:hover {
+            box-shadow: 0 10px 20px -5px rgba(59, 130, 246, 0.5);
+            opacity: 0.9;
+            color: white;
+        }
+
+        .card-body {
+            padding: 28px;
+        }
+
+        .card-body h3 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .card-body p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        footer {
+            padding: 60px 20px;
+            text-align: center;
+            border-top: 1px solid var(--card-border);
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        footer p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.2rem; }
+            .grid-projetos { grid-template-columns: 1fr; max-width: 400px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Meus Projetos de <span>JavaScript</span></h1>
+        <p>Um conjunto de projetos desenvolvidos com JavaScript</p>
+    </header>
+
+    <main>
+        <div class="grid-projetos">
+            
+            <div class="card">
+                <div class="card-image">
+                    <img src="img-js/hora-dia.png" alt="Hora do Dia">
+                    <div class="project-overlay">
+                        <a href="exercicio1-horadia/horadia.html" class="btn-icon highlight-btn" target="_blank">
+                            <i class="fa-solid fa-rocket"></i> Ver Projeto
+                        </a>
+                        <a href="https://github.com/VitorCardoso-dev" class="btn-icon" target="_blank">
+                            <i class="fa-brands fa-github"></i> Code
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h3>Hora do Dia</h3>
+                    <p>Interface inteligente que adapta toda a identidade visual da página baseando-se no horário em tempo real do usuário.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-image">
+                    <img src="img-js/imc.png" alt="Calculadora IMC">
+                    <div class="project-overlay">
+                        <a href="#" class="btn-icon highlight-btn" target="_blank">
+                            <i class="fa-solid fa-rocket"></i> Ver Projeto
+                        </a>
+                        <a href="#" class="btn-icon" target="_blank">
+                            <i class="fa-brands fa-github"></i> Code
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h3>Calculadora de IMC</h3>
+                    <p>Algoritmo de saúde que processa dados biométricos e entrega um feedback visual instantâneo sobre a condição física.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-image">
+                    <img src="img-js/registro-idade.png" alt="Verificador de Idade">
+                    <div class="project-overlay">
+                        <a href="#" class="btn-icon highlight-btn" target="_blank">
+                            <i class="fa-solid fa-rocket"></i> Ver Projeto
+                        </a>
+                        <a href="#" class="btn-icon" target="_blank">
+                            <i class="fa-brands fa-github"></i> Code
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h3>Analisador de Perfil</h3>
+                    <p>Sistema de verificação dinâmica que utiliza lógica condicional para renderizar componentes de mídia baseados em inputs.</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 // VITOR SILVA // FULLSTACK DEVELOPER BENT</p>
+    </footer>
+
+</body>
+</html>
