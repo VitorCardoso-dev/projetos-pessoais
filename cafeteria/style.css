@@ -6,6 +6,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap');
 
 ::-webkit-scrollbar { display: none; }
+
 /* ===================================================
    CONFIGURAÇÕES GLOBAIS E RESET
    =================================================== */
@@ -13,16 +14,14 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    
 }
 
 body {
-    height: 100vh;
+    min-height: 100vh; /* CORRIGIDO: mudado de height para min-height para não cortar a página para baixo */
     font-family: 'Poppins', Arial, Helvetica, sans-serif;
     background-color: #0a0604;
     color: #f5e9dc;
 }
-
 
 /* ===================================================
    CABEÇALHO E NAVEGAÇÃO
@@ -45,16 +44,16 @@ header {
 .cabeçalho {
     display: flex;
     align-items: center;
-    margin: auto;
-    width: 100vw;
-    gap: 185px;
+    justify-content: space-between;
+    margin: 0 auto;
+    width: 100%;
+    padding: 0 20px;
 }
 
 .titulo {
     display: flex;
     align-items: center;
     color: #f5e9dc;
-    margin-left: 50px;
     font-family: 'Playfair Display', serif;
     letter-spacing: 0.5px;
 }
@@ -72,8 +71,8 @@ header {
 .icones {
     display: flex;
     color: #f5e9dc;
-    gap: 10px;
-    margin-right: 50px;
+    gap: 15px;
+    margin-right:30px;
 }
 
 .icones img {
@@ -89,7 +88,7 @@ header {
 /* Links da navegação */
 nav a {
     color: #f5e9dc;
-    margin: 10px;
+    margin: 0 15px;
     font-weight: 500;
     text-decoration: none;
     font-size: 0.95em;
@@ -118,7 +117,6 @@ nav a:hover::after {
     width: 100%;
 }
 
-
 /* ===================================================
    SEÇÃO PRINCIPAL (HERO) - Banner de Entrada
    =================================================== */
@@ -143,9 +141,9 @@ main::before {
 }
 
 .apresentando {
-    width: 600px;
-    margin-left: 25px;
-    margin-bottom: 25px;
+    width: 100%;
+    max-width: 600px;
+    margin-left: 10%; /* CORRIGIDO: margem baseada em porcentagem para alinhar melhor em telas grandes */
     position: relative;
     z-index: 2;
     animation: fadeInUp 1s ease-out;
@@ -205,27 +203,21 @@ main::before {
     box-shadow: 0 10px 24px rgba(227, 204, 103, 0.4);
 }
 
-
-/* ===================================================
-   SEÇÃO SOBRE NÓS
-   =================================================== */
-
-
 /* ===================================================
    SEÇÃO SOBRE NÓS
    =================================================== */
 #sobre-nos {
-    padding: 100px;
+    padding: 100px 20px;
     background: linear-gradient(180deg, #0a0604 0%, #120a06 100%);
-    margin: auto;
     color: #f5e9dc;
 }
 
 .about {
     display: flex;
-    width: 80vw;
+    width: 100%;
+    max-width: 1000px; /* CORRIGIDO: limitador de largura para não esticar em telas gigantes */
     margin: auto;
-    height: 360px;
+    min-height: 360px;
     background: linear-gradient(135deg, #1a0f0a 0%, #2a1810 100%);
     border-radius: 14px;
     overflow: hidden;
@@ -241,8 +233,8 @@ main::before {
 }
 
 .about > img {
-    height: 358px;
-    width: auto;
+    height: 360px;
+    width: 45%; /* CORRIGIDO: proporção fixa para a imagem no desktop */
     object-fit: cover;
     flex-shrink: 0;
     transition: transform 0.8s ease;
@@ -256,18 +248,17 @@ div.cafe-especial {
     flex: 1;
     margin: 20px;
     background: transparent;
-    padding: 10px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    overflow: hidden;
 }
 
 div.cafe-especial > h2 {
     font-family: 'Playfair Display', serif;
-    font-size: 1.6em;
+    font-size: 1.8em;
     font-weight: 700;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     color: #e3cc67;
     letter-spacing: 0.5px;
     line-height: 1.2;
@@ -275,8 +266,8 @@ div.cafe-especial > h2 {
 
 div.cafe-especial > p {
     color: #d4c4ad;
-    line-height: 1.5;
-    font-size: 0.9em;
+    line-height: 1.6;
+    font-size: 0.95em;
     font-weight: 300;
     margin-bottom: 8px;
 }
@@ -310,9 +301,8 @@ div.cafe-especial > button:hover {
    SEÇÃO DO MENU (Produtos)
    =================================================== */
 #menu {
-    padding: 100px;
+    padding: 100px 20px;
     background: linear-gradient(180deg, #120a06 0%, #0a0604 100%);
-    margin: auto;
     color: #f5e9dc;
 }
 
@@ -321,7 +311,7 @@ div.cafe-especial > button:hover {
     font-family: 'Playfair Display', serif;
     font-size: 2.4em;
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
     color: #e3cc67;
     letter-spacing: 1px;
 }
@@ -330,10 +320,9 @@ div.cafe-especial > button:hover {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 10px;
+    gap: 25px; /* Aumentado o espaçamento para desktops */
+    max-width: 1200px;
     margin: auto;
-    padding: 10px;
-    border-radius: 10px;
 }
 
 .café {
@@ -404,25 +393,22 @@ div.cafe-especial > button:hover {
     box-shadow: 0 8px 22px rgba(227, 204, 103, 0.45);
 }
 
-
 /* ===================================================
    SEÇÃO DE AVALIAÇÕES (Testemunhos)
    =================================================== */
 .clientes {
-    padding: 100px;
+    padding: 100px 20px;
     background: linear-gradient(180deg, #0a0604 0%, #120a06 100%);
-    margin: auto;
     color: #f5e9dc;
 }
 
 .avaliações {
-        display: flex;
+    display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 10px;
+    gap: 25px; /* Aumentado espaçamento */
+    max-width: 1200px;
     margin: auto;
-    padding: 10px;
-    border-radius: 10px;
 }
 
 .cliente {
@@ -445,7 +431,7 @@ div.cafe-especial > button:hover {
 
 .pessoas {
     font-size: 11px;
-    width: 300px;
+    width: 100%; /* CORRIGIDO: de 300px para 100% para não quebrar com o padding interno do card */
     margin: auto;
 }
 
@@ -490,7 +476,6 @@ div.cafe-especial > button:hover {
     border-color: #6f574f;
 }
 
-
 /* ===================================================
    SEÇÃO DE LOCALIZAÇÃO (MAPS) E RODAPÉ
    =================================================== */
@@ -501,7 +486,7 @@ div.cafe-especial > button:hover {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 30px 10px;
+    padding: 50px 20px;
 }
 
 #endereço h1,
@@ -515,15 +500,17 @@ div.cafe-especial > button:hover {
 #endereço iframe,
 .mapa {
     border-radius: 12px;
+    width: 100%;
+    max-width: 600px; /* Definido tamanho máximo padrão para o mapa no PC */
+    height: 350px;
     box-shadow: 0 14px 36px rgba(0, 0, 0, 0.55),
                 0 0 0 1px rgba(199, 161, 122, 0.2);
 }
 
 footer {
-    margin-top: 10px;
     color: #b8a890;
     background-color: #050203;
-    padding: 20px 10px;
+    padding: 25px 10px;
     text-align: center;
     border-top: 1px solid rgba(199, 161, 122, 0.18);
     font-size: 0.9em;
@@ -555,9 +542,8 @@ footer > a > img:hover {
     color: #e3cc67;
 }
 
-
 /* ===================================================
-   SCROLLBAR PERSONALIZADA (Toque profissional)
+   SCROLLBAR PERSONALIZADA
    =================================================== */
 ::-webkit-scrollbar {
     width: 10px;
@@ -576,7 +562,6 @@ footer > a > img:hover {
     background: linear-gradient(180deg, #c7a17a, #e3cc67);
 }
 
-/* Seleção de texto */
 ::selection {
     background-color: rgba(227, 204, 103, 0.4);
     color: #fff8ec;
@@ -587,51 +572,34 @@ footer > a > img:hover {
    --- REGRAS DE RESPONSIVIDADE ---
    =================================================== */
 
-/* TABLETS E TELAS MÉDIAS (até 1024px) - Resolve a quebra da NAV */
+/* TABLETS E TELAS MÉDIAS (até 1024px) */
 @media (max-width: 1024px) {
     .cabeçalho {
-        gap: 20px;
         justify-content: space-around;
-        width: 100vw;
     }
-
-    .titulo {
-        margin-left: 20px;
-    }
-
-    .icones {
-        margin-right: 20px;
-    }
-
     nav a {
-        margin: 5px;
+        margin: 0 10px;
         font-size: 0.9em;
     }
 }
 
-/* CELULARES (até 768px) - Ajustes gerais e Sobre-nós */
+/* CELULARES (até 768px) */
 @media (max-width: 768px) {
     header {
         height: auto;
         padding: 15px 0;
-        flex-direction: column;
         position: relative;
-        margin-bottom: -5px;
     }
 
     .cabeçalho {
         flex-direction: column;
         gap: 15px;
-        width: 100%;
-        margin: 0;
-    }
-
-    .titulo {
-        margin-left: 0;
     }
 
     nav {
+        display: flex;
         justify-content: center;
+        flex-wrap: wrap;
     }
 
     nav a {
@@ -640,8 +608,7 @@ footer > a > img:hover {
     }
 
     .icones {
-        margin-top: 10px;
-        margin-right: 0;
+        margin-top: 5px;
         justify-content: center;
         width: 100%;
         gap: 20px;
@@ -665,7 +632,6 @@ footer > a > img:hover {
         backdrop-filter: blur(4px);
     }
 
-    /* SEÇÃO SOBRE-NÓS CORRIGIDA */
     #sobre-nos {
         padding: 40px 10px;
     }
@@ -673,7 +639,6 @@ footer > a > img:hover {
     .about {
         flex-direction: column;
         height: auto;
-        width: 100%;
     }
 
     .about > img {
@@ -684,17 +649,17 @@ footer > a > img:hover {
     div.cafe-especial {
         margin: 20px;
         text-align: center;
+        padding: 10px;
     }
+    
     div.cafe-especial > button {
-    align-self: center;
-    margin-top: 14px;
-}
+        align-self: center;
+        margin-top: 14px;
+    }
 
-    /* MENU E CLIENTES */
     #menu,
     .clientes {
         padding: 50px 20px;
-        text-align: center;
     }
 
     .avaliações,
@@ -706,12 +671,12 @@ footer > a > img:hover {
     .cliente {
         width: 100%;
         max-width: 330px;
-        margin: auto;
     }
 
+    #endereço iframe,
     .mapa {
-        width: 100%;
-        max-width: 400px;
+        max-width: 100%;
+        height: 250px;
     }
 }
 
