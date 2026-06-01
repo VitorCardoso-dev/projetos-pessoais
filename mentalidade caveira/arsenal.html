@@ -7,283 +7,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:wght@300;400;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="shortcut icon" href="imagens/logo.ico">
-    <style> 
-    :root {
-        --primary-red: #d90429; 
-        --steel-gray: #BEBEBE; 
-        --dark-bg: #050505; 
-        --card-bg: #111111; 
-        --light-gray: #1A1A1A; 
-        
-        --metal-gradient: linear-gradient(
-            90deg,
-            #4A4A4A 0%,
-            #C2C2C2 45%,
-            #7A7A7A 70%,
-            #1B1B1B 100%
-        );
-        
-        --bg-radial: radial-gradient(
-            circle,
-            #232323 0%,
-            #0E0E0E 45%,
-            #050505 100%
-        );
-    }
-
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-
-    body {
-        font-family: 'Roboto', sans-serif;
-        background-color: var(--dark-bg);
-        background: var(--bg-radial);
-        color: #D9D9D9;
-        line-height: 1.6;
-    }
-
-    .btn-voltar {
-        display: inline-block; 
-        margin-top: 20px; 
-        padding: 10px 20px; 
-        color: var(--steel-gray); 
-        text-decoration: none; 
-        font-family: 'Oswald', sans-serif;
-        text-transform: uppercase; 
-        font-size: 0.85rem;  
-        transition: all 0.3s ease;
-        letter-spacing: 1px; 
-        font-weight: 600;
-    }
-    
-    .btn-voltar:hover { 
-        background: red; 
-        color: #ffffff; 
-        box-shadow: 0 0 15px rgba(204, 0, 27, 0.4);
-    }
-
-    .arsenal-secao {
-        background: linear-gradient(rgba(5, 5, 5, 0.95), rgba(11, 11, 11, 0.75)), 
-        url('imagens/selva-amazonica.jpeg');
-        background-size: cover;
-        background-position: center;
-        color: #ffffff;
-        padding: 60px 5%;
-        width: 100%;
-        min-height: calc(100vh - 150px);
-    }
-
-    .arsenal-container {
-        max-width: 1200px;
-        margin: 0 auto;
-    }
-
-    .arsenal-secao h2 {
-        font-family: 'Oswald', sans-serif;
-        text-transform: uppercase;
-        font-size: 30px;
-        margin-bottom: 10px;
-        color: #ffffff;
-    }
-
-    .arsenal-secao h2 span { 
-        color: var(--primary-red); 
-    }
-
-    .exploracao-campo {
-        font-size: 1rem;
-        color: #BEBEBE;
-        margin-bottom: 40px;
-        max-width: 850px;
-    }
-
-    .painel-cadastro {
-        background: #111111;
-        padding: 30px;
-        border-radius: 4px;
-        border: 1px solid #2C2C2C;
-        margin-bottom: 40px;
-        box-shadow: 0 10px 20px rgba(0,0,0,0.4);
-    }
-
-    .painel-cadastro h3 {
-        font-family: 'Oswald', sans-serif;
-        text-transform: uppercase;
-        font-size: 18px;
-        margin-bottom: 20px;
-        color: #ffffff;
-    }
-
-    .form-grupo {
-        display: flex;
-        gap: 15px;
-        flex-wrap: wrap;
-        align-items: center;
-    }
-
-    .form-grupo select {
-        flex: 1;
-        min-width: 200px;
-        padding: 12px;
-        background: #1A1A1A;
-        border: 1px solid #3A3A3A;
-        color: #ffffff;
-        font-size: 15px;
-        border-radius: 4px;
-    }
-
-    .form-grupo select:focus {
-        border-color: var(--primary-red);
-        background: #232323;
-        outline: none;
-    }
-
-    .input-arquivo-oculto {
-        display: none !important;
-    }
-
-    .label-arquivo-tatico {
-        flex: 1;
-        min-width: 200px;
-        padding: 12px;
-        background: #1A1A1A;
-        border: 1px solid #3A3A3A;
-        color: #BEBEBE;
-        font-size: 15px;
-        border-radius: 4px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        cursor: pointer;
-        transition: 0.3s;
-    }
-
-    .label-arquivo-tatico:hover {
-        border-color: var(--primary-red);
-        background: #232323;
-        color: #fff;
-    }
-
-    .label-arquivo-tatico i {
-        color: var(--primary-red);
-    }
-
-    .btn-adicionar {
-        background: var(--primary-red);
-        color: #ffffff;
-        border: none;
-        padding: 12px 30px;
-        font-family: 'Oswald', sans-serif;
-        text-transform: uppercase;
-        font-weight: bold;
-        cursor: pointer;
-        transition: 0.3s;
-        border-radius: 4px;
-        box-shadow: 0 4px 10px rgba(217, 4, 41, 0.3);
-    }
-
-    .btn-adicionar:hover { 
-        background: #a0001a; 
-        box-shadow: 0 4px 15px rgba(217, 4, 41, 0.5);
-    }
-
-    .grid-arquivos {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-        gap: 20px;
-    }
-
-    .card-usuario {
-        background: #111111;
-        padding: 25px;
-        border-radius: 4px;
-        border: 1px solid #2C2C2C;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        position: relative;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        cursor: pointer;
-        transition: 0.3s;
-        text-decoration: none;
-        color: inherit;
-    }
-    
-    .card-usuario:hover {
-        border-color: var(--primary-red);
-        background: #1A1A1A;
-        transform: translateY(-2px);
-    }
-
-    .badge-tipo {
-        position: absolute;
-        top: 15px;
-        right: 15px;
-        background: #3A3A3A;
-        border: 1px solid #4A4A4A;
-        font-size: 11px;
-        padding: 3px 8px;
-        text-transform: uppercase;
-        font-weight: bold;
-        color: #D9D9D9;
-    }
-
-    .card-usuario h4 {
-        font-family: 'Oswald', sans-serif;
-        font-size: 19px;
-        text-transform: uppercase;
-        margin-bottom: 10px;
-        color: #ffffff;
-        word-break: break-all;
-    }
-
-    .card-usuario p {
-        font-size: 0.9rem;
-        color: #A5A5A5;
-        margin-bottom: 20px;
-    }
-
-    .btn-remover {
-        background: none;
-        border: none;
-        color: #ff4444;
-        cursor: pointer;
-        font-size: 13px;
-        text-transform: uppercase;
-        font-weight: bold;
-        align-self: flex-start;
-        transition: 0.3s;
-        z-index: 10;
-    }
-
-    .btn-remover:hover { 
-        color: #ffffff; 
-        text-decoration: underline; 
-    }
-
-    footer {
-        background: #050505;
-        border-top: 2px solid #2C2C2C;
-        color: #6E6E6E;
-        padding: 40px;
-        text-align: center;
-        font-size: 12px;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-    }
-
-    .caveira {
-        font-family: 'Oswald', sans-serif;
-        margin-top: 10px;
-        color: var(--primary-red);
-    }
-</style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
 
     <section class="arsenal-secao">
         <div class="arsenal-container">
@@ -323,15 +49,12 @@
         <p class="caveira">Faca na Caveira | Missão Dada é Missão Cumprida</p>
     </footer>
     
-        <!-- este arquivo utiliza tecnologia "IndexedDB", metodo um pouco avançado para salvar arquivos no navegador, junto com uso de inteligencia artificial, achei o melhor jeito para fazer isso -->
     <script>
-        
         // Configuração do Banco de Dados Local IndexedDB (Persistente e Robusto)
         const dbNome = "ArsenalCaveiraDB";
         const dbVersao = 1;
         let db;
 
-        // Inicializa a conexão com o banco ao carregar a página
         const requisicao = indexedDB.open(dbNome, dbVersao);
 
         requisicao.onupgradeneeded = function(e) {
@@ -374,12 +97,11 @@
 
             const arquivo = arquivoInput.files[0];
 
-            // Criando estrutura com os metadados e o arquivo binário puro (Blob)
             const novoMaterial = {
                 id: Date.now(),
                 titulo: arquivo.name,
                 tipo: tipoSelect.value,
-                arquivoBlob: arquivo // O banco aceita arquivos brutos sem precisar converter para texto pesado
+                arquivoBlob: arquivo 
             };
 
             const transacao = db.transaction(["materiais"], "readwrite");
@@ -444,12 +166,9 @@
             pedido.onsuccess = function(e) {
                 const item = e.target.result;
                 if (item && item.arquivoBlob) {
-                    // Cria uma URL temporária viva para abrir o arquivo que está salvo no banco
                     const urlVisualizacao = URL.createObjectURL(item.arquivoBlob);
+                    window.open(urlVisualizacao, '_blank');
                     
-                    const novaAba = window.open(urlVisualizacao, '_blank');
-                    
-                    // Libera a memória do navegador após um curto período
                     setTimeout(() => {
                         URL.revokeObjectURL(urlVisualizacao);
                     }, 5000);
@@ -469,7 +188,5 @@
             };
         }
     </script>
-
-    <!-- este arquivo utiliza tecnologia "IndexedDB", metodo um pouco avançado para salvar arquivos no navegador, junto com uso de inteligencia artificial, achei o melhor jeito para fazer isso -->
 </body>
 </html>
