@@ -46,7 +46,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    padding: 40px 5%;
+    padding: 50px 5%;
     background: linear-gradient(rgba(5, 5, 5, 0.85), rgba(11, 11, 11, 0.6)), url('imagens/exercito-fundo.jpg');
     background-size: cover;
     background-position: center;
@@ -77,8 +77,8 @@ header {
 }
 
 .titulo p {
-    font-size: 1.2rem;
-    max-width: 850px;
+    font-size: 1.5em;
+    width: 50vw;
     opacity: 0.9;
     text-align: justify;
     color: #D9D9D9;
@@ -233,11 +233,13 @@ main {
 
 .sobre {
     padding: 100px 5%;
-    background-color: #1A1A1A; 
+    background-color: #1a1a1a38;
     border-top: 2px solid #2C2C2C;
     text-align: left;
     transition: background-color 0.5s ease;
     margin-bottom: 20px;
+    border-radius: 10px;
+
 }
 
 .sobre h1 {
@@ -277,9 +279,6 @@ main {
     font-weight: 900;
 }
 
-.sobre:hover {
-    background-color: #232323;
-}
 
 .beneficios {
     display: flex;
@@ -679,9 +678,9 @@ footer {
 
 /* Layout Principal */
 .main-container {
-    max-width: 1200px;
+    padding-top:10px;
+    width: 80vw;
     margin: 40px auto;
-    padding: 0 5%;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 40px;
@@ -836,7 +835,6 @@ footer {
 .banner-sucesso {
     display: none; 
     background: linear-gradient(90deg, rgb(26, 103, 26),rgb(11, 66, 11),rgb(2, 40, 2)); 
-    border: 2px solid var(--bright-green); 
     padding: 25px; 
     text-align: center; 
     margin: 30px auto; 
@@ -844,6 +842,7 @@ footer {
     box-shadow: 0 0 20px rgba(119, 255, 51, 0.3); 
     position: relative; 
 }
+
 .banner-sucesso h2 {
     font-family: 'Oswald', sans-serif; 
     color: white; 
