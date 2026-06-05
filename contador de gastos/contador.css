@@ -64,18 +64,12 @@ header {
   gap: 10px;
 }
 
-.logo h1 {
-  font-size: 1.1rem;
-  font-weight: 700;
-}
-
 .logo span {
-  font-size: 1.4rem;
+  font-size: 2.5em;
 }
 
 .logo small {
   display: block;
-  font-size: .7rem;
   color: var(--text-muted);
 }
 
@@ -206,11 +200,13 @@ section {
   background: transparent;
   border: 1px solid var(--border);
   color: var(--text-muted);
+  padding:10px;
+  transition: all 0.5s ease;
 }
 
 .btn-ghost:hover {
+  background: rgb(189, 74, 74);
   color: var(--text);
-  border-color: var(--text-muted);
 }
 
 .btn-danger {
@@ -894,4 +890,33 @@ section {
 ::-webkit-scrollbar-thumb {
   background: var(--border);
   border-radius: 3px;
+}
+
+footer {
+  text-align: center;
+  padding: 30px 20px;
+  margin-top: 50px;
+  border-top: 1px solid var(--border, #e2e8f0); /* Linha sutil separando o rodapé */
+  color: var(--text-muted, #888888);
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+}
+
+footer p {
+  margin: 0;
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
+footer p:hover {
+  opacity: 1; /* Dá um leve destaque ao passar o mouse */
+}
+
+@media (max-width:768px){
+  .logo span{
+    font-size: 1.3em;
+  }
+  h1{
+    font-size: 1.5em;
+  }
 }

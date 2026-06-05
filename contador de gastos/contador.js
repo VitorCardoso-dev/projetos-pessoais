@@ -1,4 +1,3 @@
-
 /* ============================================================
    STORAGE MODULE
    ------------------------------------------------------------
@@ -25,7 +24,7 @@
 ============================================================ */
 const STORAGE_KEY = "financial_503020";
 
-// Lê o estado salvo. Se não existir nada, devolve um estado vazio padrão.
+// Lê o estado prazo. Se não existir nada, devolve um estado vazio padrão.
 function storage_load() {
   const raw = localStorage.getItem(STORAGE_KEY);
   return raw ? JSON.parse(raw) : { income: 0, envelopes: [] };
@@ -259,9 +258,7 @@ function renderizacao_envelopes(data) {
               <span class="env-cat-tag">${cfg.label}</span>
             </div>
             <div class="env-actions">
-              <!-- Botão 🧾 abre o modal para registrar gasto neste envelope -->
               <button class="btn-icon" title="Registrar gasto" onclick="openExpenseModal('${env.id}')">🧾</button>
-              <!-- Botão 🗑 exclui o envelope (pede confirmação) -->
               <button class="btn-icon danger" title="Excluir" onclick="deleteEnvelope('${env.id}')">🗑</button>
             </div>
           </div>
@@ -281,7 +278,6 @@ function renderizacao_envelopes(data) {
             </div>
           </div>
 
-          <!-- Barra de progresso de uso (spent / value) -->
           <div class="env-bar-track">
             <div class="env-bar-fill ${barCls}" style="width:${Math.min(pct, 100)}%"></div>
           </div>
@@ -523,8 +519,10 @@ function doReset() {
   document.getElementById("income-display").style.display = "none";
   document.getElementById("income-form").style.display    = "flex";
   document.getElementById("income-input").value = "";
-  document.getElementById("app-content").style.display    = "none";
   document.getElementById("btn-reset").style.display      = "none";
+
+  // Re-renderiza o sistema passando valores zerados para atualizar a tela
+  renderizacao_all({ income: 0, envelopes: [] });
 }
 
 /* ============================================================
@@ -551,7 +549,7 @@ document.addEventListener("keydown", e => {
    ------------------------------------------------------------
    Quando o DOM termina de carregar:
    - Se já existir receita salva → entra direto no modo "app"
-   - Se não → mostra o formulário de receita (estado inicial)
+   - Se não → mantém o formulário de receita e renderiza o app zerado
 ============================================================ */
 document.addEventListener("DOMContentLoaded", () => {
   const data = storage_load();
@@ -563,9 +561,11 @@ document.addEventListener("DOMContentLoaded", () => {
     // Já existe estado salvo: aplica direto (mostra valores, envelopes, etc.)
     applyIncome(data);
   } else {
-    // Primeiro acesso (ou após reset): apenas o formulário de receita
+    // Primeiro acesso (or após reset): mantém o formulário de receita ativo
     document.getElementById("income-form").style.display    = "flex";
     document.getElementById("income-display").style.display = "none";
-    document.getElementById("app-content").style.display    = "none";
+
+    // Força a renderização inicial com dados zerados para o app-content ficar preenchido
+    renderizacao_all(data);
   }
 });
