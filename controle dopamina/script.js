@@ -2,7 +2,6 @@
        1. DADOS E CONFIGURAÇÕES INICIAIS
        ========================================================================== */
 // Lista de hábitos padrão do sistema (Bons e Ruins) com suas respectivas pontuações
-// Qualquer alteração feita aqui refletirá IMEDIATAMENTE ao atualizar a página!
 const habitosPadrao = [
     { id: 1, nome: "Estudar (blocos diarios completos)", valor: 15, tipo: "bom", corrosivo: false, canal: "estudo" },
     { id: 2, nome: "Treino / Atividade Física", valor: 15, tipo: "bom", corrosivo: false, canal: "treino" },
@@ -35,54 +34,44 @@ const recompensasBonusPool = [
     "🎁 RECOMPENSA BÔNUS: Comer sua refeição favorita livre (Custo: 0 pts)",
     "🎁 RECOMPENSA BÔNUS: +2 Horas de Jogos ou Filmes (Custo: 0 pts)",
     "🎁 RECOMPENSA BÔNUS: Comprar um presente pessoal (Custo: 0 pts)",
-    "🎁 RECOMPENSA BÔNUS: Descanço total por metade de um dia (Custo: 0 pts)"
+    "🎁 RECOMPENSA BÔNUS: Descanso total por metade de um dia (Custo: 0 pts)"
 ];
 
 /* ==========================================================================
        2. SINCRO-SISTEMA AUTOMÁTICO COM O CÓDIGO
        ========================================================================== */
-// Buscamos o histórico atual da memória para não perder os pontos acumulados
 const itensSalvosNoLS = JSON.parse(localStorage.getItem('itensHabitos')) || [];
 const recompensasSalvasNoLS = JSON.parse(localStorage.getItem('itensRecompensas')) || [];
 
-// Filtramos apenas os hábitos/recompensas criados manualmente por você através da tela do sistema
 const idsPadraoHabitos = habitosPadrao.map(h => h.id);
 const habitosPersonalizados = itensSalvosNoLS.filter(item => !idsPadraoHabitos.includes(item.id));
 
 const idsPadraoRecompensas = recompensasPadrao.map(r => r.id);
 const recompensasPersonalizadas = recompensasSalvasNoLS.filter(item => !idsPadraoRecompensas.includes(item.id));
 
-// Montamos as listas finais trazendo SEMPRE o código atualizado + seus itens customizados da tela
 let itensHabitos = [...JSON.parse(JSON.stringify(habitosPadrao)), ...habitosPersonalizados];
 let itensRecompensas = [...JSON.parse(JSON.stringify(recompensasPadrao)), ...recompensasPersonalizadas];
 
-// Gravamos as listas sincronizadas de volta na memória
 localStorage.setItem('itensHabitos', JSON.stringify(itensHabitos));
 localStorage.setItem('itensRecompensas', JSON.stringify(itensRecompensas));
 
-// Inicializa as variáveis de pontuação coletando os registros salvos
 let ganhos = parseInt(localStorage.getItem('ganhos')) || 0;
 let perdas = parseInt(localStorage.getItem('perdas')) || 0;
 let saldo = parseInt(localStorage.getItem('saldo')) || 0;
 
-// Inicializa as variáveis numéricas dos contadores de combo
 let comboEstudo = parseInt(localStorage.getItem('comboEstudo')) || 0;
 let comboTreino = parseInt(localStorage.getItem('comboTreino')) || 0;
 let comboLimpo = parseInt(localStorage.getItem('comboLimpo')) || 0;
 
-// Inicializa o estado de recompensas bônus desbloqueadas
-let bonusLiberado = localStorage.getItem('bonusLiberado') === 'true';
-let textoBonusAtual = localStorage.getItem('textoBonusAtual') || "";
+// Inicializa a lista de bônus acumulados ativos como Array
+let bonusesAtivos = JSON.parse(localStorage.getItem('bonusesAtivos')) || [];
 
-// Executa as renderizações obrigatórias para exibir as informações na tela assim que o app carrega
 renderizarListas();
 atualizarTela();
 
 /* ==========================================================================
        3. FUNÇÕES DE INTERFACE E EXIBIÇÃO (DOM)
        ========================================================================== */
-
-// Abre ou recolhe o menu que contém as listas de hábitos e contadores
 function togglePainelAtividades() {
     const painel = document.getElementById('painel-atividades-retratil');
     const btn = document.getElementById('btn-toggle-painel');
@@ -95,13 +84,12 @@ function togglePainelAtividades() {
     }
 }
 
-// Mostra a caixa de marcação "Corrosivo" apenas se o usuário selecionar "Hábito Ruim" no formulário
 function toggleOpcaoCorrosivo() {
     const tipo = document.getElementById('novo-tipo').value;
     document.getElementById('label-corrosivo').style.display = (tipo === 'ruim') ? 'inline-block' : 'none';
 }
 
-// Controla a exibição e ações do Cartão Customizado (Modal)
+// Controla a exibição e ações do seu Cartão Customizado Animado (Modal)
 function mostrarCartao(mensagem, tipo, callbackSim) {
     const modal = document.getElementById('cartao-modal');
     const texto = document.getElementById('modal-texto');
@@ -112,16 +100,17 @@ function mostrarCartao(mensagem, tipo, callbackSim) {
     modal.style.display = 'flex';
 
     if (tipo === 'alerta') {
-        btnCancelar.style.display = 'none'; // Transforma em um aviso simples de OK
+        btnCancelar.style.display = 'none'; 
         btnConfirmar.innerText = 'OK';
         btnConfirmar.style.background = '#3b82f6';
         btnConfirmar.onclick = function() {
             modal.style.display = 'none';
+            if (callbackSim) callbackSim(); 
         };
     } else if (tipo === 'confirmacao') {
-        btnCancelar.style.display = 'inline-block'; // Mostra botão para desistir
+        btnCancelar.style.display = 'inline-block'; 
         btnConfirmar.innerText = 'Confirmar';
-        btnConfirmar.style.background = '#ef4444'; // Vermelho para chamar atenção
+        btnConfirmar.style.background = '#ef4444'; 
         
         btnConfirmar.onclick = function() {
             modal.style.display = 'none';
@@ -133,7 +122,6 @@ function mostrarCartao(mensagem, tipo, callbackSim) {
     }
 }
 
-// Lê os campos do formulário para adicionar um novo hábito customizado ou uma nova recompensa na loja
 function criarItemPersonalizado() {
     const nome = document.getElementById('novo-nome').value.trim();
     const valor = parseInt(document.getElementById('novo-valor').value);
@@ -148,7 +136,6 @@ function criarItemPersonalizado() {
     if (tipo === 'recompensa') {
         itensRecompensas.push({ id: Date.now(), nome: nome, custo: valor });
     } else {
-        // Vincula de forma inteligente o hábito criado a canais específicos de combo baseado em palavras-chave
         let canalIdentificado = "nenhum";
         if (nome.toLowerCase().includes("estud")) canalIdentificado = "estudo";
         else if (nome.toLowerCase().includes("trein")) canalIdentificado = "treino";
@@ -164,19 +151,16 @@ function criarItemPersonalizado() {
         });
     }
 
-    // Limpa os campos de digitação do formulário após o salvamento bem-sucedido
     document.getElementById('novo-nome').value = "";
     document.getElementById('novo-valor').value = "";
     document.getElementById('novo-corrosivo').checked = false;
 
-    // box-shadow permanente do navegador com as novas adições
     localStorage.setItem('itensHabitos', JSON.stringify(itensHabitos));
     localStorage.setItem('itensRecompensas', JSON.stringify(itensRecompensas));
     
     renderizarListas();
 }
 
-// Remove permanentemente um hábito da lista utilizando seu ID numérico único
 function deletarHabito(id) {
     mostrarCartao("Tem certeza que deseja excluir permanentemente este hábito?", "confirmacao", () => {
         itensHabitos = itensHabitos.filter(item => item.id !== id);
@@ -185,7 +169,6 @@ function deletarHabito(id) {
     });
 }
 
-// Remove permanentemente uma recompensa da loja utilizando seu ID numérico único
 function deletarRecompensa(id) {
     mostrarCartao("Tem certeza que deseja excluir permanentemente esta recompensa?", "confirmacao", () => {
         itensRecompensas = itensRecompensas.filter(item => item.id !== id);
@@ -194,7 +177,6 @@ function deletarRecompensa(id) {
     });
 }
 
-// Constrói dinamicamente os blocos HTML de cada item dentro de suas respectivas colunas visuais
 function renderizarListas() {
     const listaBons = document.getElementById('lista-bons');
     const listaRuins = document.getElementById('lista-ruins');
@@ -217,7 +199,6 @@ function renderizarListas() {
                 </div>`;
             listaBons.appendChild(div);
         } else {
-            // Renderização especial diferenciada caso o hábito possua a propriedade corrosiva ativa
             if (item.corrosivo) {
                 div.style.background = '#fff5f5';
                 div.style.padding = '6px 8px';
@@ -253,7 +234,6 @@ function renderizarListas() {
     });
 }
 
-// Atualiza os textos numéricos de saldo, os números dos combos e a visibilidade dos banners bônus
 function atualizarTela() {
     document.getElementById('soma-ganhos').innerText = ganhos + " pts";
     document.getElementById('soma-perdas').innerText = perdas + " pts";
@@ -263,75 +243,87 @@ function atualizarTela() {
     document.getElementById('combo-treino').innerText = comboTreino;
     document.getElementById('combo-limpo').innerText = comboLimpo;
 
-    // Controla a exibição das seções escondidas da loja e do cabeçalho dedicadas ao prêmio bônus
-    if (bonusLiberado) {
+    const containerBonusLoja = document.getElementById('item-bonus-loja');
+
+    // CONSERTADO: Transforma a área de bônus em cartões independentes e empilhados verticalmente
+    if (bonusesAtivos.length > 0) {
         document.getElementById('banner-bonus').style.display = 'flex'; 
-        document.getElementById('item-bonus-loja').style.display = 'flex';
-        document.getElementById('texto-bonus').innerText = textoBonusAtual;
+        containerBonusLoja.style.display = 'block'; 
+        containerBonusLoja.style.background = 'transparent'; 
+        containerBonusLoja.style.padding = '0';
+        containerBonusLoja.style.border = 'none';
+        containerBonusLoja.style.boxShadow = 'none';
+        
+        // Mapeia o array criando um cartão físico individual para cada bônus conquistado
+        containerBonusLoja.innerHTML = bonusesAtivos.map((bonus, index) => `
+            <div class="linha-habito" style="background: #fef3c7; padding: 12px 15px; border-radius: 6px; margin-bottom: 10px; border-left: 4px solid #f59e0b; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                <span class="texto-item" style="font-weight: bold; color: #92400e; font-size: 14px;">${bonus}</span>
+                <div class="botoes-acoes">
+                    <button class="btn-gastar" style="background: #f59e0b; color: white; padding: 6px 12px; border-radius: 4px; border: none; cursor: pointer;" onclick="gastarRecompensaBonus(${index})">
+                        <i class="fa-solid fa-star"></i> Resgatar
+                    </button>
+                </div>
+            </div>
+        `).join('');
     } else {
         document.getElementById('banner-bonus').style.display = 'none';
-        document.getElementById('item-bonus-loja').style.display = 'none';
+        containerBonusLoja.style.display = 'none';
+        containerBonusLoja.innerHTML = '';
     }
 
-    // Salva os estados atuais atualizados das pontuações na memória do navegador
     localStorage.setItem('ganhos', ganhos);
     localStorage.setItem('perdas', perdas);
     localStorage.setItem('saldo', saldo);
     localStorage.setItem('comboEstudo', comboEstudo);
     localStorage.setItem('comboTreino', comboTreino);
     localStorage.setItem('comboLimpo', comboLimpo);
-    localStorage.setItem('bonusLiberado', bonusLiberado);
-    localStorage.setItem('textoBonusAtual', textoBonusAtual);
+    localStorage.setItem('bonusesAtivos', JSON.stringify(bonusesAtivos));
 }
 
 /* ==========================================================================
        4. LÓGICA DOS COMBOS E REGRAS DE NEGÓCIO
        ========================================================================== */
-
-// Gerencia o acionamento de um Hábito Bom, computando pontos e avançando marcas de constância
 function cliqueHabitoBom(valor, canal) {
     ganhos += valor;
     
     if (canal === "estudo") {
         comboEstudo++;
-        if (comboEstudo === 5) checarEAtivarBonus("Estudos");
+        if (comboEstudo % 5 === 0) checarEAtivarBonus("Estudos");
     } else if (canal === "treino") {
         comboTreino++;
-        if (comboTreino === 5) checarEAtivarBonus("Treino");
+        if (comboTreino % 5 === 0) checarEAtivarBonus("Treino");
     } else if (canal === "limpo") {
         comboLimpo++;
-        if (comboLimpo === 5) checarEAtivarBonus("Dias Limpos");
+        if (comboLimpo % 5 === 0) checarEAtivarBonus("Dias Limpos");
     }
 
     saldo = ganhos - perdas;
     atualizarTela();
 }
 
-// Sorteia aleatoriamente e ativa uma das super recompensas gratuitas caso o combo atinja a meta de 5 marcas
 function checarEAtivarBonus(origem) {
-    if (!bonusLiberado) {
-        bonusLiberado = true;
-        const indexAleatorio = Math.floor(Math.random() * recompensasBonusPool.length);
-        textoBonusAtual = recompensasBonusPool[indexAleatorio];
-        mostrarCartao(`🌟 Excelente! Combo de [${origem}] alcançou o nível 5! Nova Super Recompensa liberada de graça!`, "alerta");
-    }
+    const indexAleatorio = Math.floor(Math.random() * recompensasBonusPool.length);
+    const novaRecompensa = recompensasBonusPool[indexAleatorio];
+    
+    bonusesAtivos.push(novaRecompensa);
+    atualizarTela();
+    
+    // Dispara o bônus usando o seu cartão animado!
+    mostrarCartao(`🌟 Excelente! Combo de [${origem}] alcançou mais um nível 5! Nova Super Recompensa liberada e acumulada de graça!`, "alerta");
 }
 
-// Aplica apenas a perda de pontos de hábitos ruins comuns, sem falsos alarmes ou quebras indevidas de combo.
 function cliqueHabitoRuim(valor) {
     perdas += valor;
     saldo = ganhos - perdas;
     atualizarTela();
 }
 
-// Gerencia a punição severa do Hábito Corrosivo: zera de forma irreversível todos os combos e corta o saldo atual pela metade
 function cliqueHabitoCorrosivo() {
     mostrarCartao("Confirmar ocorrência de hábito corrosivo? Todos os seus combos zeram e você perde metade do saldo.", "confirmacao", () => {
         comboEstudo = 0;
         comboTreino = 0;
         comboLimpo = 0;
-        bonusLiberado = false;
-        textoBonusAtual = "";
+        bonusesAtivos = []; 
 
         if (saldo > 0) {
             let perdaCorrosiva = Math.floor(saldo / 2);
@@ -344,7 +336,6 @@ function cliqueHabitoCorrosivo() {
     });
 }
 
-// Consome pontos acumulados do saldo atual para adquirir uma das recompensas cadastradas na loja
 function gastarPontos(custo) {
     if (saldo >= custo) {
         perdas += custo;
@@ -356,19 +347,14 @@ function gastarPontos(custo) {
     }
 }
 
-// Consome e limpa o prêmio bônus obtido, redefinindo os marcadores de combo globais para recomeçar o ciclo de evolução
-function gastarRecompensaBonus() {
+// CONSERTADO: Aplica o alerta animado ao bônus correto e remove apenas ele ao clicar em OK
+function gastarRecompensaBonus(index) {
     mostrarCartao("Aproveite seu super prêmio de constância!", "alerta", () => {
-        bonusLiberado = false;
-        textoBonusAtual = "";
-        comboEstudo = 0;
-        comboTreino = 0;
-        comboLimpo = 0;
+        bonusesAtivos.splice(index, 1); 
         atualizarTela();
     });
 }
 
-// Limpa apenas o histórico numérico de saldos e pontuações, preservando a lista de hábitos customizada intacta
 function resetarSaldos() {
     mostrarCartao("Zerar apenas a pontuação, preservando os hábitos?", "confirmacao", () => {
         ganhos = 0;
@@ -377,13 +363,11 @@ function resetarSaldos() {
         comboEstudo = 0;
         comboTreino = 0;
         comboLimpo = 0;
-        bonusLiberado = false;
-        textoBonusAtual = "";
+        bonusesAtivos = [];
         atualizarTela();
     });
 }
 
-// Redefine totalmente a lista de itens ativos trazendo de volta as configurações padrão de fábrica registradas no topo do arquivo
 function resetarTudo() {
     mostrarCartao("Restaurar lista para o padrão inicial? Seus pontos não sumirão.", "confirmacao", () => {
         itensHabitos = JSON.parse(JSON.stringify(habitosPadrao));
