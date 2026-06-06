@@ -1,0 +1,395 @@
+        /* ==========================================================================
+           ESTILOS GERAIS E ESTRUTURA
+           ========================================================================== */
+        *{
+            margin: 0;
+            padding:0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color:#cecece4a;
+            color: #333;
+            padding: 20px;
+            padding-bottom: 260px; /* Espaço para o painel fixo no rodapé não cobrir o conteúdo */
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        h1, h2, h3 {
+            text-align: center;
+            color: #222;
+        }
+
+        /* Estilização do Header */
+        .app-header {
+            background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+            border-bottom: 2px solid #e2e8f0;
+            margin: -25px -25px 25px -25px; 
+            padding: 30px 25px;
+            border-radius: 8px 8px 0 0;
+            text-align: center;
+        }
+
+        .app-header h1 {
+            font-size: 24px;
+            color: #0f172a;
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+        }
+
+        /* Botão para Revelar/Ocultar as Atividades */
+        .btn-toggle-painel {
+            display: block;
+            width: 100%;
+            max-width: 320px;
+            margin: 15px auto;
+            background-color: #0f172a;
+            color: white;
+            padding: 12px;
+            font-size: 14px;
+            border-radius: 50px;
+            transition: 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        .btn-toggle-painel:hover {
+            background-color: #1e293b;
+            transform: translateY(-1px);
+        }
+
+        /* Box de metas e constâncias múltiplas */
+        .meta-estudo {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            padding: 12px 20px;
+            border-radius: 50px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            margin: 0 auto 25px auto;
+            max-width: fit-content;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: #475569;
+            padding: 2px 10px;
+        }
+
+        .stat-item i { color: #3b82f6; }
+        .stat-item.streak-treino i { color: #22c55e; }
+        .stat-item.streak-estudo i { color: #f59e0b; }
+        .stat-item.streak-limpo i { color: #a855f7; }
+
+        /* Banner de aviso de Recompensa Bônus */
+        .bonus-banner {
+            display: none; 
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: linear-gradient(90deg, #fef3c7 0%, #fde68a 50%, #fef3c7 100%);
+            border: 1px solid #f59e0b;
+            color: #92400e;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 13px;
+            animation: slideDown 0.4s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ==========================================================================
+           FORMULÁRIO DE CRIAÇÃO DE ITENS
+           ========================================================================== */
+        .form-criacao {
+            background: #f8f9fa;
+            border: 1px dashed #ccc;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 25px;
+        }
+
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+
+        .form-row input, .form-row select {
+            padding: 6px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .form-row input[type="text"] { flex: 2; min-width: 150px; }
+        .form-row input[type="number"] { flex: 1; min-width: 80px; }
+
+        @media (max-width: 600px) {
+            .form-row {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 12px;
+            }
+            .form-row input[type="text"], .form-row input[type="number"], .form-row select, .form-row button {
+                width: 100%;
+                flex: none;
+                padding: 10px;
+            }
+            .meta-estudo {
+                flex-direction: column;
+                gap: 10px;
+                border-radius: 12px;
+                align-items: flex-start;
+            }
+        }
+
+        /* ==========================================================================
+           COLUNAS E CARDS
+           ========================================================================== */
+        .colunas-habitos {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        @media (max-width: 600px) {
+            .colunas-habitos { grid-template-columns: 1fr; }
+        }
+
+        .coluna-boa, .coluna-mal, .coluna-recompensas {
+            border: 1px solid #eee;
+            padding: 15px;
+            border-radius: 6px;
+        }
+
+        .coluna-boa {
+            background: linear-gradient(90deg, #22ad2245 0%, #22ad2225 50%, #22ad2210 100%);
+            border-left: 3px solid #20d720;
+        }
+
+        .coluna-mal {
+            background: linear-gradient(90deg, #ff000045 0%, #ff000025 50%, #ff000010 100%);
+            border-left: 3px solid #ef4444;
+        }
+
+        .coluna-recompensas {
+            background: linear-gradient(90deg, #a6ccddcc 0%, #a6ccdd70 50%, #a6ccdd30 100%);
+            border-left: 3px solid #3b82f6;
+        }
+
+        .coluna h3 {
+            border-bottom: 2px solid #eee;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+            margin-top: 0;
+        }
+
+        .positivo { color: #22c55e; }
+        .negativo { color: #f11124; }
+        .destaque { color: #1c79e2; }
+
+        /* ALINHAMENTO CORRIGIDO DOS BOTÕES */
+        .linha-habito {
+            display: flex;
+            justify-content: space-between;
+            align-items: center; 
+            gap: 15px; 
+            padding: 10px 0;
+            color: black;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 15px;
+        }
+
+        .texto-item {
+            flex: 1;
+            word-break: break-word; 
+        }
+
+        .botoes-acoes {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            flex-shrink: 0; 
+        }
+
+        /* ==========================================================================
+           ESTILIZAÇÃO DOS BOTÕES
+           ========================================================================== */
+        button {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn-add { background-color: #22c55e; color: white; transition: 0.3s; }
+        .btn-add:hover { background-color:white; color: #22c55e; box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3); }
+
+        .btn-sub { background-color: #ef4444; color: white; }
+        .btn-sub:hover { background-color: white; color: #ef4444; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3); }
+
+        .btn-gastar { background-color: #3b82f6; color: white; }
+        .btn-gastar:hover { background-color:white; color: #3b82f6; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3); }
+
+        .btn-delete { background: none; color: #94a3b8; font-size: 16px; padding: 6px; }
+        .btn-delete:hover { color: #ef4444; }
+
+        .corrosivo { 
+            background: #7f1d1d; 
+            color: white; 
+            padding: 6px 12px;
+        }
+        .corrosivo:hover { background: #b91c1c; }
+
+        .btn-reset-all,.btn-reset-ponts {
+            display: block;
+            width: 200px;
+            margin: 10px auto 0;
+            background: #f1f5f9;
+            color: #64748b;
+            border: 1px solid #cbd5e1;
+            padding: 10px;
+            transition: 0.3s;
+        }
+        .btn-reset-all:hover { background: #ef4444; color: white; border-color: #ef4444; }
+        .btn-reset-ponts:hover { background: #eac663; color: black; border-color: yellow; }
+
+
+        /* ==========================================================================
+           PAINEL DE SALDOS (FIXO NO RODAPÉ)
+           ========================================================================== */
+        .painel-saldos-fixo {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #080839;
+            box-shadow: 0 -3px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+            padding: 15px 20px;
+            z-index: 10005
+        }
+
+        .conteudo-saldos {
+            width: 100%;
+            max-width: 850px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+            text-align: center;
+        }
+
+        .caixa-saldo {
+            padding: 8px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            border: 1px solid #eee;
+        }
+
+        .numero {
+            font-size: 22px;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        .footer-creditos {
+            width: 100%;
+            text-align: center;
+            font-size: 11px;
+            color: #94a3b8;
+            margin-top: 10px;
+            border-top: 1px solid #ffffff1a;
+            padding-top: 5px;
+        }
+        /* ==========================================================================
+   CARTÃO CUSTOMIZADO (MODAL)
+   ========================================================================== */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+    backdrop-filter: blur(3px); /* Deixa o fundo levemente embaçado */
+}
+
+.modal-card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    max-width: 350px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popIn {
+    0% { transform: scale(0.8); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.modal-card p {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 20px;
+    line-height: 1.5;
+    font-weight: 500;
+}
+
+.modal-botoes {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.modal-botoes button {
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 6px;
+    transition: 0.2s;
+}
+
+.btn-cancelar {
+    background: #e2e8f0;
+    color: #475569;
+}
+
+.btn-cancelar:hover {
+    background: #cbd5e1;
+}
+
+.btn-confirmar {
+    background: #3b82f6;
+    color: white;
+}
+
+.btn-confirmar:hover {
+    background: #2563eb;
+}
